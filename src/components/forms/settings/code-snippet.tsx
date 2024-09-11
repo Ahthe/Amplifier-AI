@@ -33,7 +33,7 @@ const CodeSnippet = ({ id }: Props) => {
     document.body.appendChild(iframe)
     
     window.addEventListener("message", (e) => {
-        if(e.origin !== "https://amplifire-ai.vercel.app/") return null
+        if(e.origin !== "https://amplifire-ai.vercel.app") return null
         let dimensions = JSON.parse(e.data)
         iframe.width = dimensions.width
         iframe.height = dimensions.height

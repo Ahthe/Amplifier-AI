@@ -10,6 +10,7 @@ import logging
 import random
 import time
 import requests
+import re
 
 load_dotenv()
 
@@ -99,6 +100,13 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
     except FileNotFoundError:
         posted_posts = []
 
+    # Load previously skipped posts due to being too old
+    try:
+        with open('too_old_posts.json', 'r') as f:
+            too_old_posts = json.load(f)
+    except FileNotFoundError:
+        too_old_posts = []
+
     # Set a limit for the number of new posts to comment on
     max_new_posts = 5
     new_posts_found = 0
@@ -107,10 +115,11 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
     for post in subreddit.search(keyword, limit=20):  # Increase the limit to search more posts
         logging.info(f"Processing post: {post.title}")
 
-        # Skip if we've already posted in this exact post
-        if post.id in posted_posts:
-            logging.info(f"Already posted in this post: {post.title}, skipping...")
+        # Skip if we've already posted in this exact post or if it's too old to reply to
+        if post.id in posted_posts or post.id in too_old_posts:
+            logging.info(f"Already posted in this post or it's too old: {post.title}, skipping...")
             continue
+
         # # Analyze the post using OpenAI GPT to check relevance
         # relevance_check = openai.ChatCompletion.create(
         #     model="gpt-3.5-turbo",
@@ -166,9 +175,21 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
                 break
 
         except Exception as e:
+            error_message = str(e)
             logging.error(f"Error posting comment on post: {post.title}")
-            logging.error(f"Error message: {str(e)}")
+            logging.error(f"Error message: {error_message}")
 
+            # Check if the error is related to the post being too old
+            # Use regex to extract the first part of the error message
+            match = re.search(r'Error message: (\w+):', error_message)
+            if match and match.group(1) == "TOO_OLD":
+                logging.info(f"Post is too old to reply to: {post.title}, saving to too_old_posts.json")
+                too_old_posts.append(post.id)
+
+                # Save the updated list of too old post IDs to a file
+                with open('too_old_posts.json', 'w') as f:
+                    json.dump(too_old_posts, f, indent=4)
+                    
         post_data = {
             'title': post.title,
             'url': post.url,

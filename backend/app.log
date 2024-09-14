@@ -1,18 +1,157 @@
+INFO:werkzeug:127.0.0.1 - - [13/Sep/2024 23:21:11] "OPTIONS /generate_leads HTTP/1.1" 200 -
+INFO:root:Fetching Twitter leads for keyword: Projectmanagement
+INFO:root:Request URL: https://api.social-searcher.com/v2/search
+INFO:root:Request Parameters: {'key': '95bdeb28a736a268ba5c31341076f843', 'q': 'Projectmanagement', 'network': 'twitter', 'limit': 5}
+ERROR:root:HTTP error occurred: 405 Client Error:  for url: https://api.social-searcher.com/v2/search?key=95bdeb28a736a268ba5c31341076f843&q=Projectmanagement&network=twitter&limit=5
+INFO:werkzeug:127.0.0.1 - - [13/Sep/2024 23:21:11] "POST /generate_leads HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/Sep/2024 23:33:42] "OPTIONS /generate_leads HTTP/1.1" 200 -
+INFO:root:Fetching Twitter leads for keyword: Projectmanagement
+INFO:root:Request URL: https://api.social-searcher.com/v2/search
+INFO:root:Request Parameters: {'key': '95bdeb28a736a268ba5c31341076f843', 'q': 'Projectmanagement', 'network': 'twitter', 'limit': 5}
+ERROR:root:HTTP error occurred: 405 Client Error:  for url: https://api.social-searcher.com/v2/search?key=95bdeb28a736a268ba5c31341076f843&q=Projectmanagement&network=twitter&limit=5
+INFO:werkzeug:127.0.0.1 - - [13/Sep/2024 23:33:42] "POST /generate_leads HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [13/Sep/2024 23:34:46] "OPTIONS /generate_leads HTTP/1.1" 200 -
+INFO:root:Searching for keyword: Projectmanagement
+INFO:root:Location provided: New York, USA
+INFO:root:Processing post: Terror suspect accused of plotting attack in New York came to Canada on student visa: minister
+INFO:root:Comment posted successfully on post: Terror suspect accused of plotting attack in New York came to Canada on student visa: minister
+INFO:root:Comment ID: ln196su
+INFO:root:Comment URL: https://www.reddit.com/r/canada/comments/1fdobie/terror_suspect_accused_of_plotting_attack_in_new/ln196su/
+INFO:root:Processing post: India defeat Pakistan by 6 runs in New York
+INFO:root:Comment posted successfully on post: India defeat Pakistan by 6 runs in New York
+INFO:root:Comment ID: ln196w5
+INFO:root:Comment URL: https://www.reddit.com/r/Cricket/comments/1dc27f7/india_defeat_pakistan_by_6_runs_in_new_york/ln196w5/
+INFO:root:Processing post: Discussion Thread: New York Criminal Fraud Trial of Donald Trump, Day 5
+INFO:root:Comment posted successfully on post: Discussion Thread: New York Criminal Fraud Trial of Donald Trump, Day 5
+INFO:root:Comment ID: ln196zs
+INFO:root:Comment URL: https://www.reddit.com/r/politics/comments/1ca9lu0/discussion_thread_new_york_criminal_fraud_trial/ln196zs/
+INFO:root:Processing post: Texas is as different from New York as France is from Norway.
+INFO:root:Comment posted successfully on post: Texas is as different from New York as France is from Norway.
+INFO:root:Comment ID: ln1977d
+INFO:root:Comment URL: https://www.reddit.com/r/ShitAmericansSay/comments/1esabda/texas_is_as_different_from_new_york_as_france_is/ln1977d/
+INFO:root:Processing post: Discussion Thread: New York Criminal Fraud Trial of Donald Trump, Day 6
+INFO:root:Comment posted successfully on post: Discussion Thread: New York Criminal Fraud Trial of Donald Trump, Day 6
+INFO:root:Comment ID: ln197bo
+INFO:root:Comment URL: https://www.reddit.com/r/politics/comments/1cb47qw/discussion_thread_new_york_criminal_fraud_trial/ln197bo/
+INFO:werkzeug:127.0.0.1 - - [13/Sep/2024 23:34:56] "POST /generate_leads HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [13/Sep/2024 23:43:57] "OPTIONS /generate_leads HTTP/1.1" 200 -
+INFO:root:Searching for keyword: Projectmanagement
+INFO:root:Location provided: New York, USA
+INFO:root:Processing post: Terror suspect accused of plotting attack in New York came to Canada on student visa: minister
+INFO:root:Comment posted successfully on post: Terror suspect accused of plotting attack in New York came to Canada on student visa: minister
+INFO:root:Comment ID: ln1abal
+INFO:root:Comment URL: https://www.reddit.com/r/canada/comments/1fdobie/terror_suspect_accused_of_plotting_attack_in_new/ln1abal/
+INFO:root:Processing post: India defeat Pakistan by 6 runs in New York
+INFO:root:Comment posted successfully on post: India defeat Pakistan by 6 runs in New York
+INFO:root:Comment ID: ln1aber
+INFO:root:Comment URL: https://www.reddit.com/r/Cricket/comments/1dc27f7/india_defeat_pakistan_by_6_runs_in_new_york/ln1aber/
+INFO:root:Processing post: Discussion Thread: New York Criminal Fraud Trial of Donald Trump, Day 5
+INFO:root:Comment posted successfully on post: Discussion Thread: New York Criminal Fraud Trial of Donald Trump, Day 5
+INFO:root:Comment ID: ln1abj4
+INFO:root:Comment URL: https://www.reddit.com/r/politics/comments/1ca9lu0/discussion_thread_new_york_criminal_fraud_trial/ln1abj4/
+INFO:root:Processing post: Texas is as different from New York as France is from Norway.
+INFO:root:Comment posted successfully on post: Texas is as different from New York as France is from Norway.
+INFO:root:Comment ID: ln1abon
+INFO:root:Comment URL: https://www.reddit.com/r/ShitAmericansSay/comments/1esabda/texas_is_as_different_from_new_york_as_france_is/ln1abon/
+INFO:root:Processing post: Discussion Thread: New York Criminal Fraud Trial of Donald Trump, Day 6
+INFO:root:Comment posted successfully on post: Discussion Thread: New York Criminal Fraud Trial of Donald Trump, Day 6
+INFO:root:Comment ID: ln1abt7
+INFO:root:Comment URL: https://www.reddit.com/r/politics/comments/1cb47qw/discussion_thread_new_york_criminal_fraud_trial/ln1abt7/
+INFO:root:Fetching Twitter leads for keyword: Projectmanagement
+ERROR:root:HTTP error occurred: 403 Client Error: Forbidden for url: https://twitter135.p.rapidapi.com/Search/?q=Projectmanagement&count=5
+INFO:werkzeug:127.0.0.1 - - [13/Sep/2024 23:44:07] "POST /generate_leads HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [13/Sep/2024 23:47:16] "OPTIONS /generate_leads HTTP/1.1" 200 -
+INFO:root:Searching for keyword: Project management software
+INFO:root:Location provided: New York, USA
+INFO:root:Processing post: I am 25 years old, make $122,000, live in New York, NY and work as a product manager.
+INFO:root:Comment posted successfully on post: I am 25 years old, make $122,000, live in New York, NY and work as a product manager.
+INFO:root:Comment ID: ln1apsr
+INFO:root:Comment URL: https://www.reddit.com/r/MoneyDiariesACTIVE/comments/k5y3fx/i_am_25_years_old_make_122000_live_in_new_york_ny/ln1apsr/
+INFO:root:Processing post: ERP Software Development Company in New York
+ERROR:root:Error posting comment on post: ERP Software Development Company in New York
+ERROR:root:Error message: TOO_OLD: "that's a piece of history now; it's too late to reply to it" on field 'parent'
+INFO:root:Processing post: Before FromSoftware moves on to a new project, I really wish we could get this. Made these images for reference.
+INFO:root:Comment posted successfully on post: Before FromSoftware moves on to a new project, I really wish we could get this. Made these images for reference.
+INFO:root:Comment ID: ln1aq0y
+INFO:root:Comment URL: https://www.reddit.com/r/Eldenring/comments/1ezf3cu/before_fromsoftware_moves_on_to_a_new_project_i/ln1aq0y/
+INFO:root:Processing post: Top 15 Software Development Companies in the USA
+INFO:root:Comment posted successfully on post: Top 15 Software Development Companies in the USA
+INFO:root:Comment ID: ln1aq4w
+INFO:root:Comment URL: https://www.reddit.com/r/top_companies/comments/1exo2n5/top_15_software_development_companies_in_the_usa/ln1aq4w/
+INFO:root:Processing post: Woman confronts tenant’s who have not paid their rent in five months (New York, USA)
+ERROR:root:Error posting comment on post: Woman confronts tenant’s who have not paid their rent in five months (New York, USA)
+ERROR:root:Error message: TOO_OLD: "that's a piece of history now; it's too late to reply to it" on field 'parent'
+INFO:root:Fetching Twitter leads for keyword: Project management software
+ERROR:root:HTTP error occurred: 403 Client Error: Forbidden for url: https://twitter135.p.rapidapi.com/Search/?q=Project+management+software&count=5
+INFO:werkzeug:127.0.0.1 - - [13/Sep/2024 23:47:27] "POST /generate_leads HTTP/1.1" 200 -
 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5000
 INFO:werkzeug:[33mPress CTRL+C to quit[0m
 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5000
 INFO:werkzeug:[33mPress CTRL+C to quit[0m
-INFO:werkzeug:127.0.0.1 - - [09/Sep/2024 21:48:47] "[33mGET / HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [13/Sep/2024 23:59:28] "OPTIONS /generate_leads HTTP/1.1" 200 -
+INFO:root:Searching for keyword: Project management software
+INFO:root:Location provided: New York, USA
+INFO:root:Processing post: I am 25 years old, make $122,000, live in New York, NY and work as a product manager.
+INFO:root:Post is not relevant: I am 25 years old, make $122,000, live in New York, NY and work as a product manager., skipping...
+INFO:root:Processing post: ERP Software Development Company in New York
+INFO:root:Post is not relevant: ERP Software Development Company in New York, skipping...
+INFO:root:Processing post: Top 15 Software Development Companies in the USA
+INFO:root:Post is not relevant: Top 15 Software Development Companies in the USA, skipping...
+INFO:root:Processing post: Before FromSoftware moves on to a new project, I really wish we could get this. Made these images for reference.
+INFO:root:Post is not relevant: Before FromSoftware moves on to a new project, I really wish we could get this. Made these images for reference., skipping...
+INFO:root:Processing post: Woman confronts tenant’s who have not paid their rent in five months (New York, USA)
+INFO:root:Post is not relevant: Woman confronts tenant’s who have not paid their rent in five months (New York, USA), skipping...
+ERROR:app:Exception on /generate_leads [POST]
+Traceback (most recent call last):
+  File "C:\Users\Dayforce Intern\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Dayforce Intern\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Dayforce Intern\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\flask_cors\extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Dayforce Intern\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Dayforce Intern\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Users\abdul\GitKraken\Amplifier-AI\backend\app.py", line 70, in generate_leads
+    twitter_leads = fetch_twitter_leads(keyword) # Can't leave actual Twitter API keys in the code, so we'll use Social Searcher for now so we don't need other parameters like location, business_name, etc.
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: fetch_twitter_leads() missing 3 required positional arguments: 'business_name', 'business_description', and 'website_link'
+INFO:werkzeug:127.0.0.1 - - [13/Sep/2024 23:59:33] "[35m[1mPOST /generate_leads HTTP/1.1[0m" 500 -
 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5000
 INFO:werkzeug:[33mPress CTRL+C to quit[0m
-INFO:werkzeug: * Restarting with stat
-WARNING:werkzeug: * Debugger is active!
-INFO:werkzeug: * Debugger PIN: 545-521-791
-INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on all addresses (0.0.0.0)
- * Running on http://127.0.0.1:5000
- * Running on http://192.168.2.125:5000
-INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2024 00:01:53] "OPTIONS /generate_leads HTTP/1.1" 200 -
+INFO:root:Searching for keyword: Project management software
+INFO:root:Location provided: New York, USA
+INFO:root:Processing post: I am 25 years old, make $122,000, live in New York, NY and work as a product manager.
+INFO:root:Post is not relevant: I am 25 years old, make $122,000, live in New York, NY and work as a product manager., skipping...
+INFO:root:Processing post: ERP Software Development Company in New York
+INFO:root:Post is not relevant: ERP Software Development Company in New York, skipping...
+INFO:root:Processing post: Top 15 Software Development Companies in the USA
+INFO:root:Comment posted successfully on post: Top 15 Software Development Companies in the USA
+INFO:root:Comment ID: ln1cfzk
+INFO:root:Comment URL: https://www.reddit.com/r/top_companies/comments/1exo2n5/top_15_software_development_companies_in_the_usa/ln1cfzk/
+INFO:root:Processing post: Before FromSoftware moves on to a new project, I really wish we could get this. Made these images for reference.
+INFO:root:Post is not relevant: Before FromSoftware moves on to a new project, I really wish we could get this. Made these images for reference., skipping...
+INFO:root:Processing post: Woman confronts tenant’s who have not paid their rent in five months (New York, USA)
+INFO:root:Post is not relevant: Woman confronts tenant’s who have not paid their rent in five months (New York, USA), skipping...
+INFO:root:Fetching Twitter leads for keyword: Project management software
+ERROR:root:HTTP error occurred: 403 Client Error: Forbidden for url: https://twitter135.p.rapidapi.com/Search/?q=Project+management+software&count=5
+INFO:werkzeug:127.0.0.1 - - [14/Sep/2024 00:02:00] "POST /generate_leads HTTP/1.1" 200 -

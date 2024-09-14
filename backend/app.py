@@ -67,7 +67,7 @@ def generate_leads():
     reddit_leads = fetch_reddit_leads(keyword, location, business_name, business_description, website_link)
 
     # Generate leads from Twitter using Social Searcher
-    twitter_leads = fetch_twitter_leads(keyword) # Can't leave actual Twitter API keys in the code, so we'll use Social Searcher for now so we don't need other parameters like location, business_name, etc.
+    twitter_leads = fetch_twitter_leads(keyword, business_name, business_description, website_link) # Can't leave actual Twitter API keys in the code, so we'll use Social Searcher for now so we don't need other parameters like location, business_name, etc.
     
     # Prepare the data to save
     result = {
@@ -92,9 +92,39 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
     subreddit = reddit.subreddit("all")
     posts = []
     
-    for post in subreddit.search(keyword, limit=5): #TODO: Does this use the entire keyword with whitespaces and all or does it just use the first word? e.g. "web development" vs "webdevelopment". How does the Reddit API handle this?
-        logging.info(f"Processing post: {post.title}") # this .selftext prints the descriptions out fine they're just way too long {post.selftext}")
-        # Analyze the post using OpenAI GPT
+    # Load previously posted post IDs from a file to avoid duplicate posts
+    try:
+        with open('posted_posts.json', 'r') as f:
+            posted_posts = json.load(f)
+    except FileNotFoundError:
+        posted_posts = []
+
+    for post in subreddit.search(keyword, limit=5):
+        logging.info(f"Processing post: {post.title}")
+
+        # Skip if we've already posted in this exact post
+        if post.id in posted_posts:
+            logging.info(f"Already posted in this post: {post.title}, skipping...")
+            continue
+
+        # Analyze the post using OpenAI GPT to check relevance
+        relevance_check = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+            {"role": "system", "content": "You are a helpful assistant that determines if a post is relevant to a business. Respond with only 'yes' or 'no'."},
+            {"role": "user", "content": f"Is this post relevant to a business that offers {business_description}? Post title: {post.title}, Post description: {post.selftext}"}
+            ],
+            max_tokens=10, # Limit the response to a single word
+            temperature=0
+        )
+        relevance_response = relevance_check.choices[0].message.content.strip().lower()
+
+        # If the post is not relevant, skip it
+        if "no" in relevance_response:
+            logging.info(f"Post is not relevant: {post.title}, skipping...")
+            continue
+
+        # Generate a comment using OpenAI GPT
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -117,6 +147,14 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
             # logging.info(f"Comment: {comment}")
             logging.info(f"Comment ID: {posted_comment.id}")
             logging.info(f"Comment URL: https://www.reddit.com{posted_comment.permalink}")
+
+            # Add the post ID to the list of posted posts
+            posted_posts.append(post.id)
+
+            # Save the updated list of posted post IDs to a file
+            with open('posted_posts.json', 'w') as f:
+                json.dump(posted_posts, f, indent=4)
+
         except Exception as e:
             logging.error(f"Error posting comment on post: {post.title}")
             logging.error(f"Error message: {str(e)}")

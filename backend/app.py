@@ -7,6 +7,8 @@ import openai
 import tweepy
 import json
 import logging
+import random
+import time
 
 load_dotenv()
 
@@ -86,7 +88,7 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
     posts = []
     
     for post in subreddit.search(keyword, limit=5): #TODO: Does this use the entire keyword with whitespaces and all or does it just use the first word? e.g. "web development" vs "webdevelopment". How does the Reddit API handle this?
-        logging.info(f"Processing post: {post.title} - {post.selftext}")
+        logging.info(f"Processing post: {post.title}") # this .selftext prints the descriptions out fine they're just way too long {post.selftext}")
         # Analyze the post using OpenAI GPT
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
@@ -106,8 +108,8 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
             # Post the comment
             posted_comment = post.reply(comment)
             logging.info(f"Comment posted successfully on post: {post.title}")
-            logging.info(f"Description: {post.selftext}")
-            logging.info(f"Comment: {comment}")
+            # logging.info(f"Description: {post.selftext}")
+            # logging.info(f"Comment: {comment}")
             logging.info(f"Comment ID: {posted_comment.id}")
             logging.info(f"Comment URL: https://www.reddit.com{posted_comment.permalink}")
         except Exception as e:
@@ -122,9 +124,9 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
         posts.append(post_data)
 
         # Add a random delay between 30 and 60 seconds to avoid spam detection
-        delay = random.randint(5, 10)
-        logging.info(f"Waiting for {delay} seconds before posting the next comment...")
-        time.sleep(delay)
+        # delay = random.randint(5, 10)
+        # logging.info(f"Waiting for {delay} seconds before posting the next comment...")
+        # time.sleep(delay)
     
     return posts
 

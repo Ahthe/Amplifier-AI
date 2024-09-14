@@ -34,7 +34,7 @@ TWITTER_CONSUMER_SECRET = os.getenv('TWITTER_CONSUMER_SECRET')
 TWITTER_ACCESS_TOKEN = os.getenv('TWITTER_ACCESS_TOKEN')
 TWITTER_ACCESS_SECRET = os.getenv('TWITTER_ACCESS_SECRET')
 
-# Create Reddit API client (PRAW)
+# Create Reddit API client (PRAW) - way to interact with Reddit API
 reddit = praw.Reddit(client_id=REDDIT_CLIENT_ID,
                      client_secret=REDDIT_CLIENT_SECRET,
                      user_agent=REDDIT_USER_AGENT,
@@ -72,21 +72,22 @@ def generate_leads():
     return jsonify(reddit_leads)
 
 def fetch_reddit_leads(keyword, business_name, business_description, website_link):
-    
-    logging.info(f"Searching for keyword: {keyword}")
+    # TODO: Use other keywords to search for relevant posts,
+    # TODO: if loop if location is provided else continue ()
+    logging.info(f"Searching for keyword: {keyword}") 
     subreddit = reddit.subreddit("all")
     posts = []
     
     for post in subreddit.search(keyword, limit=5):
-        logging.info(f"Processing post: {post.title}")
+        logging.info(f"Processing post: {post.title}") # TODO: if location is provided, add location to the log   
         # Analyze the post using OpenAI GPT
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": "You are a helpful assistant that analyzes post titles and generates relevant business comments."},
-                {"role": "user", "content": f"Analyze this post title and generate a relevant comment: {post.title}"}
+                {"role": "system", "content": "You are a helpful assistant that analyzes post titles and descriptions and generates relevant and valuable comments."},
+                {"role": "user", "content": f"Analyze this post title and description and generate a relevant, helpful comment that provides genuine value to the user:\n\nTitle: {post.title}\n\nDescription: {post.selftext}"}
             ],
-            max_tokens=100,
+            max_tokens=150,
             temperature=0.7
         )
         generated_text = response.choices[0].message.content.strip()
@@ -110,6 +111,11 @@ def fetch_reddit_leads(keyword, business_name, business_description, website_lin
             'comment': comment
         }
         posts.append(post_data)
+
+        # Add a random delay between 30 and 60 seconds to avoid spam detection
+        # delay = random.randint(30, 60)
+        # logging.info(f"Waiting for {delay} seconds before posting the next comment...")
+        # time.sleep(delay)
     
     return posts
 

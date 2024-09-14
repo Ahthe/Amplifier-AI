@@ -64,25 +64,25 @@ def generate_leads():
     website_link = data.get('website_link')
     
     # Generate leads from Reddit
-    # reddit_leads = fetch_reddit_leads(keyword, location, business_name, business_description, website_link)
+    reddit_leads = fetch_reddit_leads(keyword, location, business_name, business_description, website_link)
 
-    # Generate leads from Twitter using Social Searcher
-    twitter_leads = fetch_twitter_leads(keyword) # Can't leave actual Twitter API keys in the code, so we'll use Social Searcher for now so we don't need other parameters like location, business_name, etc.
+    # # Generate leads from Twitter using Social Searcher
+    # twitter_leads = fetch_twitter_leads(keyword) # Can't leave actual Twitter API keys in the code, so we'll use Social Searcher for now so we don't need other parameters like location, business_name, etc.
 
-    # Generate leads from LinkedIn using Social Searcher
-    linkedin_leads = fetch_linkedin_leads(keyword)
+    # # Generate leads from LinkedIn using Social Searcher
+    # linkedin_leads = fetch_linkedin_leads(keyword)
     
     # Prepare the data to save
     result = {
         "question": keyword,
-        "leads": twitter_leads,
+        "leads": reddit_leads,
     }
 
     # Save the result to a JSON file
     with open('leads_data.json', 'w') as f:
         json.dump(result, f, indent=4)
     
-    return jsonify(twitter_leads)
+    return jsonify(reddit_leads)
 
 def fetch_reddit_leads(keyword, location, business_name, business_description, website_link):
     logging.info(f"Searching for keyword: {keyword}")
@@ -102,35 +102,38 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
         posted_posts = []
 
     # Set a limit for the number of new posts to comment on
-    max_new_posts = 5
+    max_new_posts = 50
     new_posts_found = 0
 
+
     # Search through posts, but only comment on new ones
-    for post in subreddit.search(keyword, limit=20):  # Increase the limit to search more posts
+    for post in subreddit.search(keyword, limit=100):  # Increase the limit to search more posts
         logging.info(f"Processing post: {post.title}")
 
         # Skip if we've already posted in this exact post
         if post.id in posted_posts:
             logging.info(f"Already posted in this post: {post.title}, skipping...")
             continue
-        # # Analyze the post using OpenAI GPT to check relevance
-        # relevance_check = openai.ChatCompletion.create(
-        #     model="gpt-4o-mini",
-        #     messages=[
-        #     {"role": "system", "content": "You are a helpful assistant that determines if a post is relevant to a business. Respond with only 'yes' or 'no'."},
-        #     {"role": "user", "content": f"Is this post relevant to a business that offers {business_description}? Post title: {post.title}, Post description: {truncated_description}"}
-        #     ],
-        #     max_tokens=10, # Limit the response to a single word
-        #     temperature=0
-        # )
-        # relevance_response = relevance_check.choices[0].message.content.strip().lower()
 
-        # # If the post is not relevant, skip it
-        # if "no" in relevance_response:
-        #     logging.info(f"Post is not relevant: {post.title}, skipping...")
-        #     continue
+    # TODO: Test this out and see if it works with gpt-4o-mini and finds relevant posts
+    #     # Analyze the post using OpenAI GPT to check relevance
+    #     relevance_check = openai.ChatCompletion.create(
+    #         model="gpt-4o-mini",
+    #         messages=[
+    #         {"role": "system", "content": "You are a helpful assistant that determines if a post is relevant to a business. Respond with only 'yes' or 'no'."},
+    #         {"role": "user", "content": f"Is this post relevant to a business that offers {business_description}? Post title: {post.title}, Post description: {truncated_description}"}
+    #         ],
+    #         max_tokens=10, # Limit the response to a single word
+    #         temperature=0
+    #     )
+    #     relevance_response = relevance_check.choices[0].message.content.strip().lower()
 
-        truncated_description = post.selftext[:5000]  # Limit description to 500 characters for OpenAI GPT
+    #     # If the post is not relevant, skip it
+    #     if "no" in relevance_response:
+    #         logging.info(f"Post is not relevant: {post.title}, skipping...")
+    #         continue
+
+        truncated_description = post.selftext[:5000]  # Limit description to 5000 characters because token limit is 16385 tokens for 3.5 at least TODO: check if this is the case for gpt-4o-mini
         # Generate a comment using OpenAI GPT
         response = openai.ChatCompletion.create(
             model="gpt-4o-mini",
@@ -138,7 +141,7 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
                 {"role": "system", "content": "You are a helpful assistant that analyzes post titles and descriptions and generates relevant and valuable comments."},
                 {"role": "user", "content": f"Analyze this post title and description and generate a relevant, helpful comment that provides genuine value to the user:\n\nTitle: {post.title}\n\nDescription: {truncated_description}"}
             ],
-            max_tokens=200,
+            max_tokens=100,
             temperature=0.7
         )
         generated_text = response.choices[0].message.content.strip()
@@ -157,8 +160,8 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
             posted_posts.append(post.id)
 
             # Save the updated list of posted post IDs to a file
-            with open('posted_posts.json', 'w') as f:
-                json.dump(posted_posts, f, indent=4)
+            with open('posted_posts.json', 'w') as f: # by opening a file we overwrite the previous content
+                json.dump(posted_posts, f, indent=4) # add the list of posted posts to the file
 
             # Increment the count of new posts found
             new_posts_found += 1

@@ -99,14 +99,18 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
     except FileNotFoundError:
         posted_posts = []
 
-    for post in subreddit.search(keyword, limit=5):
+    # Set a limit for the number of new posts to comment on
+    max_new_posts = 5
+    new_posts_found = 0
+
+    # Search through posts, but only comment on new ones
+    for post in subreddit.search(keyword, limit=20):  # Increase the limit to search more posts
         logging.info(f"Processing post: {post.title}")
 
         # Skip if we've already posted in this exact post
         if post.id in posted_posts:
             logging.info(f"Already posted in this post: {post.title}, skipping...")
             continue
-
         # # Analyze the post using OpenAI GPT to check relevance
         # relevance_check = openai.ChatCompletion.create(
         #     model="gpt-3.5-turbo",
@@ -143,8 +147,6 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
             # Post the comment
             posted_comment = post.reply(comment)
             logging.info(f"Comment posted successfully on post: {post.title}")
-            # logging.info(f"Description: {post.selftext}")
-            # logging.info(f"Comment: {comment}")
             logging.info(f"Comment ID: {posted_comment.id}")
             logging.info(f"Comment URL: https://www.reddit.com{posted_comment.permalink}")
 
@@ -154,6 +156,14 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
             # Save the updated list of posted post IDs to a file
             with open('posted_posts.json', 'w') as f:
                 json.dump(posted_posts, f, indent=4)
+
+            # Increment the count of new posts found
+            new_posts_found += 1
+
+            # If we've found enough new posts, stop searching
+            if new_posts_found >= max_new_posts:
+                logging.info(f"Found {new_posts_found} new posts, stopping search.")
+                break
 
         except Exception as e:
             logging.error(f"Error posting comment on post: {post.title}")

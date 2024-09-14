@@ -107,22 +107,22 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
             logging.info(f"Already posted in this post: {post.title}, skipping...")
             continue
 
-        # Analyze the post using OpenAI GPT to check relevance
-        relevance_check = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-            {"role": "system", "content": "You are a helpful assistant that determines if a post is relevant to a business. Respond with only 'yes' or 'no'."},
-            {"role": "user", "content": f"Is this post relevant to a business that offers {business_description}? Post title: {post.title}, Post description: {post.selftext}"}
-            ],
-            max_tokens=10, # Limit the response to a single word
-            temperature=0
-        )
-        relevance_response = relevance_check.choices[0].message.content.strip().lower()
+        # # Analyze the post using OpenAI GPT to check relevance
+        # relevance_check = openai.ChatCompletion.create(
+        #     model="gpt-3.5-turbo",
+        #     messages=[
+        #     {"role": "system", "content": "You are a helpful assistant that determines if a post is relevant to a business. Respond with only 'yes' or 'no'."},
+        #     {"role": "user", "content": f"Is this post relevant to a business that offers {business_description}? Post title: {post.title}, Post description: {post.selftext}"}
+        #     ],
+        #     max_tokens=10, # Limit the response to a single word
+        #     temperature=0
+        # )
+        # relevance_response = relevance_check.choices[0].message.content.strip().lower()
 
-        # If the post is not relevant, skip it
-        if "no" in relevance_response:
-            logging.info(f"Post is not relevant: {post.title}, skipping...")
-            continue
+        # # If the post is not relevant, skip it
+        # if "no" in relevance_response:
+        #     logging.info(f"Post is not relevant: {post.title}, skipping...")
+        #     continue
 
         # Generate a comment using OpenAI GPT
         response = openai.ChatCompletion.create(

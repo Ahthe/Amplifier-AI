@@ -46,7 +46,7 @@ const Bubble = ({ message, createdAt }: Props) => {
           'flex flex-col gap-3 min-w-[200px] max-w-[300px] p-4 rounded-t-md',
           message.role == 'assistant'
             ? 'bg-muted rounded-r-md'
-            : 'bg-grandis rounded-l-md'
+            : 'bg-black rounded-l-md'
         )}
       >
         {createdAt ? (
@@ -66,16 +66,16 @@ const Bubble = ({ message, createdAt }: Props) => {
             }`}
           </p>
         )}
-        {image ? (
-          <div className="relative">
-            <Image
-              src={`https://ucarecdn.com/${image[0]}/`}
-              width={300}
-              height={200}
-              alt="image"
-              className="object-contain"
-            />
-          </div>
+        {/* {image ? (
+          // <div className="relative">
+          //   <Image
+          //     src={`https://ucarecdn.com/${image[0]}/`}
+          //     width={300}
+          //     height={200}
+          //     alt="image"
+          //     className="object-contain"
+          //   />
+          // </div>
         ) : (
           <p className="text-sm">
             {message.content.replace('(complete)', ' ')}
@@ -88,8 +88,8 @@ const Bubble = ({ message, createdAt }: Props) => {
                 Your Link
               </Link>
             )}
-          </p>
-        )}
+          </p> */}
+        {/* )} */}
       </div>
     </div>
   )

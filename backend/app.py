@@ -34,6 +34,9 @@ TWITTER_CONSUMER_SECRET = os.getenv('TWITTER_CONSUMER_SECRET')
 TWITTER_ACCESS_TOKEN = os.getenv('TWITTER_ACCESS_TOKEN')
 TWITTER_ACCESS_SECRET = os.getenv('TWITTER_ACCESS_SECRET')
 
+# Social Searcher API key
+SOCIAL_SEARCHER_API_KEY = os.getenv('SOCIAL_SEARCHER_API_KEY')
+
 # Create Reddit API client (PRAW) - way to interact with Reddit API
 reddit = praw.Reddit(client_id=REDDIT_CLIENT_ID,
                      client_secret=REDDIT_CLIENT_SECRET,
@@ -74,8 +77,7 @@ def generate_leads():
 
 def fetch_reddit_leads(keyword, location, business_name, business_description, website_link):
     logging.info(f"Searching for keyword: {keyword}")
-
-    # If a location is provided, modify the search query to include the location
+    # TODO: if already posted on specific post, don't post again. How can we keep track of this? For example if a user uses it one day and then again the next day, we don't want to post on the same post again.
     if location:
         logging.info(f"Location provided: {location}")
         keyword = f"{keyword} {location}"
@@ -83,8 +85,8 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
     subreddit = reddit.subreddit("all")
     posts = []
     
-    for post in subreddit.search(keyword, limit=5):
-        logging.info(f"Processing post: {post.title}") # TODO: if location is provided, add location to the log   
+    for post in subreddit.search(keyword, limit=5): #TODO: Does this use the entire keyword with whitespaces and all or does it just use the first word? e.g. "web development" vs "webdevelopment". How does the Reddit API handle this?
+        logging.info(f"Processing post: {post.title} - {post.selftext}")
         # Analyze the post using OpenAI GPT
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
@@ -104,6 +106,8 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
             # Post the comment
             posted_comment = post.reply(comment)
             logging.info(f"Comment posted successfully on post: {post.title}")
+            logging.info(f"Description: {post.selftext}")
+            logging.info(f"Comment: {comment}")
             logging.info(f"Comment ID: {posted_comment.id}")
             logging.info(f"Comment URL: https://www.reddit.com{posted_comment.permalink}")
         except Exception as e:
@@ -118,9 +122,9 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
         posts.append(post_data)
 
         # Add a random delay between 30 and 60 seconds to avoid spam detection
-        # delay = random.randint(30, 60)
-        # logging.info(f"Waiting for {delay} seconds before posting the next comment...")
-        # time.sleep(delay)
+        delay = random.randint(5, 10)
+        logging.info(f"Waiting for {delay} seconds before posting the next comment...")
+        time.sleep(delay)
     
     return posts
 

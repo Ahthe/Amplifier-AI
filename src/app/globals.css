@@ -1,4 +1,4 @@
-/* @tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -171,9 +171,9 @@ body {
 .parsed-container img {
   width: 100% !important;
   border-radius: 20px;
-} */
+}
 
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -305,4 +305,4 @@ img {
 
 .parsed-container img {
   @apply w-full rounded-lg;
-}
+} */

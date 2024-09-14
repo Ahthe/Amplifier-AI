@@ -140,7 +140,7 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
             messages=[
                 {"role": "system", "content": "You are a helpful assistant that analyzes post titles and descriptions and generates relevant and valuable comments."},
                 {"role": "user", "content": f"Analyze this post title and description and generate a relevant, helpful comment that provides genuine value to the user in only 5 sentences:\n\nTitle: {post.title}\n\nDescription: {truncated_description}"}
-            ],
+            ], # TODO: fix this
             max_tokens=200,
             temperature=0.7
         )

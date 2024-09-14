@@ -9,6 +9,7 @@ import json
 import logging
 import random
 import time
+import requests
 
 load_dotenv()
 
@@ -63,77 +64,138 @@ def generate_leads():
     website_link = data.get('website_link')
     
     # Generate leads from Reddit
-    reddit_leads = fetch_reddit_leads(keyword, location, business_name, business_description, website_link)
+    # reddit_leads = fetch_reddit_leads(keyword, location, business_name, business_description, website_link)
+
+    # Generate leads from Twitter using Social Searcher
+    twitter_leads = fetch_twitter_leads(keyword, business_name, business_description, website_link)
     
     # Prepare the data to save
     result = {
         "question": keyword,
-        "leads": reddit_leads
+        "leads": twitter_leads
     }
 
     # Save the result to a JSON file
     with open('leads_data.json', 'w') as f:
         json.dump(result, f, indent=4)
     
-    return jsonify(reddit_leads)
+    return jsonify(twitter_leads)
 
-def fetch_reddit_leads(keyword, location, business_name, business_description, website_link):
-    logging.info(f"Searching for keyword: {keyword}")
-    # TODO: if already posted on specific post, don't post again. How can we keep track of this? For example if a user uses it one day and then again the next day, we don't want to post on the same post again.
-    if location:
-        logging.info(f"Location provided: {location}")
-        keyword = f"{keyword} {location}"
+# def fetch_reddit_leads(keyword, location, business_name, business_description, website_link):
+#     logging.info(f"Searching for keyword: {keyword}")
+#     # TODO: if already posted on specific post, don't post again. How can we keep track of this? For example if a user uses it one day and then again the next day, we don't want to post on the same post again.
+#     if location:
+#         logging.info(f"Location provided: {location}")
+#         keyword = f"{keyword} {location}"
 
-    subreddit = reddit.subreddit("all")
-    posts = []
+#     subreddit = reddit.subreddit("all")
+#     posts = []
     
-    for post in subreddit.search(keyword, limit=5): #TODO: Does this use the entire keyword with whitespaces and all or does it just use the first word? e.g. "web development" vs "webdevelopment". How does the Reddit API handle this?
-        logging.info(f"Processing post: {post.title}") # this .selftext prints the descriptions out fine they're just way too long {post.selftext}")
-        # Analyze the post using OpenAI GPT
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant that analyzes post titles and descriptions and generates relevant and valuable comments."},
-                {"role": "user", "content": f"Analyze this post title and description and generate a relevant, helpful comment that provides genuine value to the user:\n\nTitle: {post.title}\n\nDescription: {post.selftext}"}
-            ],
-            max_tokens=150,
-            temperature=0.7
-        )
-        generated_text = response.choices[0].message.content.strip()
+#     for post in subreddit.search(keyword, limit=5): #TODO: Does this use the entire keyword with whitespaces and all or does it just use the first word? e.g. "web development" vs "webdevelopment". How does the Reddit API handle this?
+#         logging.info(f"Processing post: {post.title}") # this .selftext prints the descriptions out fine they're just way too long {post.selftext}")
+#         # Analyze the post using OpenAI GPT
+#         response = openai.ChatCompletion.create(
+#             model="gpt-3.5-turbo",
+#             messages=[
+#                 {"role": "system", "content": "You are a helpful assistant that analyzes post titles and descriptions and generates relevant and valuable comments."},
+#                 {"role": "user", "content": f"Analyze this post title and description and generate a relevant, helpful comment that provides genuine value to the user:\n\nTitle: {post.title}\n\nDescription: {post.selftext}"}
+#             ],
+#             max_tokens=150,
+#             temperature=0.7
+#         )
+#         generated_text = response.choices[0].message.content.strip()
 
-        # Create the comment
-        comment = f"{generated_text}\n\nWe are {business_name}. {business_description}. Please visit our website for more information: {website_link}"
+#         # Create the comment
+#         comment = f"{generated_text}\n\nWe are {business_name}. {business_description}. Please visit our website for more information: {website_link}"
 
-        try:
-            # Post the comment
-            posted_comment = post.reply(comment)
-            logging.info(f"Comment posted successfully on post: {post.title}")
-            # logging.info(f"Description: {post.selftext}")
-            # logging.info(f"Comment: {comment}")
-            logging.info(f"Comment ID: {posted_comment.id}")
-            logging.info(f"Comment URL: https://www.reddit.com{posted_comment.permalink}")
-        except Exception as e:
-            logging.error(f"Error posting comment on post: {post.title}")
-            logging.error(f"Error message: {str(e)}")
+#         try:
+#             # Post the comment
+#             posted_comment = post.reply(comment)
+#             logging.info(f"Comment posted successfully on post: {post.title}")
+#             # logging.info(f"Description: {post.selftext}")
+#             # logging.info(f"Comment: {comment}")
+#             logging.info(f"Comment ID: {posted_comment.id}")
+#             logging.info(f"Comment URL: https://www.reddit.com{posted_comment.permalink}")
+#         except Exception as e:
+#             logging.error(f"Error posting comment on post: {post.title}")
+#             logging.error(f"Error message: {str(e)}")
 
-        post_data = {
-            'title': post.title,
-            'url': post.url,
-            'comment': comment
-        }
-        posts.append(post_data)
+#         post_data = {
+#             'title': post.title,
+#             'url': post.url,
+#             'comment': comment
+#         }
+#         posts.append(post_data)
 
-        # Add a random delay between 30 and 60 seconds to avoid spam detection
-        # delay = random.randint(5, 10)
-        # logging.info(f"Waiting for {delay} seconds before posting the next comment...")
-        # time.sleep(delay)
+#         # Add a random delay between 30 and 60 seconds to avoid spam detection
+#         # delay = random.randint(5, 10)
+#         # logging.info(f"Waiting for {delay} seconds before posting the next comment...")
+#         # time.sleep(delay)
     
-    return posts
+#     return posts
 
-def fetch_twitter_leads(keyword):
-    tweets = twitter_api.search(q=keyword, lang="en", count=5)
-    tweet_data = [{'text': tweet.text, 'user': tweet.user.screen_name} for tweet in tweets]
-    return tweet_data
+def fetch_twitter_leads(keyword, business_name, business_description, website_link):
+    logging.info(f"Fetching Twitter leads for keyword: {keyword}")
+    
+    # Social Searcher API endpoint
+    api_url = "https://api.social-searcher.com/v2/search"
+    
+    # Parameters for the API request
+    params = {
+        'key': SOCIAL_SEARCHER_API_KEY,
+        'q': keyword,
+        'network': 'twitter',  # Specify the network as 'twitter'
+        'limit': 5  # Limit the number of results to 5
+    }
+    
+    # Log the request URL for debugging
+    logging.info(f"Request URL: {api_url}")
+    logging.info(f"Request Parameters: {params}")
+    
+    try:
+        # Make the GET request to the Social Searcher API
+        response = requests.get(api_url, params=params)
+        response.raise_for_status()  # Raise an error for bad responses (4xx or 5xx)
+        
+        data = response.json()
+        tweets = []
+        
+        # Extract relevant tweet data
+        for post in data.get('posts', []):
+            tweet_text = post.get('text', '')
+            tweet_user = post.get('user', {}).get('name', '')
+            tweet_url = post.get('url', '')
+
+            # Log the tweet data for debugging
+            logging.info(f"Tweet Text: {tweet_text}")
+            logging.info(f"Tweet User: {tweet_user}")
+            logging.info(f"Tweet URL: {tweet_url}")
+
+            # Simulate posting the comment (since we can't actually post without the Twitter API)
+            tweet_data = {
+                'text': tweet_text,
+                'user': tweet_user,
+                'url': tweet_url
+            }
+            tweets.append(tweet_data)
+        
+        return tweets
+    
+    except requests.exceptions.HTTPError as http_err:
+        logging.error(f"HTTP error occurred: {http_err}")
+    except requests.exceptions.RequestException as req_err:
+        logging.error(f"Error fetching Twitter leads: {req_err}")
+    except Exception as e:
+        logging.error(f"An unexpected error occurred: {str(e)}")
+    
+    return []
+
+# def fetch_twitter_leads(keyword):
+#     tweets = twitter_api.search(q=keyword, lang="en", count=5)
+#     tweet_data = [{'text': tweet.text, 'user': tweet.user.screen_name} for tweet in tweets]
+#     return tweet_data
+
+
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))

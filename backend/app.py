@@ -37,8 +37,8 @@ TWITTER_CONSUMER_SECRET = os.getenv('TWITTER_CONSUMER_SECRET')
 TWITTER_ACCESS_TOKEN = os.getenv('TWITTER_ACCESS_TOKEN')
 TWITTER_ACCESS_SECRET = os.getenv('TWITTER_ACCESS_SECRET')
 
-# Twitter API credentials (for RapidAPI)
-RAPIDAPI_KEY = os.getenv('RAPIDAPI_KEY')
+# Social Searcher API key
+SOCIAL_SEARCHER_API_KEY = os.getenv('SOCIAL_SEARCHER_API_KEY')
 
 # Create Reddit API client (PRAW) - way to interact with Reddit API
 reddit = praw.Reddit(client_id=REDDIT_CLIENT_ID,
@@ -64,22 +64,25 @@ def generate_leads():
     website_link = data.get('website_link')
     
     # Generate leads from Reddit
-    reddit_leads = fetch_reddit_leads(keyword, location, business_name, business_description, website_link)
+    # reddit_leads = fetch_reddit_leads(keyword, location, business_name, business_description, website_link)
 
     # Generate leads from Twitter using Social Searcher
-    # twitter_leads = fetch_twitter_leads(keyword, business_name, business_description, website_link) # Can't leave actual Twitter API keys in the code, so we'll use Social Searcher for now so we don't need other parameters like location, business_name, etc.
+    twitter_leads = fetch_twitter_leads(keyword) # Can't leave actual Twitter API keys in the code, so we'll use Social Searcher for now so we don't need other parameters like location, business_name, etc.
+
+    # Generate leads from LinkedIn using Social Searcher
+    linkedin_leads = fetch_linkedin_leads(keyword)
     
     # Prepare the data to save
     result = {
         "question": keyword,
-        "leads": reddit_leads,
+        "leads": twitter_leads,
     }
 
     # Save the result to a JSON file
     with open('leads_data.json', 'w') as f:
         json.dump(result, f, indent=4)
     
-    return jsonify(reddit_leads)
+    return jsonify(twitter_leads)
 
 def fetch_reddit_leads(keyword, location, business_name, business_description, website_link):
     logging.info(f"Searching for keyword: {keyword}")
@@ -112,7 +115,7 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
             continue
         # # Analyze the post using OpenAI GPT to check relevance
         # relevance_check = openai.ChatCompletion.create(
-        #     model="gpt-3.5-turbo",
+        #     model="gpt-4o-mini",
         #     messages=[
         #     {"role": "system", "content": "You are a helpful assistant that determines if a post is relevant to a business. Respond with only 'yes' or 'no'."},
         #     {"role": "user", "content": f"Is this post relevant to a business that offers {business_description}? Post title: {post.title}, Post description: {truncated_description}"}
@@ -130,7 +133,7 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
         truncated_description = post.selftext[:5000]  # Limit description to 500 characters for OpenAI GPT
         # Generate a comment using OpenAI GPT
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant that analyzes post titles and descriptions and generates relevant and valuable comments."},
                 {"role": "user", "content": f"Analyze this post title and description and generate a relevant, helpful comment that provides genuine value to the user:\n\nTitle: {post.title}\n\nDescription: {truncated_description}"}
@@ -183,66 +186,48 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
     
     return posts
 
-def fetch_twitter_leads(keyword, business_name, business_description, website_link):
+def fetch_twitter_leads(keyword):
     logging.info(f"Fetching Twitter leads for keyword: {keyword}")
     
-    # RapidAPI endpoint for Twitter API v2
-    api_url = "https://twitter135.p.rapidapi.com/Search/"
-    
-    # Headers for the API request
-    headers = {
-        'X-RapidAPI-Key': RAPIDAPI_KEY,
-        'X-RapidAPI-Host': 'twitter135.p.rapidapi.com'
-    }
+    # Social Searcher API endpoint
+    api_url = "https://api.social-searcher.com/v2/search"
     
     # Parameters for the API request
     params = {
+        'key': SOCIAL_SEARCHER_API_KEY,
         'q': keyword,
-        'count': 5
+        'network': 'twitter',  # Specify the network as 'twitter'
+        'limit': 5  # Limit the number of results to 5
     }
     
+    # Log the request URL for debugging
+    logging.info(f"Request URL: {api_url}")
+    logging.info(f"Request Parameters: {params}")
+    
     try:
-        # Make the GET request to the RapidAPI Twitter API
-        response = requests.get(api_url, headers=headers, params=params)
+        # Make the GET request to the Social Searcher API
+        response = requests.get(api_url, params=params)
         response.raise_for_status()  # Raise an error for bad responses (4xx or 5xx)
         
         data = response.json()
         tweets = []
         
         # Extract relevant tweet data
-        for tweet in data.get('globalObjects', {}).get('tweets', {}).values():
-            tweet_text = tweet.get('full_text', '')
-            tweet_user = tweet.get('user_id_str', '')
-            tweet_url = f"https://twitter.com/i/web/status/{tweet.get('id_str', '')}"
+        for post in data.get('posts', []):
+            tweet_text = post.get('text', '')
+            tweet_user = post.get('user', {}).get('name', '')
+            tweet_url = post.get('url', '')
 
+            # Log the tweet data for debugging
             logging.info(f"Tweet Text: {tweet_text}")
             logging.info(f"Tweet User: {tweet_user}")
             logging.info(f"Tweet URL: {tweet_url}")
 
-            # Generate a reply using OpenAI GPT
-            response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {"role": "system", "content": "You are a helpful assistant that analyzes tweets and generates relevant and valuable replies."},
-                    {"role": "user", "content": f"Analyze this tweet and generate a relevant, helpful reply that provides genuine value to the user:\n\nTweet: {tweet_text}"}
-                ],
-                max_tokens=150,
-                temperature=0.7
-            )
-            generated_reply = response.choices[0].message.content.strip()
-
-            # Create the reply text
-            reply = f"{generated_reply}\n\nWe are {business_name}. {business_description}. Please visit our website for more information: {website_link}"
-
-            # Log the generated reply for debugging
-            logging.info(f"Generated Reply: {reply}")
-
-            # Store the tweet data along with the generated reply
+            # Simulate posting the comment (since we can't actually post without the Twitter API)
             tweet_data = {
                 'text': tweet_text,
                 'user': tweet_user,
-                'url': tweet_url,
-                'generated_reply': reply
+                'url': tweet_url
             }
             tweets.append(tweet_data)
         
@@ -252,6 +237,52 @@ def fetch_twitter_leads(keyword, business_name, business_description, website_li
         logging.error(f"HTTP error occurred: {http_err}")
     except requests.exceptions.RequestException as req_err:
         logging.error(f"Error fetching Twitter leads: {req_err}")
+    except Exception as e:
+        logging.error(f"An unexpected error occurred: {str(e)}")
+    
+    return []
+
+def fetch_linkedin_leads(keyword):
+    logging.info(f"Fetching LinkedIn leads for keyword: {keyword}")
+    
+    # Social Searcher API endpoint
+    api_url = "https://api.social-searcher.com/v2/search"
+    
+    # Parameters for the API request
+    params = {
+        'key': SOCIAL_SEARCHER_API_KEY,
+        'q': keyword,
+        'network': 'linkedin',  # Specify the network as 'linkedin'
+        'limit': 5  # Limit the number of results to 5
+    }
+    
+    try:
+        # Make the GET request to the Social Searcher API
+        response = requests.get(api_url, params=params)
+        response.raise_for_status()  # Raise an error for bad responses (4xx or 5xx)
+        
+        data = response.json()
+        linkedin_posts = []
+        
+        # Extract relevant LinkedIn post data
+        for post in data.get('posts', []):
+            post_text = post.get('text', '')
+            post_user = post.get('user', {}).get('name', '')
+            post_url = post.get('url', '')
+
+            post_data = {
+                'text': post_text,
+                'user': post_user,
+                'url': post_url
+            }
+            linkedin_posts.append(post_data)
+        
+        return linkedin_posts
+    
+    except requests.exceptions.HTTPError as http_err:
+        logging.error(f"HTTP error occurred: {http_err}")
+    except requests.exceptions.RequestException as req_err:
+        logging.error(f"Error fetching LinkedIn leads: {req_err}")
     except Exception as e:
         logging.error(f"An unexpected error occurred: {str(e)}")
     

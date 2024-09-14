@@ -4,11 +4,9 @@ import DashboardIcon from '@/icons/dashboard-icon'
 import EmailIcon from '@/icons/email-icon'
 import HelpDeskIcon from '@/icons/help-desk-icon'
 import IntegrationsIcon from '@/icons/integrations-icon'
-import { LeadIcon } from '@/icons/lead'
 import SettingsIcon from '@/icons/settings-icon'
 import StarIcon from '@/icons/star-icon'
 import TimerIcon from '@/icons/timer-icon'
-
 
 type SIDE_BAR_MENU_PROPS = {
   label: string
@@ -21,11 +19,6 @@ export const SIDE_BAR_MENU: SIDE_BAR_MENU_PROPS[] = [
     label: 'Dashboard',
     icon: <DashboardIcon />,
     path: 'dashboard',
-  },
-  {
-    label: 'Lead Amplifier',
-    icon: <LeadIcon />,
-    path: 'lead-amplifier',
   },
   {
     label: 'Conversations',

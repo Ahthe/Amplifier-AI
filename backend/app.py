@@ -54,10 +54,11 @@ def generate_leads():
     keyword = data.get('keyword')
     business_name = data.get('name')
     business_description = data.get('description')
+    location = data.get('location')
     website_link = data.get('website_link')
     
     # Generate leads from Reddit
-    reddit_leads = fetch_reddit_leads(keyword, business_name, business_description, website_link)
+    reddit_leads = fetch_reddit_leads(keyword, location, business_name, business_description, website_link)
     
     # Prepare the data to save
     result = {
@@ -71,10 +72,14 @@ def generate_leads():
     
     return jsonify(reddit_leads)
 
-def fetch_reddit_leads(keyword, business_name, business_description, website_link):
-    # TODO: Use other keywords to search for relevant posts,
-    # TODO: if loop if location is provided else continue ()
-    logging.info(f"Searching for keyword: {keyword}") 
+def fetch_reddit_leads(keyword, location, business_name, business_description, website_link):
+    logging.info(f"Searching for keyword: {keyword}")
+
+    # If a location is provided, modify the search query to include the location
+    if location:
+        logging.info(f"Location provided: {location}")
+        keyword = f"{keyword} {location}"
+
     subreddit = reddit.subreddit("all")
     posts = []
     

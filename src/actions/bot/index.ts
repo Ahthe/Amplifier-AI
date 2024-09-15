@@ -241,9 +241,6 @@ export const onAiChatBotAssistant = async (
               if the customer wants to buy a product redirect them to the payment page https://amplifire-ai.vercel.app/portal/${id}/payment/${
                 checkCustomer?.customer[0].id
               }
-
-              Always maintain a respectful and professional tone.
-              Array of questions: [${chatBotDomain.filterQuestions.map((questions) => questions.question).join(', ')}]
           `,
             },
             ...chat,

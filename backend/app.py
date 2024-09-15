@@ -192,49 +192,83 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
 def fetch_twitter_leads(keyword):
     logging.info(f"Fetching Twitter leads for keyword: {keyword}")
     
-    # Social Searcher API endpoint
-    api_url = "https://api.social-searcher.com/v2/search"
+    # Social Searcher API endpoint for requesting data
+    api_url_request = "https://api.social-searcher.com/v2/search"
     
-    # Parameters for the API request
-    params = {
+    # Parameters for the initial API request (Step 1)
+    params_request = {
         'key': SOCIAL_SEARCHER_API_KEY,
         'q': keyword,
         'network': 'twitter',  # Specify the network as 'twitter'
-        'limit': 5  # Limit the number of results to 5
+        'limit': 10  # Limit the number of results to 10
     }
     
-    # Log the request URL for debugging
-    logging.info(f"Request URL: {api_url}")
-    logging.info(f"Request Parameters: {params}")
-    
     try:
-        # Make the GET request to the Social Searcher API
-        response = requests.get(api_url, params=params)
+        # Step 1: Make the initial request to get the requestid
+        logging.info(f"Requesting data for keyword: {keyword}")
+        response = requests.get(api_url_request, params=params_request)
         response.raise_for_status()  # Raise an error for bad responses (4xx or 5xx)
         
         data = response.json()
-        tweets = []
+        requestid = data.get('requestid')
         
-        # Extract relevant tweet data
-        for post in data.get('posts', []):
-            tweet_text = post.get('text', '')
-            tweet_user = post.get('user', {}).get('name', '')
-            tweet_url = post.get('url', '')
-
-            # Log the tweet data for debugging
-            logging.info(f"Tweet Text: {tweet_text}")
-            logging.info(f"Tweet User: {tweet_user}")
-            logging.info(f"Tweet URL: {tweet_url}")
-
-            # Simulate posting the comment (since we can't actually post without the Twitter API)
-            tweet_data = {
-                'text': tweet_text,
-                'user': tweet_user,
-                'url': tweet_url
-            }
-            tweets.append(tweet_data)
+        if not requestid:
+            logging.error("No requestid found in the response.")
+            return []
         
-        return tweets
+        logging.info(f"Received requestid: {requestid}")
+        
+        # Step 2: Wait for 60 seconds before fetching the results
+        logging.info("Waiting for 60 seconds before fetching the results...")
+        time.sleep(60)
+        
+        # Social Searcher API endpoint for fetching results
+        api_url_fetch = f"https://api.social-searcher.com/v2/search?requestid={requestid}&page=0&limit=10&key={SOCIAL_SEARCHER_API_KEY}"
+        
+        # Retry logic in case the status is pending
+        max_retries = 3
+        retry_delay = 300  # 5 minutes in seconds
+        
+        for attempt in range(max_retries):
+            logging.info(f"Fetching results for requestid: {requestid} (Attempt {attempt + 1})")
+            response = requests.get(api_url_fetch)
+            response.raise_for_status()
+            
+            data = response.json()
+            status = data.get('status')
+            
+            if status == 'finished':
+                logging.info("Data processing finished, extracting tweets...")
+                tweets = []
+                
+                # Extract relevant tweet data
+                for post in data.get('posts', []):
+                    tweet_text = post.get('text', '')
+                    tweet_user = post.get('user', {}).get('name', '')
+                    tweet_url = post.get('url', '')
+
+                    # Log the tweet data for debugging
+                    logging.info(f"Tweet Text: {tweet_text}")
+                    logging.info(f"Tweet User: {tweet_user}")
+                    logging.info(f"Tweet URL: {tweet_url}")
+
+                    tweet_data = {
+                        'text': tweet_text,
+                        'user': tweet_user,
+                        'url': tweet_url
+                    }
+                    tweets.append(tweet_data)
+                
+                return tweets
+            
+            elif status == 'pending':
+                logging.info(f"Status is pending, waiting for {retry_delay} seconds before retrying...")
+                time.sleep(retry_delay)
+            else:
+                logging.error(f"Unexpected status: {status}")
+                break
+        
+        logging.error("Max retries reached or unexpected status encountered.")
     
     except requests.exceptions.HTTPError as http_err:
         logging.error(f"HTTP error occurred: {http_err}")

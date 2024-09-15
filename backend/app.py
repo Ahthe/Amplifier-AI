@@ -64,10 +64,10 @@ def generate_leads():
     website_link = data.get('website_link')
     
     # Generate leads from Reddit
-    # reddit_leads = fetch_reddit_leads(keyword, location, business_name, business_description, website_link)
+    reddit_leads = fetch_reddit_leads(keyword, location, business_name, business_description, website_link)
 
     # # Generate leads from Twitter using Social Searcher
-    twitter_leads = fetch_twitter_leads(keyword) # Can't leave actual Twitter API keys in the code, so we'll use Social Searcher for now so we don't need other parameters like location, business_name, etc.
+    # twitter_leads = fetch_twitter_leads(keyword) # Can't leave actual Twitter API keys in the code, so we'll use Social Searcher for now so we don't need other parameters like location, business_name, etc.
 
     # # Generate leads from LinkedIn using Social Searcher
     # linkedin_leads = fetch_linkedin_leads(keyword)
@@ -75,14 +75,14 @@ def generate_leads():
     # Prepare the data to save
     result = {
         "question": keyword,
-        "leads": twitter_leads,
+        "leads": reddit_leads,
     }
 
     # Save the result to a JSON file
     with open('leads_data.json', 'w') as f:
         json.dump(result, f, indent=4)
     
-    return jsonify(twitter_leads)
+    return jsonify(reddit_leads)
 
 def fetch_reddit_leads(keyword, location, business_name, business_description, website_link):
     logging.info(f"Searching for keyword: {keyword}")

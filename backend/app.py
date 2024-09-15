@@ -110,7 +110,7 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
 
 
     # Search through posts, but only comment on new ones
-    for post in subreddit.search(keyword, limit=10):  # Increase the limit to search more posts
+    for post in subreddit.search(keyword, limit=20):  # Increase the limit to search more posts
         logging.info(f"Processing post: {post.title}")
 
         # Skip if we've already posted in this exact post
@@ -145,7 +145,6 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
                     "role": "system",
                     "content": f"You are a thoughtful and insightful Reddit user who provides genuine and valuable responses to posts. Your goal is to assist users by offering advice, insights, or solutions. And naturally mention our business, {business_name}, in a way that adds value to the conversation. Include our link, {website_link}, if it fits naturally, explaining briefly how it might help with their issue. Avoid being overly promotional or spammy. Maintain a neutral and helpful tone throughout your response."
                 },
-                
                 {
                     "role": "user",
                     "content": f"Please analyze the following Reddit post's title and description and craft a genuine and helpful reply that provides value to the user. Find a way to naturally recommend our business - {business_name} - if it is relevant and can be seamlessly integrated into your response. If you can't mention the business naturally, focus solely on providing valuable advice. Focus on speaking in a neutral tone and avoid using exclaimation marks. And please try to find a way to RECOMMEND our {business_name} in the reply naturally and preferably mention the {website_link} as well \n\n\
@@ -200,6 +199,7 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
 
         except Exception as e:
             logging.error(f"Error posting comment on post: {post.title}")
+            logging.error(f"Error COULD NOT POST ON THIS URL: {post.url}")
             logging.error(f"Error message: {str(e)}")
 
         post_data = {

@@ -143,12 +143,12 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
             messages=[
                 {
                     "role": "system",
-                    "content": f"You are a helpful and considerate Reddit user who provides valuable and genuine responses to posts and subtly and naturally recommends our {business_name} in your reply to the post. Your goal is to assist users with their issues by offering advice, insights, or solutions. Naturally mention our business, {business_name}, in a seamless and natural way and PREFERRABLY even sharing our link with them - {website_link}, briefly explaining how it might help with their issue. However, you should avoid coming across as spammy."
+                    "content": f"You are a thoughtful and insightful Reddit user who provides genuine and valuable responses to posts. Your goal is to assist users by offering advice, insights, or solutions. And naturally mention our business, {business_name}, in a way that adds value to the conversation. Include our link, {website_link}, if it fits naturally, explaining briefly how it might help with their issue. Avoid being overly promotional or spammy. Maintain a neutral and helpful tone throughout your response."
                 },
                 
                 {
                     "role": "user",
-                    "content": f"Please analyze the following Reddit post's title and description and craft a genuine and helpful reply that provides value to the user. Only recommend our business - {business_name} - if it is relevant and can be seamlessly integrated into your response. If you can't mention the business naturally, focus solely on providing helpful advice. But please try to find a way to RECOMMEND our {business_name} in the reply \n\n\
+                    "content": f"Please analyze the following Reddit post's title and description and craft a genuine and helpful reply that provides value to the user. Find a way to naturally recommend our business - {business_name} - if it is relevant and can be seamlessly integrated into your response. If you can't mention the business naturally, focus solely on providing valuable advice. Focus on speaking in a neutral tone and avoid using exclaimation marks. And please try to find a way to RECOMMEND our {business_name} in the reply naturally and preferably mention the {website_link} as well \n\n\
                     Title: {post.title}\n\n\
                     Description: {truncated_description}\n\n\
                     Our Business Name: {business_name}\n\n\

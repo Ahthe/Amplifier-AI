@@ -2,6 +2,7 @@
 
 import { client } from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs";
+import { formatISO } from 'date-fns';
 
 export const onDomainCustomerResponses = async (customerId: string) => {
   try {
@@ -49,6 +50,7 @@ export const onGetAllDomainBookings = async (domainId: string) => {
   }
 };
 
+//WIP
 export const onBookNewAppointment = async (
   domainId: string,
   customerId: string,
@@ -57,6 +59,7 @@ export const onBookNewAppointment = async (
   email: string
 ) => {
   try {
+    const formattedDate = formatISO(new Date(date)); // Ensure the date is in ISO format
     const booking = await client.customer.update({
       where: {
         id: customerId,
@@ -66,7 +69,7 @@ export const onBookNewAppointment = async (
           create: {
             domainId,
             slot,
-            date,
+            date: formattedDate,
             email,
           },
         },

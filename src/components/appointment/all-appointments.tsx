@@ -23,6 +23,8 @@ type Props = {
     | undefined
 }
 
+import { format } from 'date-fns';
+
 const AllAppointments = ({ bookings }: Props) => {
   return (
     <DataTable headers={APPOINTMENT_TABLE_HEADER}>
@@ -32,19 +34,16 @@ const AllAppointments = ({ bookings }: Props) => {
             <TableCell>{booking.email}</TableCell>
             <TableCell>
               <div>
-                {getMonthName(booking.date.getMonth())} {booking.date.getDate()}{' '}
-                {booking.date.getFullYear()}
+                {format(new Date(booking.date), 'MMMM d, yyyy')}
               </div>
               <div className="uppercase">{booking.slot}</div>
             </TableCell>
             <TableCell>
               <div>
-                {getMonthName(booking.createdAt.getMonth())}{' '}
-                {booking.createdAt.getDate()} {booking.createdAt.getFullYear()}
+                {format(new Date(booking.createdAt), 'MMMM d, yyyy')}
               </div>
               <div>
-                {booking.createdAt.getHours()} {booking.createdAt.getMinutes()}{' '}
-                {booking.createdAt.getHours() > 12 ? 'PM' : 'AM'}
+                {format(new Date(booking.createdAt), 'h:mm a')}
               </div>
             </TableCell>
             <TableCell className="text-right">
@@ -56,7 +55,7 @@ const AllAppointments = ({ bookings }: Props) => {
         <CardDescription>No Appointments</CardDescription>
       )}
     </DataTable>
-  )
-}
+  );
+};
 
 export default AllAppointments

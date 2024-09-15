@@ -46,12 +46,12 @@ export const APPOINTMENT_TIME_SLOTS: AppointmentTimeSlots[] = [
   // { 
   //   slot: '2:30pm' 
   // },
-  // { 
-  //   slot: '3:00pm' 
-  // },
-  // { 
-  //   slot: '3:30pm' 
-  // },
+  { 
+    slot: '3:00pm' 
+  },
+  { 
+    slot: '3:30pm' 
+  },
   { 
     slot: '4:00pm' 
   },

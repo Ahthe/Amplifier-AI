@@ -156,7 +156,7 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
                     Our Website Link: {website_link}"
                 }
             ],
-            max_tokens=200,
+            max_tokens=300,
             temperature=0.7
         )
         generated_text = response.choices[0].message.content.strip()
@@ -181,6 +181,7 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
 
         # Add the post ID to the list of all posts (before the try block)
         all_posts.append(post.id)
+        logging.info(f"Comment generated: {comment}") # Log the comment that was generated
 
         try:
             # Post the comment

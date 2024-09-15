@@ -91,7 +91,8 @@ export const onAiChatBotAssistant = async (
           },
         },
       },
-    })
+    });
+    console.log(chatBotDomain); // Add this line to check the result
     if (chatBotDomain) {
       const extractedEmail = extractEmailsFromString(message)
       if (extractedEmail) {

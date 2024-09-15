@@ -4,6 +4,7 @@ import { DataTable } from '../table'
 import { TableCell, TableRow } from '../ui/table'
 import { getMonthName } from '@/lib/utils'
 import { CardDescription } from '../ui/card'
+import { format } from 'date-fns';
 
 type Props = {
   bookings:
@@ -22,8 +23,6 @@ type Props = {
       }[]
     | undefined
 }
-
-import { format } from 'date-fns';
 
 const AllAppointments = ({ bookings }: Props) => {
   return (

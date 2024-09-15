@@ -1,8 +1,7 @@
-"use server";
+'use server'
 
-import { client } from "@/lib/prisma";
-import { currentUser } from "@clerk/nextjs";
-import { formatISO } from 'date-fns';
+import { client } from '@/lib/prisma'
+import { currentUser } from '@clerk/nextjs'
 
 export const onDomainCustomerResponses = async (customerId: string) => {
   try {
@@ -20,15 +19,15 @@ export const onDomainCustomerResponses = async (customerId: string) => {
           },
         },
       },
-    });
+    })
 
     if (customerQuestions) {
-      return customerQuestions;
+      return customerQuestions
     }
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
-};
+}
 
 export const onGetAllDomainBookings = async (domainId: string) => {
   try {
@@ -40,17 +39,16 @@ export const onGetAllDomainBookings = async (domainId: string) => {
         slot: true,
         date: true,
       },
-    });
+    })
 
     if (bookings) {
-      return bookings;
+      return bookings
     }
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
-};
+}
 
-//WIP
 export const onBookNewAppointment = async (
   domainId: string,
   customerId: string,
@@ -59,7 +57,6 @@ export const onBookNewAppointment = async (
   email: string
 ) => {
   try {
-    const formattedDate = formatISO(new Date(date)); // Ensure the date is in ISO format
     const booking = await client.customer.update({
       where: {
         id: customerId,
@@ -69,20 +66,20 @@ export const onBookNewAppointment = async (
           create: {
             domainId,
             slot,
-            date: formattedDate,
+            date,
             email,
           },
         },
       },
-    });
+    })
 
     if (booking) {
-      return { status: 200, message: "Booking created" };
+      return { status: 200, message: 'Booking created' }
     }
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
-};
+}
 
 export const saveAnswers = async (
   questions: [question: string],
@@ -104,16 +101,16 @@ export const saveAnswers = async (
             },
           },
         },
-      });
+      })
     }
     return {
       status: 200,
-      messege: "Updated Responses",
-    };
+      messege: 'Updated Responses',
+    }
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
-};
+}
 
 export const onGetAllBookingsForCurrentUser = async (clerkId: string) => {
   try {
@@ -144,21 +141,21 @@ export const onGetAllBookingsForCurrentUser = async (clerkId: string) => {
           },
         },
       },
-    });
+    })
 
     if (bookings) {
       return {
         bookings,
-      };
+      }
     }
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
-};
+}
 
 export const getUserAppointments = async () => {
   try {
-    const user = await currentUser();
+    const user = await currentUser()
     if (user) {
       const bookings = await client.bookings.count({
         where: {
@@ -170,13 +167,13 @@ export const getUserAppointments = async () => {
             },
           },
         },
-      });
+      })
 
       if (bookings) {
-        return bookings;
+        return bookings
       }
     }
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
-};
+}

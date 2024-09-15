@@ -4,7 +4,6 @@ import { DataTable } from '../table'
 import { TableCell, TableRow } from '../ui/table'
 import { getMonthName } from '@/lib/utils'
 import { CardDescription } from '../ui/card'
-import { format } from 'date-fns';
 
 type Props = {
   bookings:
@@ -33,16 +32,19 @@ const AllAppointments = ({ bookings }: Props) => {
             <TableCell>{booking.email}</TableCell>
             <TableCell>
               <div>
-                {format(new Date(booking.date), 'MMMM d, yyyy')}
+                {getMonthName(booking.date.getMonth())} {booking.date.getDate()}{' '}
+                {booking.date.getFullYear()}
               </div>
               <div className="uppercase">{booking.slot}</div>
             </TableCell>
             <TableCell>
               <div>
-                {format(new Date(booking.createdAt), 'MMMM d, yyyy')}
+                {getMonthName(booking.createdAt.getMonth())}{' '}
+                {booking.createdAt.getDate()} {booking.createdAt.getFullYear()}
               </div>
               <div>
-                {format(new Date(booking.createdAt), 'h:mm a')}
+                {booking.createdAt.getHours()} {booking.createdAt.getMinutes()}{' '}
+                {booking.createdAt.getHours() > 12 ? 'PM' : 'AM'}
               </div>
             </TableCell>
             <TableCell className="text-right">
@@ -54,7 +56,7 @@ const AllAppointments = ({ bookings }: Props) => {
         <CardDescription>No Appointments</CardDescription>
       )}
     </DataTable>
-  );
-};
+  )
+}
 
 export default AllAppointments

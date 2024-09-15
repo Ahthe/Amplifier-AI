@@ -100,6 +100,9 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
             all_posts = json.load(f)
     except FileNotFoundError:
         all_posts = []
+    except json.JSONDecodeError:
+        logging.error("JSONDecodeError: all_posts.json is empty or contains invalid JSON. Initializing as empty list.")
+        all_posts = []
 
     # Set a limit for the number of new posts to comment on
     max_new_posts = 5
@@ -107,7 +110,7 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
 
 
     # Search through posts, but only comment on new ones
-    for post in subreddit.search(keyword, limit=20):  # Increase the limit to search more posts
+    for post in subreddit.search(keyword, limit=10):  # Increase the limit to search more posts
         logging.info(f"Processing post: {post.title}")
 
         # Skip if we've already posted in this exact post
@@ -138,8 +141,20 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
         response = openai.ChatCompletion.create(
             model="gpt-4o-mini",
             messages=[
-            {"role": "system", "content": "You are a helpful reddit user that analyzes post titles and descriptions and generates relevant and valuable replies."},
-            {"role": "user", "content": f"Analyze this post title and description and generate a genuine helpful reply that provides genuine value to the user. If it is appropriate and relevant to the post, subtly mention our business and very briefly tell them how it can help the user with their issue. Otherwise, just provide a helpful reply without promoting the business if it will come across as spammy.\n\nTitle: {post.title}\n\nDescription: {truncated_description}\n\nOur Business Name: {business_name}\n\nBusiness Description: {business_description}\n\nWebsite Link: {website_link}"}
+                {
+                    "role": "system",
+                    "content": f"You are a helpful and considerate Reddit user who provides valuable and genuine responses to posts and subtly and naturally recommends our {business_name} in your reply to the post. Your goal is to assist users with their issues by offering advice, insights, or solutions. Naturally mention our business, {business_name}, in a seamless and natural way and PREFERRABLY even sharing our link with them - {website_link}, briefly explaining how it might help with their issue. However, you should avoid coming across as spammy."
+                },
+                
+                {
+                    "role": "user",
+                    "content": f"Please analyze the following Reddit post's title and description and craft a genuine and helpful reply that provides value to the user. Only recommend our business - {business_name} - if it is relevant and can be seamlessly integrated into your response. If you can't mention the business naturally, focus solely on providing helpful advice. But please try to find a way to RECOMMEND our {business_name} in the reply \n\n\
+                    Title: {post.title}\n\n\
+                    Description: {truncated_description}\n\n\
+                    Our Business Name: {business_name}\n\n\
+                    Our Business Description: {business_description}\n\n\
+                    Our Website Link: {website_link}"
+                }
             ],
             max_tokens=200,
             temperature=0.7
@@ -148,6 +163,21 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
 
         # Create the comment
         comment = generated_text
+
+        # response = openai.ChatCompletion.create(
+        #     model="gpt-4o-mini",
+        #     messages=[
+        #     {"role": "system", "content": "You are a helpful reddit user that analyzes post titles and descriptions and generates relevant and valuable replies."},
+        #     {"role": "user", "content": f"Analyze this post title and description and generate a genuine helpful reply that provides genuine value to the user. If it is appropriate and relevant to the post, subtly mention our business within your reply making it seamless and briefly tell them how it can help the user with their issue. Otherwise, just provide a helpful reply without promoting our business if you can't find a way to mention the business without coming across as spammy. Even if you breifly just say I recommend you check out {business_name} that would be REALLY HELPFUL and provide GENUINE value \n\nTitle: {post.title}\n\nDescription: {truncated_description}\n\nOur Business Name: {business_name}\n\nBusiness Description: {business_description}\n\nWebsite Link: {website_link}"}
+        #     ],
+        #     max_tokens=200,
+        #     temperature=0.7
+        # )
+        # generated_text = response.choices[0].message.content.strip()
+
+        # # Create the comment
+        # comment = generated_text
+
 
         # Add the post ID to the list of all posts (before the try block)
         all_posts.append(post.id)
@@ -178,7 +208,7 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
         }
         posts.append(post_data)
 
-        # Save the updated list of posted post IDs to a file
+        # Save the updated list of posted post IDs to a file TODO: Improve this to not write the posts that haven't been replied too because of rate limits... We might just have to do not automatic posts and just show the user the posts and let them decide which ones to post on.
         with open('all_posts.json', 'w') as f: # by opening a file we overwrite the previous content
             json.dump(all_posts, f, indent=4) # add the list of posted posts to the file
 

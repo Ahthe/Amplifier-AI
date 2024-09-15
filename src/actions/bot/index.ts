@@ -84,15 +84,8 @@ export const onAiChatBotAssistant = async (
             question: true,
           },
         },
-        // helpdesk: { // WIP: Include helpdesk in the selection
-        //   select: {
-        //     question: true,
-        //     answer: true,
-        //   },
-        // },
       },
-    });
-    console.log(chatBotDomain); // Add this line to check the result
+    })
     if (chatBotDomain) {
       const extractedEmail = extractEmailsFromString(message)
       if (extractedEmail) {

@@ -11,6 +11,9 @@ import random
 import time
 import requests
 
+from templates import generate_reddit_reply
+from datetime import datetime
+
 load_dotenv()
 
 
@@ -62,7 +65,7 @@ def generate_leads():
     business_description = data.get('description')
     location = data.get('location')
     website_link = data.get('website_link')
-    
+       
     # Generate leads from Reddit
     reddit_leads = fetch_reddit_leads(keyword, location, business_name, business_description, website_link)
 
@@ -92,17 +95,14 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
         keyword = f"{keyword} {location}"
 
     subreddit = reddit.subreddit("all")
-    posts = []
+    posts = {}
     
     # Load previously posted post IDs from a file to avoid duplicate posts
     try:
         with open('all_posts.json', 'r') as f:
             all_posts = json.load(f)
-    except FileNotFoundError:
-        all_posts = []
-    except json.JSONDecodeError:
-        logging.error("JSONDecodeError: all_posts.json is empty or contains invalid JSON. Initializing as empty list.")
-        all_posts = []
+    except Exception as e:
+        all_posts = {}
 
     # Set a limit for the number of new posts to comment on
     max_new_posts = 5
@@ -116,71 +116,17 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
         # Skip if we've already posted in this exact post
         if post.id in all_posts:
             logging.info(f"Already processed this post: {post.title}, skipping...")
-            continue # Skip to the next post so we don't waste ai credits
+            continue  # Skip to the next post so we don't waste AI credits
 
-        # TODO: Test this out and see if it works with gpt-4o-mini and finds relevant posts
-        # # Analyze the post using OpenAI GPT to check relevance
-        # relevance_check = openai.ChatCompletion.create(
-        #     model="gpt-4o-mini",
-        #     messages=[
-        #     {"role": "system", "content": "You are a helpful assistant that determines if a post is relevant to a business. Respond with only 'yes' or 'no'."},
-        #     {"role": "user", "content": f"Is this post relevant to a business that offers {business_description}? Post title: {post.title}, Post description: {truncated_description}"}
-        #     ],
-        #     max_tokens=10, # Limit the response to a single word
-        #     temperature=0
-        # )
-        # relevance_response = relevance_check.choices[0].message.content.strip().lower()
+        if post.archived:
+            logging.info(f"Post is archived: {post.title}, skipping...")
+            continue
 
-        # # If the post is not relevant, skip it
-        # if "no" in relevance_response:
-        #     logging.info(f"Post is not relevant: {post.title}, skipping...")
-        #     continue
-
-        truncated_description = post.selftext[:5000]  # Limit description to 5000 characters because token limit is 16385 tokens for 3.5 at least TODO: check if this is the case for gpt-4o-mini
-        # Generate a comment using OpenAI GPT
-        response = openai.ChatCompletion.create(
-            model="gpt-4o-mini",
-            messages=[
-                {
-                    "role": "system",
-                    "content": f"You are a thoughtful and insightful Reddit user who provides genuine and valuable responses to posts. Your goal is to assist users by offering advice, insights, or solutions. And naturally mention our business, {business_name}, in a way that adds value to the conversation. Include our link, {website_link}, if it fits naturally, explaining briefly how it might help with their issue. Avoid being overly promotional or spammy. Maintain a neutral and helpful tone throughout your response."
-                },
-                
-                {
-                    "role": "user",
-                    "content": f"Please analyze the following Reddit post's title and description and craft a genuine and helpful reply that provides value to the user. Find a way to naturally recommend our business - {business_name} - if it is relevant and can be seamlessly integrated into your response. If you can't mention the business naturally, focus solely on providing valuable advice. Focus on speaking in a neutral tone and avoid using exclaimation marks. And please try to find a way to RECOMMEND our {business_name} in the reply naturally and preferably mention the {website_link} as well \n\n\
-                    Title: {post.title}\n\n\
-                    Description: {truncated_description}\n\n\
-                    Our Business Name: {business_name}\n\n\
-                    Our Business Description: {business_description}\n\n\
-                    Our Website Link: {website_link}"
-                }
-            ],
-            max_tokens=300,
-            temperature=0.7
-        )
-        generated_text = response.choices[0].message.content.strip()
-
-        # Create the comment
-        comment = generated_text
-
-        # response = openai.ChatCompletion.create(
-        #     model="gpt-4o-mini",
-        #     messages=[
-        #     {"role": "system", "content": "You are a helpful reddit user that analyzes post titles and descriptions and generates relevant and valuable replies."},
-        #     {"role": "user", "content": f"Analyze this post title and description and generate a genuine helpful reply that provides genuine value to the user. If it is appropriate and relevant to the post, subtly mention our business within your reply making it seamless and briefly tell them how it can help the user with their issue. Otherwise, just provide a helpful reply without promoting our business if you can't find a way to mention the business without coming across as spammy. Even if you breifly just say I recommend you check out {business_name} that would be REALLY HELPFUL and provide GENUINE value \n\nTitle: {post.title}\n\nDescription: {truncated_description}\n\nOur Business Name: {business_name}\n\nBusiness Description: {business_description}\n\nWebsite Link: {website_link}"}
-        #     ],
-        #     max_tokens=200,
-        #     temperature=0.7
-        # )
-        # generated_text = response.choices[0].message.content.strip()
-
-        # # Create the comment
-        # comment = generated_text
-
+        # Create the comment  
+            
+        comment = generate_reddit_reply(post, business_name, business_description, website_link)
 
         # Add the post ID to the list of all posts (before the try block)
-        all_posts.append(post.id)
         logging.info(f"Comment generated: {comment}") # Log the comment that was generated
 
         try:
@@ -197,21 +143,23 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
             if new_posts_found >= max_new_posts:
                 logging.info(f"Found {new_posts_found} new posts, stopping search.")
                 break
-
+            all_posts[post.id] = {
+                'id': post.id,
+                'description': post.title,
+                'url': post.url,
+                'timestamp': datetime.now().isoformat(),
+                'comment': comment,
+                "comment_url": f"https://www.reddit.com{posted_comment.permalink}"
+            }
         except Exception as e:
             logging.error(f"Error posting comment on post: {post.title}")
             logging.error(f"Error message: {str(e)}")
 
-        post_data = {
-            'title': post.title,
-            'url': post.url,
-            'comment': comment
-        }
-        posts.append(post_data)
+        
 
         # Save the updated list of posted post IDs to a file TODO: Improve this to not write the posts that haven't been replied too because of rate limits... We might just have to do not automatic posts and just show the user the posts and let them decide which ones to post on.
-        with open('all_posts.json', 'w') as f: # by opening a file we overwrite the previous content
-            json.dump(all_posts, f, indent=4) # add the list of posted posts to the file
+    with open('all_posts.json', 'w') as f: # by opening a file we overwrite the previous content
+        json.dump(all_posts, f, indent=4) # add the list of posted posts to the file
 
         # Add a random delay between 30 and 60 seconds to avoid spam detection
         # delay = random.randint(5, 10)

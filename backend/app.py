@@ -64,10 +64,10 @@ def generate_leads():
     website_link = data.get('website_link')
     
     # Generate leads from Reddit
-    reddit_leads = fetch_reddit_leads(keyword, location, business_name, business_description, website_link)
+    # reddit_leads = fetch_reddit_leads(keyword, location, business_name, business_description, website_link)
 
     # # Generate leads from Twitter using Social Searcher
-    # twitter_leads = fetch_twitter_leads(keyword) # Can't leave actual Twitter API keys in the code, so we'll use Social Searcher for now so we don't need other parameters like location, business_name, etc.
+    twitter_leads = fetch_twitter_leads(keyword) # Can't leave actual Twitter API keys in the code, so we'll use Social Searcher for now so we don't need other parameters like location, business_name, etc.
 
     # # Generate leads from LinkedIn using Social Searcher
     # linkedin_leads = fetch_linkedin_leads(keyword)
@@ -75,14 +75,14 @@ def generate_leads():
     # Prepare the data to save
     result = {
         "question": keyword,
-        "leads": reddit_leads,
+        "leads": twitter_leads,
     }
 
     # Save the result to a JSON file
     with open('leads_data.json', 'w') as f:
         json.dump(result, f, indent=4)
     
-    return jsonify(reddit_leads)
+    return jsonify(twitter_leads)
 
 def fetch_reddit_leads(keyword, location, business_name, business_description, website_link):
     logging.info(f"Searching for keyword: {keyword}")
@@ -96,58 +96,61 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
     
     # Load previously posted post IDs from a file to avoid duplicate posts
     try:
-        with open('posted_posts.json', 'r') as f:
-            posted_posts = json.load(f)
+        with open('all_posts.json', 'r') as f:
+            all_posts = json.load(f)
     except FileNotFoundError:
-        posted_posts = []
+        all_posts = []
 
     # Set a limit for the number of new posts to comment on
-    max_new_posts = 50
+    max_new_posts = 5
     new_posts_found = 0
 
 
     # Search through posts, but only comment on new ones
-    for post in subreddit.search(keyword, limit=100):  # Increase the limit to search more posts
+    for post in subreddit.search(keyword, limit=20):  # Increase the limit to search more posts
         logging.info(f"Processing post: {post.title}")
 
         # Skip if we've already posted in this exact post
-        if post.id in posted_posts:
-            logging.info(f"Already posted in this post: {post.title}, skipping...")
-            continue
+        if post.id in all_posts:
+            logging.info(f"Already processed this post: {post.title}, skipping...")
+            continue # Skip to the next post so we don't waste ai credits
 
-    # TODO: Test this out and see if it works with gpt-4o-mini and finds relevant posts
-    #     # Analyze the post using OpenAI GPT to check relevance
-    #     relevance_check = openai.ChatCompletion.create(
-    #         model="gpt-4o-mini",
-    #         messages=[
-    #         {"role": "system", "content": "You are a helpful assistant that determines if a post is relevant to a business. Respond with only 'yes' or 'no'."},
-    #         {"role": "user", "content": f"Is this post relevant to a business that offers {business_description}? Post title: {post.title}, Post description: {truncated_description}"}
-    #         ],
-    #         max_tokens=10, # Limit the response to a single word
-    #         temperature=0
-    #     )
-    #     relevance_response = relevance_check.choices[0].message.content.strip().lower()
+        # TODO: Test this out and see if it works with gpt-4o-mini and finds relevant posts
+        # # Analyze the post using OpenAI GPT to check relevance
+        # relevance_check = openai.ChatCompletion.create(
+        #     model="gpt-4o-mini",
+        #     messages=[
+        #     {"role": "system", "content": "You are a helpful assistant that determines if a post is relevant to a business. Respond with only 'yes' or 'no'."},
+        #     {"role": "user", "content": f"Is this post relevant to a business that offers {business_description}? Post title: {post.title}, Post description: {truncated_description}"}
+        #     ],
+        #     max_tokens=10, # Limit the response to a single word
+        #     temperature=0
+        # )
+        # relevance_response = relevance_check.choices[0].message.content.strip().lower()
 
-    #     # If the post is not relevant, skip it
-    #     if "no" in relevance_response:
-    #         logging.info(f"Post is not relevant: {post.title}, skipping...")
-    #         continue
+        # # If the post is not relevant, skip it
+        # if "no" in relevance_response:
+        #     logging.info(f"Post is not relevant: {post.title}, skipping...")
+        #     continue
 
         truncated_description = post.selftext[:5000]  # Limit description to 5000 characters because token limit is 16385 tokens for 3.5 at least TODO: check if this is the case for gpt-4o-mini
         # Generate a comment using OpenAI GPT
         response = openai.ChatCompletion.create(
             model="gpt-4o-mini",
             messages=[
-                {"role": "system", "content": "You are a helpful assistant that analyzes post titles and descriptions and generates relevant and valuable comments."},
-                {"role": "user", "content": f"Analyze this post title and description and generate a relevant, helpful comment that provides genuine value to the user in only 5 sentences:\n\nTitle: {post.title}\n\nDescription: {truncated_description}"}
-            ], # TODO: fix this
+            {"role": "system", "content": "You are a helpful reddit user that analyzes post titles and descriptions and generates relevant and valuable replies."},
+            {"role": "user", "content": f"Analyze this post title and description and generate a genuine helpful reply that provides genuine value to the user. If it is appropriate and relevant to the post, subtly mention our business and very briefly tell them how it can help the user with their issue. Otherwise, just provide a helpful reply without promoting the business if it will come across as spammy.\n\nTitle: {post.title}\n\nDescription: {truncated_description}\n\nOur Business Name: {business_name}\n\nBusiness Description: {business_description}\n\nWebsite Link: {website_link}"}
+            ],
             max_tokens=200,
             temperature=0.7
         )
         generated_text = response.choices[0].message.content.strip()
 
         # Create the comment
-        comment = f"{generated_text}\n\nWe are {business_name}. {business_description}. Please visit our website for more information: {website_link}"
+        comment = generated_text
+
+        # Add the post ID to the list of all posts (before the try block)
+        all_posts.append(post.id)
 
         try:
             # Post the comment
@@ -155,13 +158,6 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
             logging.info(f"Comment posted successfully on post: {post.title}")
             logging.info(f"Comment ID: {posted_comment.id}")
             logging.info(f"Comment URL: https://www.reddit.com{posted_comment.permalink}")
-
-            # Add the post ID to the list of posted posts
-            posted_posts.append(post.id)
-
-            # Save the updated list of posted post IDs to a file
-            with open('posted_posts.json', 'w') as f: # by opening a file we overwrite the previous content
-                json.dump(posted_posts, f, indent=4) # add the list of posted posts to the file
 
             # Increment the count of new posts found
             new_posts_found += 1
@@ -181,6 +177,10 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
             'comment': comment
         }
         posts.append(post_data)
+
+        # Save the updated list of posted post IDs to a file
+        with open('all_posts.json', 'w') as f: # by opening a file we overwrite the previous content
+            json.dump(all_posts, f, indent=4) # add the list of posted posts to the file
 
         # Add a random delay between 30 and 60 seconds to avoid spam detection
         # delay = random.randint(5, 10)

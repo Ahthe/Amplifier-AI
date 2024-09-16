@@ -9,7 +9,6 @@ import SettingsIcon from '@/icons/settings-icon'
 import StarIcon from '@/icons/star-icon'
 import TimerIcon from '@/icons/timer-icon'
 
-
 type SIDE_BAR_MENU_PROPS = {
   label: string
   icon: JSX.Element

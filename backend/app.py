@@ -201,7 +201,7 @@ def fetch_twitter_leads(keyword):
         logging.info(f"Received requestid: {requestid}")
         
         # Step 2: Wait before fetching the results
-        wait_time = 60  # As per documentation, wait for 20-60 seconds
+        wait_time = 30  # As per documentation, wait for 20-60 seconds
         logging.info(f"Waiting for {wait_time} seconds before fetching the results...")
         time.sleep(wait_time)
         
@@ -237,7 +237,6 @@ def fetch_twitter_leads(keyword):
                     tweet_text = post.get('text', '')
                     tweet_user = post.get('user', {})
                     tweet_username = tweet_user.get('name', '')
-                    tweet_user_id = tweet_user.get('id', '')
                     tweet_url = post.get('url', '')
                     post_timestamp = post.get('posted', '')
 
@@ -250,7 +249,6 @@ def fetch_twitter_leads(keyword):
                     tweet_data = {
                         'text': tweet_text,
                         'user': tweet_username,
-                        'user_id': tweet_user_id,
                         'url': tweet_url,
                         'posted': post_timestamp
                     }
@@ -308,7 +306,7 @@ def fetch_linkedin_leads(keyword):
         logging.info(f"Received requestid: {requestid}")
         
         # Step 2: Wait before fetching the results
-        wait_time = 60  # As per documentation, wait for 20-60 seconds
+        wait_time = 30  # As per documentation, wait for 20-60 seconds
         logging.info(f"Waiting for {wait_time} seconds before fetching the results...")
         time.sleep(wait_time)
         
@@ -344,7 +342,6 @@ def fetch_linkedin_leads(keyword):
                     post_text = post.get('text', '')
                     post_user = post.get('user', {})
                     post_username = post_user.get('name', '')
-                    post_user_id = post_user.get('id', '')
                     post_url = post.get('url', '')
                     post_timestamp = post.get('posted', '')
 
@@ -357,7 +354,6 @@ def fetch_linkedin_leads(keyword):
                     post_data = {
                         'text': post_text,
                         'user': post_username,
-                        'user_id': post_user_id,
                         'url': post_url,
                         'posted': post_timestamp
                     }

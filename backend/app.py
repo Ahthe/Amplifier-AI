@@ -191,7 +191,7 @@ def fetch_twitter_leads(keyword):
         response.raise_for_status()
         
         data = response.json()
-        requestid = data.get('requestid')
+        requestid = data['meta'].get('requestid')
         
         if not requestid:
             logging.error("No requestid found in the response.")
@@ -213,7 +213,7 @@ def fetch_twitter_leads(keyword):
             'key': SOCIAL_SEARCHER_API_KEY,
             'requestid': requestid,
             'page': 0,
-            'limit': 10  # Same as before
+            'limit': 10
         }
         
         # Retry logic in case the status is pending
@@ -226,7 +226,7 @@ def fetch_twitter_leads(keyword):
             response.raise_for_status()
             
             data = response.json()
-            status = data.get('status')
+            status = data['meta'].get('status')
             
             if status == 'finished':
                 logging.info("Data processing finished, extracting tweets...")
@@ -258,8 +258,8 @@ def fetch_twitter_leads(keyword):
                 
                 return tweets
             
-            elif status == 'pending':
-                logging.info(f"Status is pending, waiting for {retry_delay} seconds before retrying...")
+            elif status == 'pending' or status == 'created':
+                logging.info(f"Status is {status}, waiting for {retry_delay} seconds before retrying...")
                 time.sleep(retry_delay)
             else:
                 logging.error(f"Unexpected status: {status}")
@@ -269,6 +269,7 @@ def fetch_twitter_leads(keyword):
     
     except requests.exceptions.HTTPError as http_err:
         logging.error(f"HTTP error occurred: {http_err}")
+        logging.error(f"Response content: {response.text}")
     except requests.exceptions.RequestException as req_err:
         logging.error(f"Error fetching Twitter leads: {req_err}")
     except Exception as e:
@@ -297,7 +298,7 @@ def fetch_linkedin_leads(keyword):
         response.raise_for_status()
         
         data = response.json()
-        requestid = data.get('requestid')
+        requestid = data['meta'].get('requestid')
         
         if not requestid:
             logging.error("No requestid found in the response.")
@@ -319,7 +320,7 @@ def fetch_linkedin_leads(keyword):
             'key': SOCIAL_SEARCHER_API_KEY,
             'requestid': requestid,
             'page': 0,
-            'limit': 10  # Same as before
+            'limit': 10
         }
         
         # Retry logic in case the status is pending
@@ -332,7 +333,7 @@ def fetch_linkedin_leads(keyword):
             response.raise_for_status()
             
             data = response.json()
-            status = data.get('status')
+            status = data['meta'].get('status')
             
             if status == 'finished':
                 logging.info("Data processing finished, extracting LinkedIn posts...")
@@ -364,8 +365,8 @@ def fetch_linkedin_leads(keyword):
                 
                 return linkedin_posts
             
-            elif status == 'pending':
-                logging.info(f"Status is pending, waiting for {retry_delay} seconds before retrying...")
+            elif status == 'pending' or status == 'created':
+                logging.info(f"Status is {status}, waiting for {retry_delay} seconds before retrying...")
                 time.sleep(retry_delay)
             else:
                 logging.error(f"Unexpected status: {status}")
@@ -375,6 +376,7 @@ def fetch_linkedin_leads(keyword):
     
     except requests.exceptions.HTTPError as http_err:
         logging.error(f"HTTP error occurred: {http_err}")
+        logging.error(f"Response content: {response.text}")
     except requests.exceptions.RequestException as req_err:
         logging.error(f"Error fetching LinkedIn leads: {req_err}")
     except Exception as e:

@@ -10,12 +10,12 @@ import logging
 import random
 import time
 import requests
+from textblob import TextBlob  # Import TextBlob for sentiment analysis
 
 from templates import generate_reddit_reply
 from datetime import datetime
 
 load_dotenv()
-
 
 logging.basicConfig(filename='app.log', level=logging.INFO)
 
@@ -55,8 +55,6 @@ auth = tweepy.OAuthHandler(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET)
 auth.set_access_token(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET)
 twitter_api = tweepy.API(auth)
 
-
-
 @app.route('/generate_leads', methods=['POST'])
 def generate_leads():
     data = request.json
@@ -67,17 +65,18 @@ def generate_leads():
     website_link = data.get('website_link')
        
     # Generate leads from Reddit
-    # reddit_leads = fetch_reddit_leads(keyword, location, business_name, business_description, website_link)
+    reddit_leads = fetch_reddit_leads(keyword, location, business_name, business_description, website_link)
 
     # Generate leads from Twitter using Social Searcher
-    twitter_leads = fetch_twitter_leads(keyword) # Can't leave actual Twitter API keys in the code, so we'll use Social Searcher for now so we don't need other parameters like location, business_name, etc.
+    twitter_leads = fetch_twitter_leads(keyword)
 
     # Generate leads from LinkedIn using Social Searcher
     linkedin_leads = fetch_linkedin_leads(keyword)
     
     # Prepare the data to save
     result = {
-        "question": keyword,
+        "keyword(s)": keyword,
+        "reddit_leads": reddit_leads,
         "twitter_leads": twitter_leads,
         "linkedin_leads": linkedin_leads
     }
@@ -90,15 +89,14 @@ def generate_leads():
 
 def fetch_reddit_leads(keyword, location, business_name, business_description, website_link):
     logging.info(f"Searching for keyword: {keyword}")
-    # TODO: if already posted on specific post, don't post again. How can we keep track of this? For example if a user uses it one day and then again the next day, we don't want to post on the same post again.
     if location:
         logging.info(f"Location provided: {location}")
         keyword = f"{keyword} {location}"
 
     subreddit = reddit.subreddit("all")
-    posts = {}
+    posts = []
     
-    # Load previously posted post IDs from a file to avoid duplicate posts
+    # Load processed posted post IDs from a file to avoid duplicate posts
     try:
         with open('all_posts.json', 'r') as f:
             all_posts = json.load(f)
@@ -123,12 +121,20 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
             logging.info(f"Post is archived: {post.title}, skipping...")
             continue
 
-        # Create the comment  
-            
+        # Analyze sentiment
+        sentiment = TextBlob(post.title).sentiment.polarity
+        logging.info(f"Sentiment score for post '{post.title}': {sentiment}")
+
+        # Filter posts with negative sentiment
+        if sentiment >= 0.3:
+            logging.info(f"Post '{post.title}' does not have neutral or negative sentiment, skipping...")
+            continue
+
         comment = generate_reddit_reply(post, business_name, business_description, website_link)
 
         # Add the post ID to the list of all posts (before the try block)
         logging.info(f"Comment generated: {comment}") # Log the comment that was generated
+
 
         try:
             # Post the comment
@@ -144,6 +150,7 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
             if new_posts_found >= max_new_posts:
                 logging.info(f"Found {new_posts_found} new posts, stopping search.")
                 break
+
             all_posts[post.id] = {
                 'id': post.id,
                 'description': post.title,
@@ -152,10 +159,33 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
                 'comment': comment,
                 "comment_url": f"https://www.reddit.com{posted_comment.permalink}"
             }
+
+            # Add the post data to the posts list
+            posts.append({
+                'id': post.id,
+                'title': post.title,
+                'url': post.url,
+                'timestamp': datetime.now().isoformat(),
+                'comment': comment,
+                "comment_url": f"https://www.reddit.com{posted_comment.permalink}",
+                'sentiment': sentiment
+            })
+
         except Exception as e:
             logging.error(f"Error posting comment on post: {post.title}")
             logging.error(f"Error COULD NOT POST ON THIS URL: {post.url}")
             logging.error(f"Error message: {str(e)}")
+
+            # Add the post data to the posts list
+            posts.append({
+                'id': post.id,
+                'title': post.title,
+                'url': post.url,
+                'timestamp': datetime.now().isoformat(),
+                'comment': comment,
+                "post_url": f"https://www.reddit.com{post.url}",
+                'sentiment': sentiment
+            })
 
         
 
@@ -235,6 +265,13 @@ def fetch_twitter_leads(keyword):
                 # Extract relevant tweet data
                 for post in data.get('posts', []):
                     tweet_text = post.get('text', '')
+                    sentiment = TextBlob(tweet_text).sentiment.polarity
+                    logging.info(f"Sentiment score for tweet '{tweet_text}': {sentiment}")
+
+                    if sentiment >= 0.3:
+                        logging.info(f"Tweet '{tweet_text}' does not have neutral or negative sentiment, skipping...")
+                        continue
+
                     tweet_user = post.get('user', {})
                     tweet_username = tweet_user.get('name', '')
                     tweet_url = post.get('url', '')
@@ -250,7 +287,8 @@ def fetch_twitter_leads(keyword):
                         'text': tweet_text,
                         'user': tweet_username,
                         'url': tweet_url,
-                        'posted': post_timestamp
+                        'posted': post_timestamp,
+                        'sentiment': sentiment
                     }
                     tweets.append(tweet_data)
                 
@@ -306,7 +344,7 @@ def fetch_linkedin_leads(keyword):
         logging.info(f"Received requestid: {requestid}")
         
         # Step 2: Wait before fetching the results
-        wait_time = 30  # As per documentation, wait for 20-60 seconds
+        wait_time = 60  # As per documentation, wait for 20-60 seconds
         logging.info(f"Waiting for {wait_time} seconds before fetching the results...")
         time.sleep(wait_time)
         
@@ -340,6 +378,13 @@ def fetch_linkedin_leads(keyword):
                 # Extract relevant post data
                 for post in data.get('posts', []):
                     post_text = post.get('text', '')
+                    sentiment = TextBlob(post_text).sentiment.polarity
+                    logging.info(f"Sentiment score for LinkedIn post '{post_text}': {sentiment}")
+
+                    if sentiment >= 0.3:
+                        logging.info(f"LinkedIn post '{post_text}' does not have neutral or negative sentiment, skipping...")
+                        continue
+
                     post_user = post.get('user', {})
                     post_username = post_user.get('name', '')
                     post_url = post.get('url', '')
@@ -355,7 +400,8 @@ def fetch_linkedin_leads(keyword):
                         'text': post_text,
                         'user': post_username,
                         'url': post_url,
-                        'posted': post_timestamp
+                        'posted': post_timestamp,
+                        'sentiment': sentiment
                     }
                     linkedin_posts.append(post_data)
                 
@@ -379,13 +425,6 @@ def fetch_linkedin_leads(keyword):
         logging.error(f"An unexpected error occurred: {str(e)}")
     
     return []
-
-# def fetch_twitter_leads(keyword):
-#     tweets = twitter_api.search(q=keyword, lang="en", count=5)
-#     tweet_data = [{'text': tweet.text, 'user': tweet.user.screen_name} for tweet in tweets]
-#     return tweet_data
-
-
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))

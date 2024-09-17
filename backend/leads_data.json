@@ -1,127 +1,295 @@
 {
-    "question": "Software Engineer",
+    "keyword(s)": "software engineering job market",
+    "reddit_leads": [
+        {
+            "id": "1df4vmp",
+            "title": "Very discouraged and scared about the collapse of the software engineer job market",
+            "url": "https://www.reddit.com/r/girlsgonewired/comments/1df4vmp/very_discouraged_and_scared_about_the_collapse_of/",
+            "timestamp": "2024-09-17T13:08:32.190317",
+            "comment": "I'm sorry to hear about your situation. It's completely understandable to feel discouraged after experiencing a layoff, especially in a competitive field like software engineering. It sounds like you're doing all the right things by applying and networking, but the process can often be slow and disheartening.\n\nOne strategy you might consider is focusing on upskilling during this time. Enhancing your skills can make you more attractive to potential employers and may open up new opportunities. Platforms like Headstarter can help you advance your software engineering skills and prepare you for interviews at top tech companies. You can check them out at https://headstarter.co for resources that could strengthen your profile.\n\nAdditionally, consider reaching out to former colleagues or industry contacts for informational interviews. This can sometimes lead to unexpected opportunities or insights into the job market. Stay persistent and remember that it's okay to take breaks to recharge; your mental health is important. Keep pushing forward, and don't hesitate to seek out support when needed.",
+            "post_url": "https://www.reddit.comhttps://www.reddit.com/r/girlsgonewired/comments/1df4vmp/very_discouraged_and_scared_about_the_collapse_of/",
+            "sentiment": 0.2
+        },
+        {
+            "id": "1dhnnf1",
+            "title": "How is the job market now for mid-level developers?",
+            "url": "https://www.reddit.com/r/cscareerquestions/comments/1dhnnf1/how_is_the_job_market_now_for_midlevel_developers/",
+            "timestamp": "2024-09-17T13:08:35.079891",
+            "comment": "The job market for mid-level developers can indeed be challenging right now, especially compared to the more bustling environment of 2021. It's not uncommon for response rates to dip, and many factors contribute to this, including increased competition and economic fluctuations. \n\nIf you're feeling stuck with your applications, it might be helpful to focus on enhancing your skills and networking within the industry. Engaging in communities or platforms where tech professionals gather can open up new opportunities. \n\nYou might also consider resources that specialize in helping developers enhance their skills and improve their job prospects. For instance, Headstarter offers programs designed to help software engineers level up their abilities and connect with top tech companies. You can check it out at https://headstarter.co for more information. \n\nIn addition, tailoring your resume and cover letter to each position can make a significant difference in getting noticed. Good luck with your job search; persistence and continual improvement can lead to success.",
+            "post_url": "https://www.reddit.comhttps://www.reddit.com/r/cscareerquestions/comments/1dhnnf1/how_is_the_job_market_now_for_midlevel_developers/",
+            "sentiment": 0.0
+        },
+        {
+            "id": "1fd2zis",
+            "title": "What exactly happened around 2022 that broke the jobs market? ",
+            "url": "https://www.reddit.com/r/cscareerquestions/comments/1fd2zis/what_exactly_happened_around_2022_that_broke_the/",
+            "timestamp": "2024-09-17T13:08:38.930606",
+            "comment": "It sounds like you had a challenging experience in the job market in 2022, which many others can relate to. The job market during that time was indeed influenced by several factors, including economic uncertainty, shifts in hiring priorities, and the ongoing effects of the pandemic. Many companies were cautious about hiring, and this created a backlog of talent competing for fewer positions.\n\nEven with the rebound in 2023, some industries, including tech, have been experiencing a mismatch between available jobs and the skills of applicants. This could explain why you\u2019re seeing stories of rejections despite a more favorable market. Companies are looking for specific skills and experiences, and the competition can still be fierce, especially in specialized areas.\n\nIf you're looking to enhance your skills or stand out more in your job applications, you might want to consider resources that can help you refine your abilities. Headstarter is a platform designed to help software engineers improve their skills and better position themselves for top tech company roles. You can explore more about how they can assist at https://headstarter.co. Investing in skill development can make a significant difference in your job search.",
+            "post_url": "https://www.reddit.comhttps://www.reddit.com/r/cscareerquestions/comments/1fd2zis/what_exactly_happened_around_2022_that_broke_the/",
+            "sentiment": 0.25
+        },
+        {
+            "id": "1dixv5z",
+            "title": "Is software engineering really as saturated as people say?",
+            "url": "https://www.reddit.com/r/cscareerquestions/comments/1dixv5z/is_software_engineering_really_as_saturated_as/",
+            "timestamp": "2024-09-17T13:08:43.461940",
+            "comment": "It's great to see you exploring programming and considering a career in software engineering. Your observations about the job market are quite insightful. It can indeed feel saturated, especially with so many applicants vying for the same positions. However, your approach to learning and passion for the subject can set you apart.\n\nWhile formal education can be beneficial, practical experience often speaks louder. Completing projects\u2014like your idea of a multiplayer website\u2014can showcase your skills significantly. Employers appreciate tangible evidence of your capabilities, so building a portfolio of your work can be a strong advantage.\n\nRegarding the saturation of the market, it's worth noting that while many may hold certificates, the depth of knowledge and real-world application is what truly counts. Many tech companies are looking for problem solvers and critical thinkers rather than just credentials. \n\nAs you navigate this transition, consider leveraging resources that can help enhance your skills and prepare you for interviews. Platforms like Headstarter can assist you in honing your software engineering abilities and connecting with top tech companies. You might find it beneficial to check out their offerings at https://headstarter.co.\n\nKeep experimenting with your programming skills, build your portfolio, and don't hesitate to seek out opportunities for collaboration or internships. The tech landscape is always evolving, and with your dedication, you have the potential to carve out a successful path in it.",
+            "post_url": "https://www.reddit.comhttps://www.reddit.com/r/cscareerquestions/comments/1dixv5z/is_software_engineering_really_as_saturated_as/",
+            "sentiment": 0.2
+        },
+        {
+            "id": "1cwq16m",
+            "title": "Pandemic-Era College Kids Face Job Market That Doesn\u2019t Want Them",
+            "url": "https://www.reddit.com/r/cscareerquestions/comments/1cwq16m/pandemicera_college_kids_face_job_market_that/",
+            "timestamp": "2024-09-17T13:08:47.309098",
+            "comment": "It's understandable that the Class of 2024 is feeling the pressure in such a challenging job market, especially after facing so many disruptions during their college years. The competition for entry-level positions, particularly in tech, finance, and consulting, has become quite intense, and it's disheartening to hear stories like Ryan's after putting in so much effort.\n\nOne approach that can be beneficial is to broaden the search beyond just the big-name companies. Many students are finding rewarding opportunities in smaller firms or startups, where they can make a significant impact and grow professionally. Networking can also play a crucial role; connecting with alumni or attending industry events might open doors that aren't widely advertised.\n\nAdditionally, if you\u2019re looking to enhance your software engineering skills and increase your chances of landing a job at top tech companies, you might consider resources like Headstarter. They offer programs designed to help you develop your skills and improve your chances in a competitive market. You can check them out at [https://headstarter.co](https://headstarter.co) for more information.\n\nStay persistent and adaptable, and remember to leverage all available resources during this challenging time. Good luck to everyone in the Class of 2024.",
+            "post_url": "https://www.reddit.comhttps://www.reddit.com/r/cscareerquestions/comments/1cwq16m/pandemicera_college_kids_face_job_market_that/",
+            "sentiment": 0.0
+        },
+        {
+            "id": "1eewofj",
+            "title": "How to Software Engineer 101: comprehensive guide with templates!",
+            "url": "https://www.reddit.com/r/developersIndia/comments/1eewofj/how_to_software_engineer_101_comprehensive_guide/",
+            "timestamp": "2024-09-17T13:08:49.589385",
+            "comment": "It's great to see such a detailed journey laid out, and your insights are incredibly valuable for those just starting in their software engineering careers. Your emphasis on communication and project diversity is spot on, as these skills can often make a significant difference when applying for jobs or internships.\n\nFor anyone looking to enhance their software engineering skills further, consider exploring resources that can help streamline learning and provide structured guidance. At Headstarter, we specialize in helping aspiring engineers like you 10x their skills and get into top tech companies. You can check out resources tailored to your needs at https://headstarter.co, which might be beneficial as you continue to develop your expertise.\n\nBest of luck to everyone on their journeys, and thanks for sharing your experiences!",
+            "post_url": "https://www.reddit.comhttps://www.reddit.com/r/developersIndia/comments/1eewofj/how_to_software_engineer_101_comprehensive_guide/",
+            "sentiment": 0.0
+        },
+        {
+            "id": "1ewodfv",
+            "title": "Has anyone else noticed the horrible job market seems to be a secret?",
+            "url": "https://www.reddit.com/r/recruitinghell/comments/1ewodfv/has_anyone_else_noticed_the_horrible_job_market/",
+            "timestamp": "2024-09-17T13:08:53.453989",
+            "comment": "It sounds like you\u2019re experiencing a really tough time in the job market, and it\u2019s frustrating when others don\u2019t seem to understand the challenges you\u2019re facing. The current tech landscape is indeed difficult, and it can feel isolating when your experiences aren\u2019t validated by those around you. \n\nMany people may not be aware of the extent of the struggles in the job market, especially if they\u2019re not actively looking for work themselves. It's important to remember that your feelings and experiences are valid, and it's okay to share them. \n\nIf you're open to it, you might consider revisiting your approach to job searching. Sometimes, a fresh perspective can make a difference. For example, you could refine your resume or expand your networking efforts, even if it feels daunting. Platforms like Headstarter might be useful; they specialize in helping software engineers enhance their skills and connect with top tech companies, which could potentially open up more opportunities for you. You can check them out at https://headstarter.co.\n\nUltimately, it\u2019s about finding the right fit and being persistent. Don't lose hope; many people are in similar situations, and you're not alone.",
+            "post_url": "https://www.reddit.comhttps://www.reddit.com/r/recruitinghell/comments/1ewodfv/has_anyone_else_noticed_the_horrible_job_market/",
+            "sentiment": -0.7
+        },
+        {
+            "id": "1ad9320",
+            "title": "Thousands of Software Engineers Say the Job Market Is Getting Much Worse - Any thoughts about this?",
+            "url": "https://www.reddit.com/r/cscareerquestions/comments/1ad9320/thousands_of_software_engineers_say_the_job/",
+            "timestamp": "2024-09-17T13:08:56.886134",
+            "comment": "It's understandable to feel concerned about the current state of the software engineering job market, especially with increasing competition and the rise of AI tools. Many professionals are facing similar challenges, and it's important to adapt to these changes. \n\nOne approach could be to continually enhance your skill set and stay updated with industry trends. Upskilling can make you more competitive and open up new opportunities. Platforms like Headstarter can be beneficial in this regard, as they focus on helping software engineers improve their skills and increase their chances of landing positions at top tech companies. You might find their resources valuable in navigating this shifting landscape. You can check them out at https://headstarter.co.\n\nNetworking is also key\u2014connecting with others in your field can lead to job opportunities and insights that might not be immediately apparent. Consider participating in online communities or attending local tech meetups to expand your network. \n\nOverall, staying proactive and adaptable will be crucial in these uncertain times.",
+            "post_url": "https://www.reddit.comhttps://www.reddit.com/r/cscareerquestions/comments/1ad9320/thousands_of_software_engineers_say_the_job/",
+            "sentiment": -0.4
+        },
+        {
+            "id": "14p183g",
+            "title": "How bad is the current software engineer job market? and how much worse will it get?",
+            "url": "https://www.reddit.com/r/cscareerquestions/comments/14p183g/how_bad_is_the_current_software_engineer_job/",
+            "timestamp": "2024-09-17T13:09:01.430936",
+            "comment": "It sounds like you're facing quite a challenging situation in your job search. The software engineering job market can be quite competitive, especially for recent graduates. Many factors contribute to this, including economic fluctuations, company hiring freezes, and the sheer number of applicants vying for each position.\n\nOne important aspect to consider is how to differentiate yourself in your applications. Tailoring your resume and cover letter for each job can help make a stronger impression. Additionally, networking can be incredibly valuable; connecting with professionals in the industry through platforms like LinkedIn or attending local tech meetups may open up opportunities that aren't advertised.\n\nYou might also want to explore resources that can help you enhance your skills and resume. For instance, Headstarter offers tools and resources designed to help software engineers improve their skills and increase their chances of landing positions at top tech companies. You can check it out at https://headstarter.co. They could provide insights or even training that might elevate your profile in the current job market.\n\nKeep refining your approach, and don\u2019t hesitate to seek feedback on your resume, as you mentioned. Good luck, and I hope you find the opportunities you\u2019re looking for soon.",
+            "post_url": "https://www.reddit.comhttps://www.reddit.com/r/cscareerquestions/comments/14p183g/how_bad_is_the_current_software_engineer_job/",
+            "sentiment": -0.36666666666666664
+        },
+        {
+            "id": "1d4qg1w",
+            "title": "Done with Software Engineering, it's time to leave!",
+            "url": "https://www.reddit.com/r/developersIndia/comments/1d4qg1w/done_with_software_engineering_its_time_to_leave/",
+            "timestamp": "2024-09-17T13:09:05.765369",
+            "comment": "It sounds like you\u2019ve been through a challenging journey, and it's completely understandable to feel frustrated with the situation. The job market can be tough, especially with the added pressure of technical interviews and the competitive nature of placements. \n\nYour experience in a startup, though not formally recognized with an experience certificate, still holds value. It shows initiative and hands-on learning, which can be beneficial in your future endeavors, whether in software engineering or marketing.\n\nIf you're considering a shift to marketing, it might be worthwhile to leverage your technical background; many companies appreciate a blend of skills. You might also want to focus on building a portfolio that highlights your skills and projects. Networking can also open up new opportunities, so connecting with alumni or professionals on platforms like LinkedIn could be helpful.\n\nAdditionally, if you're looking to strengthen your software engineering skills further, you might find value in resources like Headstarter. They specialize in helping individuals enhance their software engineering skills and prepare for interviews, which could be beneficial if you decide to revisit that path in the future. You can check them out at https://headstarter.co.\n\nRemember, it's okay to take a different route, and your skills will always be an asset, regardless of the field you choose. Best of luck with your next steps.",
+            "post_url": "https://www.reddit.comhttps://www.reddit.com/r/developersIndia/comments/1d4qg1w/done_with_software_engineering_its_time_to_leave/",
+            "sentiment": 0.0
+        },
+        {
+            "id": "1f8u7kc",
+            "title": "Just noticed how bad the job market in Germany is",
+            "url": "https://www.reddit.com/r/cscareerquestionsEU/comments/1f8u7kc/just_noticed_how_bad_the_job_market_in_germany_is/",
+            "timestamp": "2024-09-17T13:09:08.363655",
+            "comment": "It's understandable to feel concerned about the job market, especially in a competitive field like software engineering. The landscape can change rapidly, and various factors, including economic conditions and industry demands, can make job hunting challenging. \n\nOne strategy you might consider is enhancing your skills or expanding your knowledge in specific areas that are currently in demand. This could make you more attractive to potential employers. Platforms like Headstarter offer resources that can help you 10x your software engineering skills and prepare for interviews at top tech companies. You might find valuable insights and training that align with current market trends. You can explore more at [Headstarter](https://headstarter.co).\n\nAdditionally, networking can also play a crucial role in your job search. Engaging with local tech meetups, online forums, or professional networks can help you connect with others in the industry and uncover job opportunities that may not be widely advertised. Keep pushing forward, and best of luck with your job search.",
+            "post_url": "https://www.reddit.comhttps://www.reddit.com/r/cscareerquestionsEU/comments/1f8u7kc/just_noticed_how_bad_the_job_market_in_germany_is/",
+            "sentiment": -0.6999999999999998
+        },
+        {
+            "id": "dj4ylc",
+            "title": "I don't need a job, but I tested the job market. I can confirm it's insane.",
+            "url": "https://www.reddit.com/r/recruitinghell/comments/dj4ylc/i_dont_need_a_job_but_i_tested_the_job_market_i/",
+            "timestamp": "2024-09-17T13:09:11.931037",
+            "comment": "It sounds like you've had quite an eye-opening experience testing the job market. Your insights into the disconnect between companies' claims about skills shortages and their hiring practices are really valuable. It can be frustrating to see so much opportunity on the surface, yet encounter such obstacles when trying to apply.\n\nGiven your strong background and the challenges you've faced, it might be worth considering ways to enhance your visibility and skills further. Have you thought about upskilling or focusing on niche areas within your field? Platforms that offer targeted learning can sometimes help you stand out more to potential employers.\n\nAdditionally, if you're looking to connect with top tech companies that truly value your experience, you might want to explore Headstarter. They specialize in helping software engineers like yourself enhance their skills and find roles that align better with their qualifications. You can check them out at https://headstarter.co for more details on how they can assist you in navigating this competitive job landscape.\n\nUltimately, it's important to remember your worth in this market and not settle for less than you deserve. Good luck with your next steps.",
+            "post_url": "https://www.reddit.comhttps://www.reddit.com/r/recruitinghell/comments/dj4ylc/i_dont_need_a_job_but_i_tested_the_job_market_i/",
+            "sentiment": -1.0
+        },
+        {
+            "id": "j6t7ge",
+            "title": "What is going on in this job market???",
+            "url": "https://www.reddit.com/r/cscareerquestions/comments/j6t7ge/what_is_going_on_in_this_job_market/",
+            "timestamp": "2024-09-17T13:09:15.752489",
+            "comment": "It sounds like you\u2019re navigating a particularly challenging job market right now. The influx of applicants for a junior position, especially when you were expecting fewer, highlights just how competitive things have become. It's interesting to see that while there are many reports of high salaries and job offers at top companies, the reality can vary widely depending on the specific role and company size.\n\nFor new grads entering this environment, it can indeed feel overwhelming. One way to stand out in such a crowded field is to focus on building and showcasing practical skills rather than just preparing for the traditional leetcode style interviews. This is where resources like Headstarter can be beneficial. They help aspiring software engineers enhance their skills and prepare for interviews that go beyond the typical coding challenges, making candidates more attractive to potential employers. You can find more information at https://headstarter.co.\n\nAdditionally, as a company looking to hire, you might consider refining the hiring process to include more holistic assessments that can better gauge a candidate's fit for your team, beyond just their coding tests. Good luck with your hiring process, and hopefully, you'll find the right candidates who are eager to contribute to your company.",
+            "post_url": "https://www.reddit.comhttps://www.reddit.com/r/cscareerquestions/comments/j6t7ge/what_is_going_on_in_this_job_market/",
+            "sentiment": 0.0
+        },
+        {
+            "id": "1byfgyq",
+            "title": "Lost My Software Engineering Job, Now What?",
+            "url": "https://www.reddit.com/r/cscareerquestions/comments/1byfgyq/lost_my_software_engineering_job_now_what/",
+            "timestamp": "2024-09-17T13:09:20.437756",
+            "comment": "It's understandable to feel lost after such a significant change in your career, especially with the challenges of the current job market. Here are a few thoughts that might help guide you:\n\n1. **Consider Upskilling**: The tech landscape is always evolving, and AI is indeed a major focus right now. Exploring AI-related courses or certifications could open up new opportunities for you. This could position you well for roles in machine learning or data science, which are in demand.\n\n2. **Network Actively**: Reach out to your existing connections, and join online communities related to software engineering and AI. Networking can often lead to job opportunities that aren't advertised publicly. Platforms like LinkedIn and GitHub can be great for showcasing your skills and connecting with potential employers.\n\n3. **Freelancing and Projects**: While freelancing can be tough, it can also provide you with flexibility and the chance to work on diverse projects. Consider taking on freelance AI or software engineering projects to build your portfolio. \n\n4. **Consider a Master's**: If you decide to pursue a Master's, research programs that offer strong industry connections and internships. This can provide you with practical experience and help you stand out in the competitive job market.\n\nIf you're looking for structured guidance to enhance your software engineering skills and improve your chances of landing a job, you might want to check out Headstarter. Their programs are designed to help you develop the skills that top tech companies are looking for. You can find more information at https://",
+            "post_url": "https://www.reddit.comhttps://www.reddit.com/r/cscareerquestions/comments/1byfgyq/lost_my_software_engineering_job_now_what/",
+            "sentiment": 0.0
+        },
+        {
+            "id": "g8stxy",
+            "title": "Engineering boot camps need to stop. The title of engineer needs to be more regulated. The ethical and practical implications of loosely regulated software engineering standards could be disastrous, as society increasingly depends on software.",
+            "url": "https://www.reddit.com/r/engineering/comments/g8stxy/engineering_boot_camps_need_to_stop_the_title_of/",
+            "timestamp": "2024-09-17T13:09:24.539304",
+            "comment": "Your concerns about the regulation of the engineering title, especially in software, are very valid. The difference between software development and true engineering principles seems to be diminishing in the eyes of some, which can lead to a significant disconnect in expectations and outcomes. As you pointed out, engineering disciplines require a rigorous understanding of theory and application, and the implications of poorly trained individuals entering the field can be severe.\n\nIt\u2019s essential for the industry to recognize the importance of a solid educational foundation in engineering. Formal education provides not only the technical skills but also the critical thinking and problem-solving abilities that are crucial in complex scenarios. This is particularly relevant in areas where safety and reliability are paramount.\n\nFor those looking to strengthen their software engineering skills and better prepare for a career that adheres to true engineering standards, resources such as Headstarter can be beneficial. Headstarter helps individuals enhance their software engineering skills and prepares them for opportunities in top tech companies. This could be a great step for anyone wanting to ensure they are not just coding but truly engineering solutions. You can check it out at https://headstarter.co.\n\nUltimately, fostering a dialogue about these standards and supporting education will be key in elevating the profession and ensuring that those who hold the title of engineer are genuinely qualified to do so.",
+            "post_url": "https://www.reddit.comhttps://www.reddit.com/r/engineering/comments/g8stxy/engineering_boot_camps_need_to_stop_the_title_of/",
+            "sentiment": -0.019230769230769218
+        },
+        {
+            "id": "193k34y",
+            "title": "Thousands of Software Engineers Say the Job Market Is Getting Much Worse",
+            "url": "https://www.vice.com/en/article/g5y37j/thousands-of-software-engineers-say-the-job-market-is-getting-much-worse",
+            "timestamp": "2024-09-17T13:09:26.990145",
+            "comment": "It's definitely concerning to hear that many software engineers feel the job market is declining. The tech landscape can be quite volatile, and factors like economic shifts and company layoffs can contribute to this perception. If you\u2019re feeling uncertain about your position or future opportunities, it might be beneficial to focus on enhancing your skills and expanding your network.\n\nOne effective way to stand out in a competitive market is to invest in your professional development. Programs that help you sharpen your coding abilities or learn new technologies can be invaluable. For instance, Headstarter offers resources that can help you significantly improve your software engineering skills and prepare for roles in top tech companies. You can check it out at https://headstarter.co. \n\nAdditionally, consider networking with others in the field and attending industry events. Building connections can often lead to job opportunities that aren't widely advertised. Stay proactive, and remember that continuous learning is key in such a dynamic industry.",
+            "post_url": "https://www.reddit.comhttps://www.vice.com/en/article/g5y37j/thousands-of-software-engineers-say-the-job-market-is-getting-much-worse",
+            "sentiment": -0.4
+        },
+        {
+            "id": "187uofs",
+            "title": "What is the Current most over saturated job market?",
+            "url": "https://www.reddit.com/r/jobs/comments/187uofs/what_is_the_current_most_over_saturated_job_market/",
+            "timestamp": "2024-09-17T13:09:29.819023",
+            "comment": "It\u2019s understandable to feel concerned about entering the job market, especially in fields like engineering and software development that have seen rapid growth. Currently, while software engineering is indeed competitive, it\u2019s worth noting that there are still substantial opportunities available, especially for those with the right skills and experience.\n\nNetworking can be a powerful tool in navigating this landscape. Engaging with professionals in your field through platforms like LinkedIn or attending industry meetups can lead to valuable connections and job opportunities. Additionally, gaining practical experience through internships or projects can significantly enhance your resume.\n\nIf you're looking to sharpen your skills and increase your chances of landing a role in a top tech company, you might find resources like Headstarter helpful. They focus on helping individuals enhance their software engineering skills and prepare for the job market effectively. You can check them out at https://headstarter.co. \n\nStaying adaptable and continuously learning will be key as you transition from grad school to the workforce. Best of luck with your studies and future job search.",
+            "post_url": "https://www.reddit.comhttps://www.reddit.com/r/jobs/comments/187uofs/what_is_the_current_most_over_saturated_job_market/",
+            "sentiment": 0.25
+        }
+    ],
     "twitter_leads": [
         {
-            "text": "Software Engineer- AI/ML, AWS Neuron Distributed Training Do you love investigating problems to develop products that impact millions of people around the... - https://t.co/6qTlZqP7CZ #jobs #job #NowHiring",
-            "user": "SanDiego_IT",
-            "url": "https://twitter.com/SanDiego_IT/status/1835856565816971574",
-            "posted": "2024-09-17 01:41:28 +00000"
+            "text": "The software engineering job market is tough nowadays, especially for beginners.  I noticed some mistakes that many people make when looking for a first job and I described 6 rules which will help to find a first job as a software engineer \ud83d\udc47  https://t.co/BYdfz2zvMw",
+            "user": "kacpersoftware",
+            "url": "https://twitter.com/kacpersoftware/status/1835913715096355232",
+            "posted": "2024-09-17 05:28:33 +00000",
+            "sentiment": 0.12222222222222223
         },
         {
-            "text": "Zebra Technologies hiring   Role: Software Engineer  Location: Pune  Experience: 0-2 years  #SoftwareEngineer  \ud83d\udc49\ud83c\udffb Apply now https://t.co/oenskhIMFe",
-            "user": "jobformore",
-            "url": "https://twitter.com/jobformore/status/1835856260249387368",
-            "posted": "2024-09-17 01:40:15 +00000"
+            "text": "Nearly done with a 2nd degree, this one in software engineering. Just in time for the worst tech job market since 2008. So I'll have two useless degrees instead of one. But eh.  Maybe I'll double down and get an MFA in Creative Writing. Just go full useless.  ...I am useless.  :(",
+            "user": "hamilto8",
+            "url": "https://twitter.com/hamilto8/status/1835453381084577881",
+            "posted": "2024-09-15 22:59:21 +00000",
+            "sentiment": -0.2232323232323232
         },
         {
-            "text": "As a software engineer this is like someone coming up to you and saying \u201cI\u2019m excited to introduce @automobile   we\u2019re building a future car with AI as the default\u201d",
-            "user": "do_sudo",
-            "url": "https://twitter.com/do_sudo/status/1835854769463628090",
-            "posted": "2024-09-17 01:34:20 +00000"
+            "text": "Marwan's hard work through Capstone, coupled with additional #LaunchSchool job-hunt support secured him interviews and a software engineering career, even in today's job market.  #journeytosuccess #softwareengineer #proofisinthework https://t.co/t0txCizpCH",
+            "user": "launchschool",
+            "url": "https://twitter.com/launchschool/status/1834611759472099360",
+            "posted": "2024-09-13 15:15:03 +00000",
+            "sentiment": -0.2916666666666667
         },
         {
-            "text": "\ud83d\ude80  Vercel  #hiring  \ud83d\udccd Job Title: Software Engineer, Edge  (remote) \ud83c\udf93 Experience: 3-5 year \ud83d\udcb0 Salary: $170000 - 221000/year \ud83d\udd17 Apply Now: https://t.co/iEgnJt3cYf #hiring #job #remote #workfromhome #programming #development",
-            "user": "remotejobzone",
-            "url": "https://twitter.com/remotejobzone/status/1835852602178764963",
-            "posted": "2024-09-17 01:25:43 +00000"
+            "text": "That does prove nothing. Finding a job is a different topic  If it comes to salaries, I have no idea what you were doing there, but usually in the software engineering market more skills means higher pay. (Don\u2019t get me wrong, I am not trying to insult anyone)  Single cases don\u2019t not change that.   And there\u2019s always an option to go on your own \ud83d\ude09",
+            "user": "kacpersoftware",
+            "url": "https://twitter.com/kacpersoftware/status/1833497375379181927",
+            "posted": "2024-09-10 13:26:53 +00000",
+            "sentiment": 0.07551020408163266
         },
         {
-            "text": "Me when I have a code bug & I wave at my laptop to make the code work again",
-            "user": "RichardDRembert",
-            "url": "https://twitter.com/RichardDRembert/status/1835852323895062580",
-            "posted": "2024-09-17 01:24:37 +00000"
+            "text": "@rblalock @svpino Isn't software engineering 'changing' in the USA.  The job market is not the same as it was in 2020.  Is it 'normalizing?",
+            "user": "moniqueo59",
+            "url": "https://twitter.com/moniqueo59/status/1832757967742992755",
+            "posted": "2024-09-08 12:28:45 +00000",
+            "sentiment": 0.0
         },
         {
-            "text": "@Deadon775 @GayBearRes Wrong! The reaseach shows people are more productive working from home, specially if you are a software engineer. This is mostly about control. This company hates its employees. They actually hire former FBI and NSA types to monitor everyone.",
-            "user": "dotmaximo",
-            "url": "https://twitter.com/dotmaximo/status/1835850194623025543",
-            "posted": "2024-09-17 01:16:09 +00000"
+            "text": "\ud83d\udd0d Thrive Market is hiring Manager, Software Engineering (Platform) (Full Time - Remote)  \ud83d\udd17 Apply Now: https://t.co/Cx1rL18PW1    #Hiring #Jobs #JobSearch #Technology #Engineering #Python #PHP #Java #Golang #AWS",
+            "user": "skillexchange_x",
+            "url": "https://twitter.com/skillexchange_x/status/1832373576516714906",
+            "posted": "2024-09-07 11:01:19 +00000",
+            "sentiment": 0.12499999999999999
         },
         {
-            "text": "Leonardo DRS is looking for individuals in Bridgeton, MO who are team-oriented & interested in joining a diverse workforce while advancing their career! https://t.co/I4tIABybI7 #Engineering #SoftwareEngineer",
-            "user": "ABurnsAngels",
-            "url": "https://twitter.com/ABurnsAngels/status/1835850071470166032",
-            "posted": "2024-09-17 01:15:40 +00000"
+            "text": "@Geiger_Capital I was laid off from my software engineering job only to find a labor market saturated with unemployed software engineers and hiring managers that won't hire straight white men \ud83e\udd37 And then they wonder why I am so radicalized",
+            "user": "scythoid",
+            "url": "https://twitter.com/scythoid/status/1832107793584943572",
+            "posted": "2024-09-06 17:25:11 +00000",
+            "sentiment": 0.06666666666666667
         },
         {
-            "text": "\ud83d\ude80 Vercel  #hiring  \ud83d\udccd Job Title: Software Engineer, Deployment Experience  (remote) \ud83c\udf93 Experience: 5-8 year \ud83d\udcb0 Salary: $200000 - 240000/year \ud83d\udd17 Apply Now: https://t.co/pZsWkum2Ev #hiring #job #remote #workfromhome #programming #develo",
-            "user": "remotejobzone",
-            "url": "https://twitter.com/remotejobzone/status/1835849271939047797",
-            "posted": "2024-09-17 01:12:29 +00000"
+            "text": "@Rewkang To be fair the salaries of tech were overinflated and this correction is the market heading to equilibrium as the weak devs get culled. Software Engineering jobs are 2x almost any other job.",
+            "user": "khalilDEGambler",
+            "url": "https://twitter.com/khalilDEGambler/status/1832071772327559254",
+            "posted": "2024-09-06 15:02:03 +00000",
+            "sentiment": 0.06666666666666665
         },
         {
-            "text": "https://t.co/MeZpfAgEPq  #iOS18 #ios #ios18features #SoftwareDevelopment #softwareengineer #iPadOS18 https://t.co/UWswTetWtz",
-            "user": "FaridG022",
-            "url": "https://twitter.com/FaridG022/status/1835849022667395249",
-            "posted": "2024-09-17 01:11:30 +00000"
+            "text": "Almost all tech sectors and jobs in the world are over saturated.   IT, UI/UX, Web Dev, Data Engineering, Data Science, Software Engineering, Data Analytics\u2026 the list goes on.   A lot of people will comment below that it\u2019s not fair, the job market sucks, and it shouldn\u2019t be this hard.  You are correct.   But it isn\u2019t going to change. So you need to decide if it\u2019s worth fighting for, putting in the effort, riding through the storm, and getting a job.",
+            "user": "Alex_TheAnalyst",
+            "url": "https://twitter.com/Alex_TheAnalyst/status/1832044003275022425",
+            "posted": "2024-09-06 13:11:42 +00000",
+            "sentiment": -0.16041666666666665
         },
         {
-            "text": "@CuGrand @vuejs Los grandes avances del frontend de los \u00faltimos a\u00f1os es tan dentro del ecosistema de Vue \ud83d\ude0e",
-            "user": "jeandybryan",
-            "url": "https://twitter.com/jeandybryan/status/1835848880035917998",
-            "posted": "2024-09-17 01:10:56 +00000"
+            "text": "After hard work and trust in Launch School's programs, Stephen not only obtained a software engineering career within weeks of job hunting, he did it in today's tough market and was promoted a few months into his position. Nothing short of amazing  #100daysofcode #softwarengineer https://t.co/mOahFKoYK3",
+            "user": "launchschool",
+            "url": "https://twitter.com/launchschool/status/1831712647919661334",
+            "posted": "2024-09-05 15:15:01 +00000",
+            "sentiment": -0.046759259259259243
         }
     ],
     "linkedin_leads": [
         {
-            "text": "I\u2019m happy to share that I\u2019m starting a new position as Senior Software Engineer at Meta!",
-            "user": "Daniel Wallis",
-            "url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7241624001544929280/",
-            "posted": "2024-09-17 01:49:00 +00000"
+            "text": "",
+            "user": "Benjamin D.",
+            "url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7241855487426584576/",
+            "posted": "2024-09-17 17:09:00 +00000",
+            "sentiment": 0.0
         },
         {
-            "text": "I\u2019m happy to share that I\u2019m starting a new position as Associate Software Engineer at Tech Mahindra!",
-            "user": "Ayesha Abdul",
-            "url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7241624032796704769/",
-            "posted": "2024-09-17 01:49:00 +00000"
+            "text": "\ud83c\udf0d \ud835\udde1\ud835\uddee\ud835\ude03\ud835\uddf6\ud835\uddf4\ud835\uddee\ud835\ude01\ud835\uddf6\ud835\uddfb\ud835\uddf4 \ud835\ude01\ud835\uddf5\ud835\uddf2 \ud835\udde3\ud835\uddee\ud835\uddff\ud835\uddee\ud835\uddf1\ud835\uddfc\ud835\ude05 \ud835\uddfc\ud835\uddf3 \ud835\udddf\ud835\uddee\ud835\ude06\ud835\uddfc\ud835\uddf3\ud835\uddf3\ud835\ude00 \ud835\uddf6\ud835\uddfb \ud835\ude01\ud835\uddf5\ud835\uddf2 \ud835\uddd5\ud835\uddfc\ud835\uddfc\ud835\uddfa\ud835\uddf6\ud835\uddfb\ud835\uddf4 \ud835\udddc\ud835\udde7 \ud835\udde0\ud835\uddee\ud835\uddff\ud835\uddf8\ud835\uddf2\ud835\ude01  The tech job market in 2024 is both dynamic and challenging. While we're seeing high demand for skilled professionals in areas like AI, machine learning, cybersecurity, and cloud computing, many companies are simultaneously reducing their workforce. Why?  \ud83d\udca1 \ud835\uddd8\ud835\uddf0\ud835\uddfc\ud835\uddfb\ud835\uddfc\ud835\uddfa\ud835\uddf6\ud835\uddf0 \ud835\uddd4\ud835\uddf1\ud835\uddf7\ud835\ude02\ud835\ude00\ud835\ude01\ud835\uddfa\ud835\uddf2\ud835\uddfb\ud835\ude01\ud835\ude00: The global economy is facing uncertainties, with rising inflation and market slowdowns. Companies are streamlining operations to cut costs, even while they continue to hire for high-priority roles.  \ud83d\udca1 \ud835\udde3\ud835\uddee\ud835\uddfb\ud835\uddf1\ud835\uddf2\ud835\uddfa\ud835\uddf6\ud835\uddf0 \ud835\udde2\ud835\ude03\ud835\uddf2\ud835\uddff-\ud835\udddb\ud835\uddf6\ud835\uddff\ud835\uddf6\ud835\uddfb\ud835\uddf4: During the COVID-19 boom, many tech companies over-expanded. Now, with market normalization, these companies are restructuring to align with actual demand, which means layoffs in some areas.  \ud83d\udca1 \ud835\udde6\ud835\uddf5\ud835\uddf6\ud835\uddf3\ud835\ude01\ud835\uddf6\ud835\uddfb\ud835\uddf4 \ud835\udde3\ud835\uddff\ud835\uddf6\ud835\uddfc\ud835\uddff\ud835\uddf6\ud835\ude01\ud835\uddf6\ud835\uddf2\ud835\ude00: Tech innovation never stops! Companies are reallocating resources to future-forward areas like AI and automation...",
+            "user": "Avani Patel",
+            "url": "https://www.linkedin.com/feed/update/urn:li:share:7241854167789539329/",
+            "posted": "2024-09-17 17:03:00 +00000",
+            "sentiment": 0.27
         },
         {
-            "text": "\ud83d\udc68\u200d\ud83d\udcbb Software engineer? How do you ensure your skills stay relevant in an AI-driven future?  \ud83d\udcfd\ufe0f Listen to Aakash in this \ud83d\udc46 69-sec video where he discusses the skills that make software developers irreplaceable in a tech landscape dominated by AI.  \ud83d\ude4c Aakash Gupta Choudhury graduated in 2020 from The Australian National University with a Master's degree in Machine Learning. He's an amazing member of the ANU alumni community with over a decade of experience as a software developer.  \ud83d\udc68\u200d\ud83c\udf93You can watch more videos showcasing our alumni's career insights in the ANU Connect video library: https://lnkd.in/gispDzPX  \ud83d\udd14 Stay in the loop with peer insights and community updates: follow ANU Alumni now! \ud83d\udc46  #ANU #professionaldevelopment #skills #AI",
-            "user": "ANU Alumni",
-            "url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7241623695759175681/",
-            "posted": "2024-09-17 01:48:00 +00000"
+            "text": "\"\u0646\u0631\u062d\u0628 \u0628\u0643\u0645 \u0641\u064a \u0628\u0648\u0627\u0628\u0629 \u0627\u0644\u062a\u0648\u0638\u064a\u0641 \u0627\u0644\u0645\u062a\u0642\u062f\u0645\u0629\u060c \u062d\u064a\u062b \u0646\u0639\u0644\u0646 \u0627\u0644\u064a\u0648\u0645 \u0639\u0646 \u0641\u0631\u0635 \u0639\u0645\u0644 \u0645\u062a\u0645\u064a\u0632\u0629 \u0641\u064a \u0627\u0644\u0643\u0648\u064a\u062a\u060c \u0645\u062a\u0627\u062d\u0629 \u0644\u062c\u0645\u064a\u0639 \u0627\u0644\u0645\u062a\u0642\u062f\u0645\u064a\u0646 \u0628\u063a\u0636 \u0627\u0644\u0646\u0638\u0631 \u0639\u0646 \u062c\u0646\u0633\u064a\u0627\u062a\u0647\u0645 \u0623\u0648 \u062a\u062e\u0635\u0635\u0627\u062a\u0647\u0645. \u062a\u0639\u0644\u0646 \u0623\u0628\u0631\u0632 \u0627\u0644\u0634\u0631\u0643\u0627\u062a \u0639\u0646 \u0645\u062c\u0645\u0648\u0639\u0629 \u0648\u0627\u0633\u0639\u0629 \u0645\u0646 \u0627\u0644\u0648\u0638\u0627\u0626\u0641 \u0627\u0644\u0634\u0627\u063a\u0631\u0629 \u0639\u0628\u0631 \u0645\u0646\u0635\u0627\u062a\u0647\u0627 \u0627\u0644\u0631\u0633\u0645\u064a\u0629\u060c \u062a\u0634\u0645\u0644 \u0645\u062e\u062a\u0644\u0641 \u0627\u0644\u0645\u062c\u0627\u0644\u0627\u062a \u0648\u0627\u0644\u062a\u062e\u0635\u0635\u0627\u062a\u060c \u0645\u0639 \u0631\u0648\u0627\u062a\u0628 \u062a\u0646\u0627\u0641\u0633\u064a\u0629 \u062a\u0628\u062f\u0623 \u0645\u0646 2500 \u062f\u064a\u0646\u0627\u0631 \u0643\u0648\u064a\u062a\u064a \u0648\u0623\u0639\u0644\u0649. \u0644\u0645\u0632\u064a\u062f \u0645\u0646 \u0627\u0644\u062a\u0641\u0627\u0635\u064a\u0644\u060c \u0646\u062f\u0639\u0648\u0643\u0645 \u0644\u0644\u0627\u0637\u0644\u0627\u0639 \u0639\u0644\u0649 \u0627\u0644\u0625\u0639\u0644\u0627\u0646\u0627\u062a \u0627\u0644\u0645\u0631\u0641\u0642\u0629 \u0623\u062f\u0646\u0627\u0647.\"          \u0648\u0638\u0627\u0626\u0641 \u0634\u0627\u063a\u0631\u0629 \u0641\u064a \u0627\u0644\u0643\u0648\u064a\u062a \u0628\u062a\u0627\u0631\u064a\u062e \u0627\u0644\u064a\u0648\u0645 \u0627\u0644\u062a\u0641\u0627\u0635\u064a\u0644 \u0648\u0631\u0627\u0628\u0637 \u0627\u0644\u062a\u0642\u062f\u064a\u0645 https://lnkd.in/dcaa7MhK          #recruitment #\u0648\u0638\u0627\u0626\u0641 #jobs #recruiting #\u062a\u0648\u0638\u064a\u0641 #careers #hr #\u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629 #job #search #\u0648\u0638\u0627\u0626\u0641_\u0627\u0644\u0634\u0631\u0642\u064a\u0629 #\u0648\u0638\u064a\u0641\u0629_\u0634\u0627\u063a\u0631\u0629 #\u0627\u0644\u062a\u0648\u0638\u064a\u0641 #\u0648\u0638\u064a\u0641\u0647 #\u0648\u0638\u0627\u0626\u0641_\u0627\u0644\u064a\u0648\u0645 #\u0648\u0638\u0627\u0626\u0641_\u0627\u0644\u0631\u064a\u0627\u0636 #hunting #\u062a\u0648\u0637\u064a\u0646 #\u0648\u0638\u0627\u0626\u0641_\u0625\u062f\u0627\u0631\u064a\u0629 #\u0627\u0644\u0631\u064a\u0627\u0636 #\u0637\u0627\u0642\u0627\u062a #saudi #\u0633\u0627\u0639\u062f_\u062a\u062a\u0633\u0627\u0639\u062f #riyadh #\u0627\u0644\u0645\u0648\u0627\u0631\u062f_\u0627\u0644\u0628\u0634\u0631\u064a\u0629 #\u0628\u0646\u0643_\u0627\u0644\u0631\u064a\u0627\u0636 #\u062c\u062f\u0629 #\u0639\u0627\u062c\u0644 #\u0627\u0644\u0627\u0645\u0627\u0631\u0627\u062a #\u0639\u0645\u0627\u0646 #\u0647\u0627\u0645 #humanresources #\u0642\u0637\u0631 #\u062e\u0628\u0631 #\u0648\u0638\u0627\u0626\u0641_\u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629 #\u0627\u0644\u062f\u0645\u0627\u0645 #\u0648\u0638\u0627\u0626\u0641_\u0639\u0645\u0627\u0646 #\u0643\u0644\u0645\u0646\u064a_\u0639\u0631\u0628\u064a #\u0627\u0644\u0633\u0644\u0637\u0646\u0629 #humanresources #\u0648\u0638\u064a\u0641\u0629 #\u0627\u0644\u0644\u063a\u0629 #qatar #oil #work #banque #petroleum #people #\u0627\u0644\u0637\u0628 #energy #\u0627\u0644\u0637\u064a\u0631\u0627\u0646 #amazon #development #\u0627\u0644\u0635\u062d\u0629 #markets #hotels #accorhotels #hospital #\u0627\u0644\u0623\u0628\u062d\u0627\u062b...",
+            "user": "\u0648\u0638\u0627\u0626\u0641 \u0641\u064a \u0627\u0644\u0643\u0648\u064a\u062a",
+            "url": "https://www.linkedin.com/feed/update/urn:li:share:7241853727614136320/",
+            "posted": "2024-09-17 17:02:00 +00000",
+            "sentiment": 0.0
         },
         {
-            "text": "EN\t I\u2019m happy to share that I\u2019m starting a new position as a Software Engineer Intern at Google\ud83c\udf89 Grateful for the opportunity and looking forward to learning, growing, and contributing alongside an amazing team.  PT Estou feliz em compartilhar que estou come\u00e7ando como Estagi\u00e1rio em Engenharia de Software no Google! \ud83c\udf89 Grato pela oportunidade e ansioso para aprender, crescer e contribuir ao lado de uma equipe incr\u00edvel.",
-            "user": "S\u00e9rgio Brito",
-            "url": "https://www.linkedin.com/feed/update/urn:li:share:7241623719146622976/",
-            "posted": "2024-09-17 01:48:00 +00000"
+            "text": "#innovation #management #digitalmarketing #technology #creativity #futurism #startups #marketing #entrepreneurship #money #sustainability #inspiration",
+            "user": "US Data Dynamics Trend",
+            "url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7241700721488744449/",
+            "posted": "2024-09-17 17:01:00 +00000",
+            "sentiment": 0.0
         },
         {
-            "text": "New Contract Opportunity!!  *6-month - Specialist Systems Trainer & Instructional Designer.  *Brisbane Based (Newstead) - Hybrid Model.  Essential Criteria:  - Qualification in an education or related field and/or recognised combination of education and experience in a directly related field. - Extensive experience (5+ years) in the design, development and delivery of business process transformation and functional system training, enabled by a new IT system.  - Extensive experience (5 + years) in the design, development and delivery of business process transformation and functional system training. -Demonstrated skills and experience in designing learning paths that cater for varying adult learning styles. -Demonstrated experience in how a digital environment can influence the design and delivery of learning.  Desirable:  ****Knowledge of Learning Management Solutions, SAP 4/Hana, Ariba and Success Factors   Please DM for more information Gabriela Leal\u00a0- Referrals rewarded \ud83d\udcb8",
-            "user": "Gabriela Leal",
-            "url": "https://www.linkedin.com/feed/update/urn:li:share:7241623735143669761/",
-            "posted": "2024-09-17 01:48:00 +00000"
+            "text": "#recruitment #\u0648\u0638\u0627\u0626\u0641 #jobs #recruiting #\u062a\u0648\u0638\u064a\u0641 #careers #hr #\u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629 #job #search #\u0648\u0638\u0627\u0626\u0641_\u0627\u0644\u0634\u0631\u0642\u064a\u0629# \u0648\u0638\u064a\u0641\u0629_\u0634\u0627\u063a\u0631 #\u0627\u0644\u062a\u0648\u0638\u064a\u0641 #\u0648\u0638\u064a\u0641\u0647 #\u0648\u0638\u0627\u0626\u0641_\u0627\u0644\u064a\u0648\u0645 #\u0648\u0638\u0627\u0626\u0641_\u0627\u0644\u0631\u064a\u0627\u0636 #hunting #\u062a\u0648\u0637\u064a\u0646 #\u0648\u0638\u0627\u0626\u0641_\u0625\u062f\u0627\u0631\u064a\u0629 #\u0627\u0644\u0631\u064a\u0627\u0636 #\u0637\u0627\u0642\u0627\u062a #saudi #\u0633\u0627\u0639\u062f_\u062a\u062a\u0633\u0627\u0639\u062f #riyadh #\u0627\u0644\u0645\u0648\u0627\u0631\u062f_\u0627\u0644\u0628\u0634\u0631\u064a\u0629 #\u0628\u0646\u0643_\u0627\u0644\u0631\u064a\u0627\u0636 #\u062c\u062f\u0629 #\u0639\u0627\u062c\u0644 #\u0627\u0644\u0627\u0645\u0627\u0631\u0627\u062a #\u0639\u0645\u0627\u0646 #\u0647\u0627\u0645 #humanresources #\u0642\u0637\u0631 #\u062e\u0628\u0631 #\u0648\u0638\u0627\u0626\u0641_\u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629 #\u0627\u0644\u062f\u0645\u0627\u0645 #\u0648\u0638\u0627\u0626\u0641_\u0639\u0645\u0627\u0646 #\u0643\u0644\u0645\u0646\u064a_\u0639\u0631\u0628\u064a #\u0627\u0644\u0633\u0644\u0637\u0646\u0629 #humanresources #\u0648\u0638\u064a\u0641\u0629 #\u0627\u0644\u0644\u063a\u0629 #qatar #oil #work #banque #petroleum #people #\u0627\u0644\u0637\u0628 #energy #\u0627\u0644\u0637\u064a\u0631\u0627\u0646 #amazon #development #\u0627\u0644\u0635\u062d\u0629 #markets #hotels #accorhotels #hospital #\u0627\u0644\u0623\u0628\u062d\u0627\u062b #egypt #airlines #oilandgas #insurance #microsoft # #university #power #pwc #middleeast #bank #canada #deloitte #medicine #aviation #\u0627\u0644\u0637\u0627\u0642\u0629 #health #education #\u0627\u0644\u062a\u0633\u0648\u064a\u0642 #\u0625\u062f\u0627\u0631\u0629 #\u0627\u0644\u0647\u0646\u062f\u0633\u0629 #team #investment #engineer #projects #devops #remotework #engineers #azure #design  #management #digital #opportunities #engineering #culture  #microservices #infrastructure #agile #java #kubernetes #software #cloud #python #network #experience #linux #docker #bigdata #so...",
+            "user": "Sabiha Missaoui",
+            "url": "https://www.linkedin.com/feed/update/urn:li:share:7240984487365423104/",
+            "posted": "2024-09-17 17:01:00 +00000",
+            "sentiment": 0.25
         },
         {
-            "text": "We are hiring for Full time entry Level & remote job  Income- 25k to 65k per month + incentives  Location- work from home  Qualification - any graduation + Working - 9pm to 6pm weekends off  Open Positions: HR Executive, Team Management, Social Media Optimization, Digital Marketing, Chat Process, and Voice Process roles available.  How to apply Comment #intrested below and send me your cv on whatsapp:- +91 7696837656  We'll personally review your profile for the perfect match and shortlist you within 24hr  Like the post and follow for more hiring updates  #applynow:-https://lnkd.in/gARgKfQf  #workfromhome #remotework\u2026",
-            "user": "Divya Mehra (HR)",
-            "url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7241623555266789376/",
-            "posted": "2024-09-17 01:47:00 +00000"
+            "text": "Empower your professional journey at KGiSL Technologies!  Job Title: SAP PLM Consultant  Aspirant must have experience 7+ years of experience in SAP PLM. Must be good at Recipe management and Food processing segment and should have done 2 end to end implementations in SAP S4 HANA  Job Description: \u2022 Must have 7+ Years of experience in SAP PLM- (Product Lifecycle Management) with end to-end implementations and support and at least 2 end to end implementation projects in SAP S/4HANA. \u2022 Expert in Recipe Management (Editing Formulas, Information systems, generating formula data and reports, change management for Recipes, Recipe Classification, Assignment of documents to recipes, entering data for quality inspections, Assignment of production version to recipe, Entering material data in formulas, Property tree and value assignments in formulas and value assignments in recipes). \u2022 Recipe Management workflows before releasing to SAP PP-PI. \u2022 Well conversant in working on Incident, Problem, Ch...",
+            "user": "Amalraj david",
+            "url": "https://www.linkedin.com/feed/update/urn:li:share:7241853506276450304/",
+            "posted": "2024-09-17 17:01:00 +00000",
+            "sentiment": 0.17499999999999996
         },
         {
-            "text": "\ud83d\udce3\ud83d\udce3ABA Bank is hiring !!!  #Join ABA bank below position\u17d6  \ud83d\udd39Large Business Loan Officer (all Levels) \ud83d\udd39Medium Business Loan Officer (all Levels)  \u2705Samdach Sothearos Branch \u2705Khan Chamkar Mon - Sangkat Boeng Trabaek \u2705Ou Baek K'am Branch \u2705Aeon Mall (Mean Chey) Branch \u2705Samdech Monireth Branch \u2705Toul Kork Branch \u2705Stung Mean Chey Branch \u2705Central Branch \u2705Chamkar Doung Branch \u2705CHBAR AMPOV 2  \u2705NORTH BRIDGE  \u2705Kambol Branch \u2705Saensokh Branch ___________________________________________ \ud83d\udce8 Telegram: https://t.me/HR_SRUN_Hai \ud83d\udce7  Email      : srun.hai@ababank.com/ jobs@ababank.com \u260e\ufe0f  Phone     : 093 630 629/097 624 3570 \ud83d\udd0e  New jobs information:  https://lnkd.in/ghkirsVX  #SME#Commercial#Bank#MFI#Career#Grow#Sale",
-            "user": "Srun Hai",
-            "url": "https://www.linkedin.com/feed/update/urn:li:share:7241623497783836673/",
-            "posted": "2024-09-17 01:47:00 +00000"
+            "text": "\"\u0646\u0631\u062d\u0628 \u0628\u0643\u0645 \u0641\u064a \u0628\u0648\u0627\u0628\u0629 \u0627\u0644\u062a\u0648\u0638\u064a\u0641 \u0627\u0644\u0645\u062a\u0642\u062f\u0645\u0629\u060c \u062d\u064a\u062b \u0646\u0639\u0644\u0646 \u0627\u0644\u064a\u0648\u0645 \u0639\u0646 \u0641\u0631\u0635 \u0639\u0645\u0644 \u0645\u062a\u0645\u064a\u0632\u0629 \u0641\u064a \u0627\u0644\u0643\u0648\u064a\u062a\u060c \u0645\u062a\u0627\u062d\u0629 \u0644\u062c\u0645\u064a\u0639 \u0627\u0644\u0645\u062a\u0642\u062f\u0645\u064a\u0646 \u0628\u063a\u0636 \u0627\u0644\u0646\u0638\u0631 \u0639\u0646 \u062c\u0646\u0633\u064a\u0627\u062a\u0647\u0645 \u0623\u0648 \u062a\u062e\u0635\u0635\u0627\u062a\u0647\u0645. \u062a\u0639\u0644\u0646 \u0623\u0628\u0631\u0632 \u0627\u0644\u0634\u0631\u0643\u0627\u062a \u0639\u0646 \u0645\u062c\u0645\u0648\u0639\u0629 \u0648\u0627\u0633\u0639\u0629 \u0645\u0646 \u0627\u0644\u0648\u0638\u0627\u0626\u0641 \u0627\u0644\u0634\u0627\u063a\u0631\u0629 \u0639\u0628\u0631 \u0645\u0646\u0635\u0627\u062a\u0647\u0627 \u0627\u0644\u0631\u0633\u0645\u064a\u0629\u060c \u062a\u0634\u0645\u0644 \u0645\u062e\u062a\u0644\u0641 \u0627\u0644\u0645\u062c\u0627\u0644\u0627\u062a \u0648\u0627\u0644\u062a\u062e\u0635\u0635\u0627\u062a\u060c \u0645\u0639 \u0631\u0648\u0627\u062a\u0628 \u062a\u0646\u0627\u0641\u0633\u064a\u0629 \u062a\u0628\u062f\u0623 \u0645\u0646 2500 \u062f\u064a\u0646\u0627\u0631 \u0643\u0648\u064a\u062a\u064a \u0648\u0623\u0639\u0644\u0649. \u0644\u0645\u0632\u064a\u062f \u0645\u0646 \u0627\u0644\u062a\u0641\u0627\u0635\u064a\u0644\u060c \u0646\u062f\u0639\u0648\u0643\u0645 \u0644\u0644\u0627\u0637\u0644\u0627\u0639 \u0639\u0644\u0649 \u0627\u0644\u0625\u0639\u0644\u0627\u0646\u0627\u062a \u0627\u0644\u0645\u0631\u0641\u0642\u0629 \u0623\u062f\u0646\u0627\u0647.\"          \u0648\u0638\u0627\u0626\u0641 \u0634\u0627\u063a\u0631\u0629 \u0641\u064a \u0627\u0644\u0643\u0648\u064a\u062a \u0628\u062a\u0627\u0631\u064a\u062e \u0627\u0644\u064a\u0648\u0645 \u0627\u0644\u062a\u0641\u0627\u0635\u064a\u0644 \u0648\u0631\u0627\u0628\u0637 \u0627\u0644\u062a\u0642\u062f\u064a\u0645 https://lnkd.in/dcaa7MhK          #recruitment #\u0648\u0638\u0627\u0626\u0641 #jobs #recruiting #\u062a\u0648\u0638\u064a\u0641 #careers #hr #\u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629 #job #search #\u0648\u0638\u0627\u0626\u0641_\u0627\u0644\u0634\u0631\u0642\u064a\u0629 #\u0648\u0638\u064a\u0641\u0629_\u0634\u0627\u063a\u0631\u0629 #\u0627\u0644\u062a\u0648\u0638\u064a\u0641 #\u0648\u0638\u064a\u0641\u0647 #\u0648\u0638\u0627\u0626\u0641_\u0627\u0644\u064a\u0648\u0645 #\u0648\u0638\u0627\u0626\u0641_\u0627\u0644\u0631\u064a\u0627\u0636 #hunting #\u062a\u0648\u0637\u064a\u0646 #\u0648\u0638\u0627\u0626\u0641_\u0625\u062f\u0627\u0631\u064a\u0629 #\u0627\u0644\u0631\u064a\u0627\u0636 #\u0637\u0627\u0642\u0627\u062a #saudi #\u0633\u0627\u0639\u062f_\u062a\u062a\u0633\u0627\u0639\u062f #riyadh #\u0627\u0644\u0645\u0648\u0627\u0631\u062f_\u0627\u0644\u0628\u0634\u0631\u064a\u0629 #\u0628\u0646\u0643_\u0627\u0644\u0631\u064a\u0627\u0636 #\u062c\u062f\u0629 #\u0639\u0627\u062c\u0644 #\u0627\u0644\u0627\u0645\u0627\u0631\u0627\u062a #\u0639\u0645\u0627\u0646 #\u0647\u0627\u0645 #humanresources #\u0642\u0637\u0631 #\u062e\u0628\u0631 #\u0648\u0638\u0627\u0626\u0641_\u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629 #\u0627\u0644\u062f\u0645\u0627\u0645 #\u0648\u0638\u0627\u0626\u0641_\u0639\u0645\u0627\u0646 #\u0643\u0644\u0645\u0646\u064a_\u0639\u0631\u0628\u064a #\u0627\u0644\u0633\u0644\u0637\u0646\u0629 #humanresources #\u0648\u0638\u064a\u0641\u0629 #\u0627\u0644\u0644\u063a\u0629 #qatar #oil #work #banque #petroleum #people #\u0627\u0644\u0637\u0628 #energy #\u0627\u0644\u0637\u064a\u0631\u0627\u0646 #amazon #development #\u0627\u0644\u0635\u062d\u0629 #markets #hotels #accorhotels #hospital #\u0627\u0644\u0623\u0628\u062d\u0627\u062b...",
+            "user": "\u0648\u0638\u0627\u0626\u0641 \u0641\u064a \u062c\u0645\u064a\u0639 \u0627\u0646\u062d\u0627\u0621 \u0627\u0644\u062f\u0648\u0644 \u0627\u0644\u0639\u0631\u0628\u064a\u0629",
+            "url": "https://www.linkedin.com/feed/update/urn:li:share:7241853514929319936/",
+            "posted": "2024-09-17 17:01:00 +00000",
+            "sentiment": 0.0
         },
         {
-            "text": "Nangia & Co LLP is #hiring   Follow Maninder Singh & JobShob Nest-CSR & NGO Jobs  for job updates.  \ud83d\udcbc Need guidance? Book a session: \u00a0https://lnkd.in/gfCQuTjb  \ud83d\udcdd Drop your CV for review: https://lnkd.in/dZ5xQ2Zg  \ud83d\udcf2 Stay Connected! Join our community:  \ud83d\udd17 WhatsApp: shorturl.at/gmrG7  \ud83c\udfa5YouTube: lnkd.in/gzZZW-NS  \ud83d\udce2Telegram: lnkd.in/grhMVvAf  \ud83d\udccc Hiring? Connect for top candidates.  #jobalerts #jobhunt #hiringnow #jobsearch #jobopportunity",
-            "user": "Maninder Singh",
-            "url": "https://www.linkedin.com/feed/update/urn:li:share:7241623236151500800/",
-            "posted": "2024-09-17 01:46:00 +00000"
+            "text": "In this edition of the EdTech Mentor Interview Series, we sit down with Jeff Rubenstein, Chief Product Officer at Doowii, Inc, to explore how digital platforms are transforming the way educators and learners engage with content.  Jeff shares his expert insights on creating seamless digital experiences in education and the future of EdTech.  \ud83c\udf99\ufe0f Don't miss out on Jeff's vision for the EdTech industry and how companies can stay ahead in this rapidly evolving landscape.  Read the full interview here: https://lnkd.in/em8nPZAq  \ud83d\udc49 Follow us for more exclusive insights from EdTech leaders. https://lnkd.in/eAB3pf_p  #EdTech #EdTechMentor #EducationTechnology #DigitalLearning #InnovationInEducation",
+            "user": "27zero",
+            "url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7241851999086948353/",
+            "posted": "2024-09-17 16:54:00 +00000",
+            "sentiment": 0.11349206349206349
         },
         {
-            "text": "Hi All, I'm currently recruiting for a CDD maker for SME Banking. Please click on the job title below to view the Job Description and apply to it!",
-            "user": "Cindy Ko",
-            "url": "https://www.linkedin.com/feed/update/urn:li:share:7241623146389241857/",
-            "posted": "2024-09-17 01:45:00 +00000"
-        },
-        {
-            "text": "I\u2019m happy to share that I\u2019m starting a new position as Software QA Engineer at Cubic Corporation!",
-            "user": "Sama Maharjan",
-            "url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7241622920450523137/",
-            "posted": "2024-09-17 01:44:00 +00000"
+            "text": "\u0648\u0638\u0627\u0626\u0641 \u0634\u0631\u0643\u0629 \u0627\u0644\u0641\u0627\u0644 \u0627\u0644\u062a\u0639\u0644\u064a\u0645\u064a\u0629 \u0644\u0643\u0627\u0641\u0629 \u0627\u0644\u0645\u0624\u0647\u0644\u0627\u062a \u0628\u0631\u0648\u0627\u062a\u0628 \u0645\u062c\u0632\u064a\u0629 - \u0645\u062d\u062f\u062b \u0628\u0627\u0633\u062a\u0645\u0631\u0627\u0631   \u0627\u0644\u062a\u0641\u0627\u0635\u064a\u0644 \u0627\u0644\u0643\u0627\u0645\u0644\u0629 \u0645\u0646 \u0647\u0646\u0627:    https://lnkd.in/dY98rUFu             #recruitment #\u0648\u0638\u0627\u0626\u0641 #jobs #recruiting #\u062a\u0648\u0638\u064a\u0641 #careers #hr #\u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629 #job #search #\u0648\u0638\u0627\u0626\u0641_\u0627\u0644\u0634\u0631\u0642\u064a\u0629 #\u0648\u0638\u064a\u0641\u0629_\u0634\u0627\u063a\u0631\u0629 #\u0627\u0644\u062a\u0648\u0638\u064a\u0641 #\u0648\u0638\u064a\u0641\u0647 #\u0648\u0638\u0627\u0626\u0641_\u0627\u0644\u064a\u0648\u0645 #\u0648\u0638\u0627\u0626\u0641_\u0627\u0644\u0631\u064a\u0627\u0636 #hunting #\u062a\u0648\u0637\u064a\u0646 #\u0648\u0638\u0627\u0626\u0641_\u0625\u062f\u0627\u0631\u064a\u0629 #\u0627\u0644\u0631\u064a\u0627\u0636 #\u0637\u0627\u0642\u0627\u062a #saudi #\u0633\u0627\u0639\u062f_\u062a\u062a\u0633\u0627\u0639\u062f #riyadh #\u0627\u0644\u0645\u0648\u0627\u0631\u062f_\u0627\u0644\u0628\u0634\u0631\u064a\u0629 #\u0628\u0646\u0643_\u0627\u0644\u0631\u064a\u0627\u0636 #\u062c\u062f\u0629 #\u0639\u0627\u062c\u0644 #\u0627\u0644\u0627\u0645\u0627\u0631\u0627\u062a #\u0639\u0645\u0627\u0646 #\u0647\u0627\u0645 #humanresources #\u0642\u0637\u0631 #\u062e\u0628\u0631 #\u0648\u0638\u0627\u0626\u0641_\u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629 #\u0627\u0644\u062f\u0645\u0627\u0645 #\u0648\u0638\u0627\u0626\u0641_\u0639\u0645\u0627\u0646 #\u0643\u0644\u0645\u0646\u064a_\u0639\u0631\u0628\u064a #\u0627\u0644\u0633\u0644\u0637\u0646\u0629 #humanresources #\u0648\u0638\u064a\u0641\u0629 #\u0627\u0644\u0644\u063a\u0629 #qatar #oil #work #banque #petroleum #people #\u0627\u0644\u0637\u0628 #energy #\u0627\u0644\u0637\u064a\u0631\u0627\u0646 #amazon #development #\u0627\u0644\u0635\u062d\u0629 #markets #hotels #accorhotels #hospital #\u0627\u0644\u0623\u0628\u062d\u0627\u062b #egypt #airlines #oilandgas #insurance #microsoft #oilgas #university #power #pwc #middleeast #bank #canada #deloitte #medicine #aviation #\u0627\u0644\u0637\u0627\u0642\u0629 #health #education #\u0627\u0644\u062a\u0633\u0648\u064a\u0642 #\u0625\u062f\u0627\u0631\u0629 #\u0627\u0644\u0647\u0646\u062f\u0633\u0629 #team #investment #engineer #projects #devops #remotework #engineers #azure #design #india #management #digital #opportunities #...",
+            "user": "\u0648\u0638\u0627\u0626\u0641 \u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629",
+            "url": "https://www.linkedin.com/feed/update/urn:li:share:7241851028860481536/",
+            "posted": "2024-09-17 16:51:00 +00000",
+            "sentiment": 0.0
         }
     ]
 }

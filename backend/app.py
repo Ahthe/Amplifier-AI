@@ -67,25 +67,26 @@ def generate_leads():
     website_link = data.get('website_link')
        
     # Generate leads from Reddit
-    reddit_leads = fetch_reddit_leads(keyword, location, business_name, business_description, website_link)
+    # reddit_leads = fetch_reddit_leads(keyword, location, business_name, business_description, website_link)
 
-    # # Generate leads from Twitter using Social Searcher
-    # twitter_leads = fetch_twitter_leads(keyword) # Can't leave actual Twitter API keys in the code, so we'll use Social Searcher for now so we don't need other parameters like location, business_name, etc.
+    # Generate leads from Twitter using Social Searcher
+    twitter_leads = fetch_twitter_leads(keyword) # Can't leave actual Twitter API keys in the code, so we'll use Social Searcher for now so we don't need other parameters like location, business_name, etc.
 
-    # # Generate leads from LinkedIn using Social Searcher
-    # linkedin_leads = fetch_linkedin_leads(keyword)
+    # Generate leads from LinkedIn using Social Searcher
+    linkedin_leads = fetch_linkedin_leads(keyword)
     
     # Prepare the data to save
     result = {
         "question": keyword,
-        "leads": reddit_leads,
+        "twitter_leads": twitter_leads,
+        "linkedin_leads": linkedin_leads
     }
 
     # Save the result to a JSON file
     with open('leads_data.json', 'w') as f:
         json.dump(result, f, indent=4)
     
-    return jsonify(reddit_leads)
+    return jsonify(result)
 
 def fetch_reddit_leads(keyword, location, business_name, business_description, website_link):
     logging.info(f"Searching for keyword: {keyword}")
@@ -184,34 +185,44 @@ def fetch_twitter_leads(keyword):
     }
     
     try:
-        # Step 1: Make the initial request to get the requestid
+        # Step 1: Make the initial request to collect data
         logging.info(f"Requesting data for keyword: {keyword}")
         response = requests.get(api_url_request, params=params_request)
-        response.raise_for_status()  # Raise an error for bad responses (4xx or 5xx)
+        response.raise_for_status()
         
         data = response.json()
         requestid = data.get('requestid')
         
         if not requestid:
             logging.error("No requestid found in the response.")
+            logging.error(f"Response content: {data}")
             return []
         
         logging.info(f"Received requestid: {requestid}")
         
-        # Step 2: Wait for 60 seconds before fetching the results
-        logging.info("Waiting for 60 seconds before fetching the results...")
-        time.sleep(60)
+        # Step 2: Wait before fetching the results
+        wait_time = 60  # As per documentation, wait for 20-60 seconds
+        logging.info(f"Waiting for {wait_time} seconds before fetching the results...")
+        time.sleep(wait_time)
         
         # Social Searcher API endpoint for fetching results
-        api_url_fetch = f"https://api.social-searcher.com/v2/search?requestid={requestid}&page=0&limit=10&key={SOCIAL_SEARCHER_API_KEY}"
+        api_url_fetch = "https://api.social-searcher.com/v2/search"
+        
+        # Parameters for fetching the results
+        params_fetch = {
+            'key': SOCIAL_SEARCHER_API_KEY,
+            'requestid': requestid,
+            'page': 0,
+            'limit': 10  # Same as before
+        }
         
         # Retry logic in case the status is pending
         max_retries = 3
-        retry_delay = 300  # 5 minutes in seconds
+        retry_delay = 300  # Wait 5 minutes between retries
         
         for attempt in range(max_retries):
             logging.info(f"Fetching results for requestid: {requestid} (Attempt {attempt + 1})")
-            response = requests.get(api_url_fetch)
+            response = requests.get(api_url_fetch, params=params_fetch)
             response.raise_for_status()
             
             data = response.json()
@@ -224,18 +235,24 @@ def fetch_twitter_leads(keyword):
                 # Extract relevant tweet data
                 for post in data.get('posts', []):
                     tweet_text = post.get('text', '')
-                    tweet_user = post.get('user', {}).get('name', '')
+                    tweet_user = post.get('user', {})
+                    tweet_username = tweet_user.get('name', '')
+                    tweet_user_id = tweet_user.get('id', '')
                     tweet_url = post.get('url', '')
+                    post_timestamp = post.get('posted', '')
 
                     # Log the tweet data for debugging
                     logging.info(f"Tweet Text: {tweet_text}")
-                    logging.info(f"Tweet User: {tweet_user}")
+                    logging.info(f"Tweet User: {tweet_username}")
                     logging.info(f"Tweet URL: {tweet_url}")
+                    logging.info(f"Tweet Posted At: {post_timestamp}")
 
                     tweet_data = {
                         'text': tweet_text,
-                        'user': tweet_user,
-                        'url': tweet_url
+                        'user': tweet_username,
+                        'user_id': tweet_user_id,
+                        'url': tweet_url,
+                        'posted': post_timestamp
                     }
                     tweets.append(tweet_data)
                 
@@ -262,39 +279,99 @@ def fetch_twitter_leads(keyword):
 def fetch_linkedin_leads(keyword):
     logging.info(f"Fetching LinkedIn leads for keyword: {keyword}")
     
-    # Social Searcher API endpoint
-    api_url = "https://api.social-searcher.com/v2/search"
+    # Social Searcher API endpoint for requesting data
+    api_url_request = "https://api.social-searcher.com/v2/search"
     
-    # Parameters for the API request
-    params = {
+    # Parameters for the initial API request (Step 1)
+    params_request = {
         'key': SOCIAL_SEARCHER_API_KEY,
         'q': keyword,
         'network': 'linkedin',  # Specify the network as 'linkedin'
-        'limit': 5  # Limit the number of results to 5
+        'limit': 10  # Limit the number of results to 10
     }
     
     try:
-        # Make the GET request to the Social Searcher API
-        response = requests.get(api_url, params=params)
-        response.raise_for_status()  # Raise an error for bad responses (4xx or 5xx)
+        # Step 1: Make the initial request to collect data
+        logging.info(f"Requesting data for keyword: {keyword}")
+        response = requests.get(api_url_request, params=params_request)
+        response.raise_for_status()
         
         data = response.json()
-        linkedin_posts = []
+        requestid = data.get('requestid')
         
-        # Extract relevant LinkedIn post data
-        for post in data.get('posts', []):
-            post_text = post.get('text', '')
-            post_user = post.get('user', {}).get('name', '')
-            post_url = post.get('url', '')
+        if not requestid:
+            logging.error("No requestid found in the response.")
+            logging.error(f"Response content: {data}")
+            return []
+        
+        logging.info(f"Received requestid: {requestid}")
+        
+        # Step 2: Wait before fetching the results
+        wait_time = 60  # As per documentation, wait for 20-60 seconds
+        logging.info(f"Waiting for {wait_time} seconds before fetching the results...")
+        time.sleep(wait_time)
+        
+        # Social Searcher API endpoint for fetching results
+        api_url_fetch = "https://api.social-searcher.com/v2/search"
+        
+        # Parameters for fetching the results
+        params_fetch = {
+            'key': SOCIAL_SEARCHER_API_KEY,
+            'requestid': requestid,
+            'page': 0,
+            'limit': 10  # Same as before
+        }
+        
+        # Retry logic in case the status is pending
+        max_retries = 3
+        retry_delay = 300  # Wait 5 minutes between retries
+        
+        for attempt in range(max_retries):
+            logging.info(f"Fetching results for requestid: {requestid} (Attempt {attempt + 1})")
+            response = requests.get(api_url_fetch, params=params_fetch)
+            response.raise_for_status()
+            
+            data = response.json()
+            status = data.get('status')
+            
+            if status == 'finished':
+                logging.info("Data processing finished, extracting LinkedIn posts...")
+                linkedin_posts = []
+                
+                # Extract relevant post data
+                for post in data.get('posts', []):
+                    post_text = post.get('text', '')
+                    post_user = post.get('user', {})
+                    post_username = post_user.get('name', '')
+                    post_user_id = post_user.get('id', '')
+                    post_url = post.get('url', '')
+                    post_timestamp = post.get('posted', '')
 
-            post_data = {
-                'text': post_text,
-                'user': post_user,
-                'url': post_url
-            }
-            linkedin_posts.append(post_data)
+                    # Log the post data for debugging
+                    logging.info(f"Post Text: {post_text}")
+                    logging.info(f"Post User: {post_username}")
+                    logging.info(f"Post URL: {post_url}")
+                    logging.info(f"Post Posted At: {post_timestamp}")
+
+                    post_data = {
+                        'text': post_text,
+                        'user': post_username,
+                        'user_id': post_user_id,
+                        'url': post_url,
+                        'posted': post_timestamp
+                    }
+                    linkedin_posts.append(post_data)
+                
+                return linkedin_posts
+            
+            elif status == 'pending':
+                logging.info(f"Status is pending, waiting for {retry_delay} seconds before retrying...")
+                time.sleep(retry_delay)
+            else:
+                logging.error(f"Unexpected status: {status}")
+                break
         
-        return linkedin_posts
+        logging.error("Max retries reached or unexpected status encountered.")
     
     except requests.exceptions.HTTPError as http_err:
         logging.error(f"HTTP error occurred: {http_err}")

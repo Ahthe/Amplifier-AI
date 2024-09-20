@@ -19,7 +19,7 @@ def generate_reddit_reply(post, business_name, business_description, website_lin
                         Please try to find a way to personally RECOMMEND {business_name}, in the reply naturally and preferably mention the, as well.
                         when promiting the business ensure you have mentioned the name. if the website link is relevent then add that too.
                         Everything after this point is information for you to use in your response. reply only with the generated comment and nothing else. 
-                        make the english simple and smooth and answer in under 
+                        make the english simple and smooth and answer in under 500 characters
                         Title: {post.title}
                         Description: {description}
                         Our Business Name: {business_name}

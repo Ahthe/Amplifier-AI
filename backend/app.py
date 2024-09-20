@@ -285,6 +285,7 @@ def fetch_twitter_leads(keyword, location, business_name, business_description, 
                     logging.info(f"Tweet User: {tweet_username}")
                     logging.info(f"Tweet URL: {tweet_url}")
                     logging.info(f"Tweet Posted At: {post_timestamp}")
+                    logging.info(f"Comment generated: {comment}")
 
                     tweet_data = {
                         'text': tweet_text, 
@@ -403,6 +404,7 @@ def fetch_linkedin_leads(keyword, location, business_name, business_description,
                     logging.info(f"Post User: {post_username}")
                     logging.info(f"Post URL: {post_url}")
                     logging.info(f"Post Posted At: {post_timestamp}")
+                    logging.info(f"Comment generated: {comment}")
 
                     post_data = {
                         'text': post_text,

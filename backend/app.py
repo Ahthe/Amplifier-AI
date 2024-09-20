@@ -72,13 +72,21 @@ def generate_leads():
 
     # Generate leads from LinkedIn using Social Searcher
     linkedin_leads = fetch_linkedin_leads(keyword, location, business_name, business_description, website_link)
+
+    # Generate leads from Instagram using Social Searcher
+    # instagram_leads = fetch_instagram_leads(keyword, business_name, business_description, website_link)
+
+    # Generate leads from Facebook using Social Searcher
+    # facebook_leads = fetch_facebook_leads(keyword, location, business_name, business_description, website_link)
     
     # Prepare the data to save
     result = {
         "keyword(s)": keyword,
         "reddit_leads": reddit_leads,
         "twitter_leads": twitter_leads,
-        "linkedin_leads": linkedin_leads
+        "linkedin_leads": linkedin_leads,
+        # "instagram_leads": instagram_leads,
+        # "facebook_leads": facebook_leads
     }
 
     # Save the result to a JSON file
@@ -104,12 +112,12 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
         all_posts = {}
 
     # Set a limit for the number of new posts to comment on
-    max_new_posts = 5
+    max_new_posts = 2
     new_posts_found = 0
 
 
     # Search through posts, but only comment on new ones
-    for post in subreddit.search(keyword, limit=5):  # Increase the limit to search more posts
+    for post in subreddit.search(keyword, limit=2):  # Increase the limit to search more posts
         logging.info(f"Processing post: {post.title}")
 
         # Skip if we've already posted in this exact post
@@ -214,7 +222,7 @@ def fetch_twitter_leads(keyword, location, business_name, business_description, 
         'key': SOCIAL_SEARCHER_API_KEY,
         'q': keyword,
         'network': 'twitter',  # Specify the network as 'twitter'
-        'limit': 5  # Limit the number of results to 5
+        'limit': 3  # Limit the number of results to 5
     }
     
     try:
@@ -246,7 +254,7 @@ def fetch_twitter_leads(keyword, location, business_name, business_description, 
             'key': SOCIAL_SEARCHER_API_KEY,
             'requestid': requestid,
             'page': 0,
-            'limit': 5
+            'limit': 3
         }
         
         # Retry logic in case the status is pending
@@ -332,7 +340,7 @@ def fetch_linkedin_leads(keyword, location, business_name, business_description,
         'key': SOCIAL_SEARCHER_API_KEY,
         'q': keyword,
         'network': 'linkedin',  # Specify the network as 'linkedin'
-        'limit': 5  # Limit the number of results to 5
+        'limit': 3  # Limit the number of results to 5
     }
     
     try:
@@ -364,7 +372,7 @@ def fetch_linkedin_leads(keyword, location, business_name, business_description,
             'key': SOCIAL_SEARCHER_API_KEY,
             'requestid': requestid,
             'page': 0,
-            'limit': 5
+            'limit': 3
         }
         
         # Retry logic in case the status is pending
@@ -432,6 +440,194 @@ def fetch_linkedin_leads(keyword, location, business_name, business_description,
         logging.error(f"Response content: {response.text}")
     except requests.exceptions.RequestException as req_err:
         logging.error(f"Error fetching LinkedIn leads: {req_err}")
+    except Exception as e:
+        logging.error(f"An unexpected error occurred: {str(e)}")
+    
+    return []
+
+# def fetch_instagram_leads(keyword, business_name, business_description, website_link):
+
+    logging.info(f"Fetching Instagram leads for hashtag: {keyword}")
+    keyword = ''.join(keyword.split())
+    
+    # Social Searcher API endpoint for Instagram search
+    api_url = "https://api.social-searcher.com/v2/search"
+    
+    # Parameters for the Instagram API request
+    params = {
+        'key': SOCIAL_SEARCHER_API_KEY,
+        'q': keyword,  # Hashtag search
+        'network': 'instagram',
+        'limit': 3  # Limit the number of results
+    }
+    
+    try:
+        # Make the request to fetch Instagram posts
+        response = requests.get(api_url, params=params)
+        response.raise_for_status()
+        
+        data = response.json()
+        instagram_posts = []
+        
+        # Extract relevant post data
+        for post in data.get('posts', []):
+            post_text = post.get('text', '')
+            sentiment = TextBlob(post_text).sentiment.polarity
+            logging.info(f"Sentiment score for Instagram post '{post_text}': {sentiment}")
+
+            if sentiment >= 0.3:
+                logging.info(f"Instagram post '{post_text}' does not have neutral or negative sentiment, skipping...")
+                continue
+            comment = generate_instagram_reply(post, business_name, business_description, website_link)
+
+            post_user = post.get('user', {})
+            post_username = post_user.get('name', '')
+            post_url = post.get('url', '')
+            post_timestamp = post.get('posted', '')
+
+            # Log the post data for debugging
+            logging.info(f"Post Text: {post_text}")
+            logging.info(f"Post User: {post_username}")
+            logging.info(f"Post URL: {post_url}")
+            logging.info(f"Post Posted At: {post_timestamp}")
+            logging.info(f"Comment generated: {comment}")
+
+            post_data = {
+                'text': post_text,
+                'user': post_username,
+                'url': post_url,
+                'posted': post_timestamp,
+                'sentiment': sentiment,
+                'comment': comment
+            }
+            instagram_posts.append(post_data)
+        
+        return instagram_posts
+    
+    except requests.exceptions.HTTPError as http_err:
+        logging.error(f"HTTP error occurred: {http_err}")
+        logging.error(f"Response content: {response.text}")
+    except requests.exceptions.RequestException as req_err:
+        logging.error(f"Error fetching Instagram leads: {req_err}")
+    except Exception as e:
+        logging.error(f"An unexpected error occurred: {str(e)}")
+    
+    return []
+
+# def fetch_facebook_leads(keyword, location, business_name, business_description, website_link):
+    logging.info(f"Fetching Facebook leads for keyword: {keyword}")
+    if location:
+        logging.info(f"Location provided: {location}")
+        keyword = f"{keyword} {location}"
+    
+    # Social Searcher API endpoint for requesting data
+    api_url_request = "https://api.social-searcher.com/v2/search"
+    
+    # Parameters for the initial API request (Step 1)
+    params_request = {
+        'key': SOCIAL_SEARCHER_API_KEY,
+        'q': keyword,
+        'network': 'facebook',  # Specify the network as 'facebook'
+        'limit': 3  # Limit the number of results to 5
+    }
+    
+    try:
+        # Step 1: Make the initial request to collect data
+        logging.info(f"Requesting data for keyword: {keyword}")
+        response = requests.get(api_url_request, params=params_request)
+        response.raise_for_status()
+        
+        data = response.json()
+        requestid = data['meta'].get('requestid')
+        
+        if not requestid:
+            logging.error("No requestid found in the response.")
+            logging.error(f"Response content: {data}")
+            return []
+        
+        logging.info(f"Received requestid: {requestid}")
+        
+        # Step 2: Wait before fetching the results
+        wait_time = 60  # As per documentation, wait for 20-60 seconds
+        logging.info(f"Waiting for {wait_time} seconds before fetching the results...")
+        time.sleep(wait_time)
+        
+        # Social Searcher API endpoint for fetching results
+        api_url_fetch = "https://api.social-searcher.com/v2/search"
+        
+        # Parameters for fetching the results
+        params_fetch = {
+            'key': SOCIAL_SEARCHER_API_KEY,
+            'requestid': requestid,
+            'page': 0,
+            'limit': 3
+        }
+        
+        # Retry logic in case the status is pending
+        max_retries = 3
+        retry_delay = 300  # Wait 5 minutes between retries
+        
+        for attempt in range(max_retries):
+            logging.info(f"Fetching results for requestid: {requestid} (Attempt {attempt + 1})")
+            response = requests.get(api_url_fetch, params=params_fetch)
+            response.raise_for_status()
+            
+            data = response.json()
+            status = data['meta'].get('status')
+            
+            if status == 'finished':
+                logging.info("Data processing finished, extracting Facebook posts...")
+                facebook_posts = []
+                
+                # Extract relevant post data
+                for post in data.get('posts', []):
+                    post_text = post.get('text', '')
+                    sentiment = TextBlob(post_text).sentiment.polarity
+                    logging.info(f"Sentiment score for Facebook post '{post_text}': {sentiment}")
+
+                    if sentiment >= 0.3:
+                        logging.info(f"Facebook post '{post_text}' does not have neutral or negative sentiment, skipping...")
+                        continue
+                    comment = generate_facebook_reply(post, business_name, business_description, website_link)
+
+                    post_user = post.get('user', {})
+                    post_username = post_user.get('name', '')
+                    post_url = post.get('url', '')
+                    post_timestamp = post.get('posted', '')
+
+                    # Log the post data for debugging
+                    logging.info(f"Post Text: {post_text}")
+                    logging.info(f"Post User: {post_username}")
+                    logging.info(f"Post URL: {post_url}")
+                    logging.info(f"Post Posted At: {post_timestamp}")
+                    logging.info(f"Comment generated: {comment}")
+
+                    post_data = {
+                        'text': post_text,
+                        'user': post_username,
+                        'url': post_url,
+                        'posted': post_timestamp,
+                        'sentiment': sentiment,
+                        'comment': comment
+                    }
+                    facebook_posts.append(post_data)
+                
+                return facebook_posts
+            
+            elif status == 'pending' or status == 'created':
+                logging.info(f"Status is {status}, waiting for {retry_delay} seconds before retrying...")
+                time.sleep(retry_delay)
+            else:
+                logging.error(f"Unexpected status: {status}")
+                break
+        
+        logging.error("Max retries reached or unexpected status encountered.")
+    
+    except requests.exceptions.HTTPError as http_err:
+        logging.error(f"HTTP error occurred: {http_err}")
+        logging.error(f"Response content: {response.text}")
+    except requests.exceptions.RequestException as req_err:
+        logging.error(f"Error fetching Facebook leads: {req_err}")
     except Exception as e:
         logging.error(f"An unexpected error occurred: {str(e)}")
     

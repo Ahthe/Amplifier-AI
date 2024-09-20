@@ -18,7 +18,12 @@ interface FormData {
 
 interface Lead {
   title: string;
+  text: string;
+  comment: string;
   url: string;
+  user: string;
+  sentiment: string;
+  posted: string;
 }
 
 interface LeadsData {
@@ -166,6 +171,12 @@ export default function NewProjectForm() {
                     <strong>Title:</strong> {lead.title}
                   </p>
                   <p>
+                    <strong>Sentiment:</strong> {lead.sentiment}
+                  </p>
+                  <p>
+                    <strong>Generated Comment:</strong> {lead.comment}
+                  </p>
+                  <p>
                     <strong>URL:</strong>{" "}
                     <a
                       href={lead.url}
@@ -187,7 +198,19 @@ export default function NewProjectForm() {
               {leads.twitter_leads.map((lead, index) => (
                 <li key={index} className="mt-2">
                   <p>
-                    <strong>Text:</strong> {lead.title}
+                    <strong>Tweet:</strong> {lead.text}
+                  </p>
+                  <p>
+                    <strong>User:</strong> {lead.user}
+                  </p>
+                  <p>
+                    <strong>Sentiment:</strong> {lead.sentiment}
+                  </p>
+                  <p>
+                    <strong>Generated Comment:</strong> {lead.comment}
+                  </p>
+                  <p>
+                    <strong>Posted:</strong> {lead.posted}
                   </p>
                   <p>
                     <strong>URL:</strong>{" "}
@@ -211,7 +234,19 @@ export default function NewProjectForm() {
               {leads.linkedin_leads.map((lead, index) => (
                 <li key={index} className="mt-2">
                   <p>
-                    <strong>Text:</strong> {lead.title}
+                    <strong>Title:</strong> {lead.text}
+                  </p>
+                  <p>
+                    <strong>User:</strong> {lead.user}
+                  </p>
+                  <p>
+                    <strong>Sentiment:</strong> {lead.sentiment}
+                  </p>
+                  <p>
+                    <strong>Generated Comment:</strong> {lead.comment}
+                  </p>
+                  <p>
+                    <strong>Posted:</strong> {lead.posted}
                   </p>
                   <p>
                     <strong>URL:</strong>{" "}

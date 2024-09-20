@@ -12,7 +12,7 @@ import time
 import requests
 from textblob import TextBlob  # Import TextBlob for sentiment analysis
 
-from templates import generate_reddit_reply
+from templates import generate_reddit_reply, generate_twitter_reply, generate_linkedin_reply
 from datetime import datetime
 
 load_dotenv()
@@ -68,10 +68,10 @@ def generate_leads():
     reddit_leads = fetch_reddit_leads(keyword, location, business_name, business_description, website_link)
 
     # Generate leads from Twitter using Social Searcher
-    twitter_leads = fetch_twitter_leads(keyword)
+    twitter_leads = fetch_twitter_leads(keyword, location, business_name, business_description, website_link)
 
     # Generate leads from LinkedIn using Social Searcher
-    linkedin_leads = fetch_linkedin_leads(keyword)
+    linkedin_leads = fetch_linkedin_leads(keyword, location, business_name, business_description, website_link)
     
     # Prepare the data to save
     result = {
@@ -109,7 +109,7 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
 
 
     # Search through posts, but only comment on new ones
-    for post in subreddit.search(keyword, limit=20):  # Increase the limit to search more posts
+    for post in subreddit.search(keyword, limit=5):  # Increase the limit to search more posts
         logging.info(f"Processing post: {post.title}")
 
         # Skip if we've already posted in this exact post
@@ -194,14 +194,17 @@ def fetch_reddit_leads(keyword, location, business_name, business_description, w
         json.dump(all_posts, f, indent=4) # add the list of posted posts to the file
 
         # Add a random delay between 30 and 60 seconds to avoid spam detection
-        # delay = random.randint(5, 10)
+        # delay = random.randint(5, 5)
         # logging.info(f"Waiting for {delay} seconds before posting the next comment...")
         # time.sleep(delay)
     
     return posts
 
-def fetch_twitter_leads(keyword):
+def fetch_twitter_leads(keyword, location, business_name, business_description, website_link):
     logging.info(f"Fetching Twitter leads for keyword: {keyword}")
+    if location:
+        logging.info(f"Location provided: {location}")
+        keyword = f"{keyword} {location}"
     
     # Social Searcher API endpoint for requesting data
     api_url_request = "https://api.social-searcher.com/v2/search"
@@ -211,7 +214,7 @@ def fetch_twitter_leads(keyword):
         'key': SOCIAL_SEARCHER_API_KEY,
         'q': keyword,
         'network': 'twitter',  # Specify the network as 'twitter'
-        'limit': 10  # Limit the number of results to 10
+        'limit': 5  # Limit the number of results to 5
     }
     
     try:
@@ -243,7 +246,7 @@ def fetch_twitter_leads(keyword):
             'key': SOCIAL_SEARCHER_API_KEY,
             'requestid': requestid,
             'page': 0,
-            'limit': 10
+            'limit': 5
         }
         
         # Retry logic in case the status is pending
@@ -271,7 +274,7 @@ def fetch_twitter_leads(keyword):
                     if sentiment >= 0.3:
                         logging.info(f"Tweet '{tweet_text}' does not have neutral or negative sentiment, skipping...")
                         continue
-
+                    comment = generate_twitter_reply(post, business_name, business_description, website_link)
                     tweet_user = post.get('user', {})
                     tweet_username = tweet_user.get('name', '')
                     tweet_url = post.get('url', '')
@@ -284,11 +287,12 @@ def fetch_twitter_leads(keyword):
                     logging.info(f"Tweet Posted At: {post_timestamp}")
 
                     tweet_data = {
-                        'text': tweet_text,
+                        'text': tweet_text, 
                         'user': tweet_username,
                         'url': tweet_url,
                         'posted': post_timestamp,
-                        'sentiment': sentiment
+                        'sentiment': sentiment,
+                        'comment': comment
                     }
                     tweets.append(tweet_data)
                 
@@ -313,8 +317,11 @@ def fetch_twitter_leads(keyword):
     
     return []
 
-def fetch_linkedin_leads(keyword):
+def fetch_linkedin_leads(keyword, location, business_name, business_description, website_link):
     logging.info(f"Fetching LinkedIn leads for keyword: {keyword}")
+    if location:
+        logging.info(f"Location provided: {location}")
+        keyword = f"{keyword} {location}"
     
     # Social Searcher API endpoint for requesting data
     api_url_request = "https://api.social-searcher.com/v2/search"
@@ -324,7 +331,7 @@ def fetch_linkedin_leads(keyword):
         'key': SOCIAL_SEARCHER_API_KEY,
         'q': keyword,
         'network': 'linkedin',  # Specify the network as 'linkedin'
-        'limit': 10  # Limit the number of results to 10
+        'limit': 5  # Limit the number of results to 5
     }
     
     try:
@@ -356,7 +363,7 @@ def fetch_linkedin_leads(keyword):
             'key': SOCIAL_SEARCHER_API_KEY,
             'requestid': requestid,
             'page': 0,
-            'limit': 10
+            'limit': 5
         }
         
         # Retry logic in case the status is pending
@@ -384,6 +391,7 @@ def fetch_linkedin_leads(keyword):
                     if sentiment >= 0.3:
                         logging.info(f"LinkedIn post '{post_text}' does not have neutral or negative sentiment, skipping...")
                         continue
+                    comment = generate_linkedin_reply(post, business_name, business_description, website_link)
 
                     post_user = post.get('user', {})
                     post_username = post_user.get('name', '')
@@ -401,7 +409,8 @@ def fetch_linkedin_leads(keyword):
                         'user': post_username,
                         'url': post_url,
                         'posted': post_timestamp,
-                        'sentiment': sentiment
+                        'sentiment': sentiment,
+                        'comment': comment
                     }
                     linkedin_posts.append(post_data)
                 

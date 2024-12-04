@@ -1,4 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Amplifier AI
+
+Amplifier AI is an innovative platform designed to enhance lead generation and customer engagement through AI-powered tools. This README provides an overview of the project, its features, and how to get started.
+
+## Project Screenshots
+
+![Main](public\images\AmplifierAI.png)
+
+<!-- _Main dashboard interface showing analytics and campaign management_ -->
+
+![Dashboard Overview](public\images/dashboard.png)
+_Main dashboard interface showing analytics and campaign management_
+
+![Social Media Integration](public\images/social-media.png)
+_Seamless integration with multiple social media platforms_
+
+![AI Response Generation](public\images/)
+_AI-powered response generation interface_
+
+![Analytics Dashboard](public\images/analytics.png)
+_Detailed analytics and performance metrics_
+
+![Campaign Management](public\images/campaigns.png)
+_Campaign creation and management interface_
 
 ## Getting Started
 

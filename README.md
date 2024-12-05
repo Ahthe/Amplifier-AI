@@ -4,7 +4,7 @@ Amplifier AI is an innovative platform designed to enhance lead generation and c
 
 ## Why We Built It 💡
 
-We wanted to push the boundaries of what AI can do and address a significant issue: 61% of startups fail due to poor marketing. 
+We wanted to push the boundaries of what AI can do and address a significant issue: 61% of startups fail due to poor marketing to tackle these challenges. Our platform features customizable AI Chatbots and an AI Lead Finder, potentially reducing the 38% failure rate due to ineffective strategies.
 
 - Amplifier AI was developed using: 
     - Next.js 
@@ -17,11 +17,14 @@ We wanted to push the boundaries of what AI can do and address a significant iss
     - Prisma 
     - PostgreSQL 
 
+## Achievements 🏆
 
-to tackle these challenges. Our platform features customizable AI Chatbots and an AI Lead Finder, potentially reducing the 38% failure rate due to ineffective strategies.
+As finalists and winners of the Headstarter Fellowship, we stood out among 15,000 participants and 3,000 teams. Our key achievements with Amplifier AI include:
 
-- Expanded reach to 56,000+ potential customers for a pilot driving school via AI chatbot support and targeted outreach on local Subreddits.
-- Integrated payment processing with Stripe, implemented custom-made auth pages using Clerk, optimized data storage with AWS S3, and facilitated real-time communication via Pusher API.
+- Winning the final competition of the Headstarter Fellowship.
+- Successfully addressing marketing challenges for startups with our AI-driven SaaS platform.
+- Developing a customizable AI Chatbot and AI Lead Finder to enhance customer engagement and lead generation.
+
 
 ## Features ✨
 

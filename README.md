@@ -4,6 +4,14 @@
 
 Amplifier AI is an innovative platform designed to help startups and small businesses overcome their biggest challenge: finding and engaging customers. As winners of the prestigious Headstarter Fellowship, we stood out among 15,000 participants and 3,000 teams with our cutting-edge, AI-driven solutions.
 
+### AI Lead Generation
+
+<video controls src="public/images/Presentation1.mp4" title="Lead Generation Example with Faizan"></video>
+
+### AI Chatbot Integration & Book Appointment
+
+<video controls src="public/images/Presentation2.mp4" title="Chatbot answers questions and book an appointment"></video>
+
 ## 🌟 Why We Built Amplifier AI
 
 **61% of startups fail due to poor marketing strategies.** We built Amplifier AI to change that narrative. Our platform combines AI-powered lead generation and customer engagement tools, giving businesses the edge to succeed in competitive markets.
@@ -51,26 +59,32 @@ Amplifier AI is an innovative platform designed to help startups and small busin
 ## Project Screenshots 📸
 
 ### Main Dashboard Interface
+
 ![Main](public/images/AmplifierAI.png)
-*Home Page*
+_Home Page_
 
 ### Dashboard Overview
-![Dashboard Overview](public/images/desktopamplifier.png)
-*Analytics and campaign management*
 
-### AI Chatbot Integration
-![AI Chatbot Integration](public/images/aichatbot.png)
-*Seamless AI ChatBot Integration with a simple HTML tag*
+![Dashboard Overview](public/images/desktopamplifier.png)
+_Analytics and campaign management_
 
 ### AI Lead Generation
+
 ![AI Lead Generation](public/images/leadfinder.png)
 ![AI Lead Generation in Action](public/images/ex1.png)
-*Powerful AI lead Generator*
+_Powerful AI lead Generator_
+
+### AI Chatbot Integration
+
+![AI Chatbot Integration](public/images/aichatbot.png)
+_Seamless AI ChatBot Integration with a simple HTML tag_
 
 ### Real-Time Chat Mode
+
 ![Real-time chat](public/images/conversation.png)
-*Real-time chat mode*
+_Real-time chat mode_
 
 ### Campaign Management
+
 ![Campaign Management](public/images/emailmarketing.png)
-*Campaign creation and management interface*
+_Campaign creation and management interface_

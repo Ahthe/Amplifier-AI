@@ -50,21 +50,27 @@ Amplifier AI is an innovative platform designed to help startups and small busin
 
 ## Project Screenshots 📸
 
+### Main Dashboard Interface
 ![Main](public/images/AmplifierAI.png)
+*Analytics and campaign management*
 
-1. Main dashboard interface showing analytics and campaign management
+### Dashboard Overview
 ![Dashboard Overview](public/images/desktopamplifier.png)
+*Seamless AI ChatBot Integration with a simple HTML tag*
 
-2. Seamless AI ChatBot Integration with a simple HTML tag
+### AI Chatbot Integration
 ![AI Chatbot Integration](public/images/aichatbot.png)
+*Powerful AI lead Generator*
 
-3. Powerfull AI lead Generator
+### AI Lead Generation
 ![AI Lead Generation](public/images/leadfinder.png)
 ![AI Lead Generation in Action](public/images/ex1.png)
+*Real-time chat mode*
 
-4. Real Time Chatmode
+### Real-Time Chat Mode
 ![Real-time chat](public/images/conversation.png)
+*Campaign creation and management interface*
 
-5. Campaign creation and management interface
+### Campaign Management
 ![Campaign Management](public/images/emailmarketing.png)
 

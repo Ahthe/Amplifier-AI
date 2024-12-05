@@ -6,18 +6,13 @@ Amplifier AI is an innovative platform designed to help startups and small busin
 
 ### AI Lead Generation
 
-
-
 https://github.com/user-attachments/assets/478c76c1-63ee-410f-99b7-511c879b8da0
 
-
+![AI Lead Gen](public/images/example_lead_gen.png)
 
 ### AI Chatbot Integration & Book Appointment
 
-
-
 https://github.com/user-attachments/assets/89e39e16-c728-4261-bfa2-50f8a98d9966
-
 
 ## 🌟 Why We Built Amplifier AI
 

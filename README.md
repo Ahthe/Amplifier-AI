@@ -55,19 +55,19 @@ As finalists and winners of the Headstarter Fellowship, we stood out among 15,00
 ![Main](public/images/AmplifierAI.png)
 _Main dashboard interface showing analytics and campaign management_
 
-![Dashboard Overview](public/images/dashboard.png)
+![Dashboard Overview](public/images/desktopamplifier.png)
 _Main dashboard interface showing analytics and campaign management_
 
-![Social Media Integration](public/images/social-media.png)
+![AI Chatbot Integration](public/images/aichatbot.png)
 _Seamless integration with multiple social media platforms_
 
-![AI Response Generation](public/images/ai-response.png)
+![AI Lead Generation](public/images/leadfinder.png)
 _AI-powered response generation interface_
 
-![Analytics Dashboard](public/images/analytics.png)
+![Real-time chat](public/images/conversation.png)
 _Detailed analytics and performance metrics_
 
-![Campaign Management](public/images/campaigns.png)
+![Campaign Management](public/images/emailmarketing.png)
 _Campaign creation and management interface_
 
 ## Getting Started 🚀

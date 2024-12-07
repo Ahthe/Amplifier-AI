@@ -41,7 +41,7 @@ https://github.com/user-attachments/assets/89e39e16-c728-4261-bfa2-50f8a98d9966
 
 ### **1. AI Lead Generator**
 
-- **Automated Outreach**: Finds potential customers on LinkedIn, Twitter, Reddit, and more.
+- **Automated Outreach**: Finds potential customers on Linkedin, Facebook, Twitter/X, Reddit, and Instagram. 
 
 - **Sentiment Analysis**: Identifies users frustrated with competitors and introduces your solution.
 

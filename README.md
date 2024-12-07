@@ -1,8 +1,8 @@
-# Amplifier AI 🚀
+# Amplifier AI🚀
 
 **Revolutionizing Lead Generation & Customer Engagement with AI**
 
-Amplifier AI is an innovative platform designed to help startups and small businesses overcome their biggest challenge: finding and engaging customers. As winners of the prestigious Headstarter Fellowship, we stood out among 15,000 participants and 3,000 teams with our cutting-edge, AI-driven solutions.
+We won 3rd place at the Headstarter Fellowship, we were chosen out of 15,000 participants and 3,000 teams with our cutting-edge, AI-driven solutions. Amplifier AI is an innovative platform designed to help startups and small businesses overcome their biggest challenge: finding and engaging customers. 
 
 ### AI Lead Generation
 

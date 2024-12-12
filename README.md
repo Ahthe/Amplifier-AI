@@ -2,7 +2,7 @@
 
 **Revolutionizing Lead Generation & Customer Engagement with AI**
 
-We won 3rd place at the Headstarter Fellowship, we were chosen out of 15,000 participants and 3,000 teams with our cutting-edge, AI-driven solutions. Amplifier AI is an innovative platform designed to help startups and small businesses overcome their biggest challenge: finding and engaging customers. 
+We won 3rd place at the Headstarter Fellowship, we were chosen out of 15,000 participants and 3,000 teams with our cutting-edge, AI-driven solution. Amplifier AI is an innovative platform designed to help startups and small businesses overcome their biggest challenge: finding and engaging customers.
 
 ### AI Lead Generation
 
@@ -23,7 +23,7 @@ https://github.com/user-attachments/assets/89e39e16-c728-4261-bfa2-50f8a98d9966
 
 - **Frontend**: Next.js, TypeScript
 
-- **Backend**: Python, Prisma, PostgreSQL
+- **Backend**: Python, LangChain, Prisma, PostgreSQL
 
 - **Cloud & APIs**: AWS S3, OpenAI API
 
@@ -41,9 +41,11 @@ https://github.com/user-attachments/assets/89e39e16-c728-4261-bfa2-50f8a98d9966
 
 ### **1. AI Lead Generator**
 
-- **Automated Outreach**: Finds potential customers on Linkedin, Facebook, Twitter/X, Reddit, and Instagram. 
+- **Automated Outreach**: Finds potential customers on Linkedin, Facebook, Twitter/X, Reddit, and Instagram.
 
 - **Sentiment Analysis**: Identifies users frustrated with competitors and introduces your solution.
+
+- **LangChain-Powered Responses**: Utilizes LangChain to generate contextually relevant, natural social media replies that seamlessly incorporate business information. Our AI intelligently crafts responses that provide value while subtly introducing our business solution.
 
 - **Email Campaigns**: Custom email campaigns to users of your product/services.
 

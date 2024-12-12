@@ -1,96 +1,113 @@
-import openai
+from langchain_openai import ChatOpenAI
+from langchain.prompts import ChatPromptTemplate
+from langchain.schema import StrOutputParser
+from langchain.output_parsers import PydanticOutputParser
+from langchain.pydantic_v1 import BaseModel, Field
+from typing import Optional
+class SocialMediaResponse(BaseModel):
+    """Structure for social media responses"""
+    response_text: str = Field(..., description="The main response text")
+    business_mention: Optional[str] = Field(None, description="How the business was mentioned")
+    confidence_score: float = Field(..., description="How confident the model is about the response relevance (0-1)")
 
+parser = PydanticOutputParser(pydantic_object=SocialMediaResponse)
+
+def create_social_response_chain(model_name="gpt-4o-mini"):
+    """Creates a reusable chain for social media responses"""
+    
+    # Initialize the model
+    llm = ChatOpenAI(
+        model=model_name,
+        temperature=0.7
+    )
+    
+    # Use the global parser
+    parser = globals()['parser']
+
+    # Create a template that's more focused and structured
+    prompt = ChatPromptTemplate.from_messages([
+        ("system", """You are a helpful social media expert who provides valuable responses while naturally 
+        incorporating business mentions naturally. Focus on:
+        1. Authenticity and value-first approach
+        2. Natural conversation flow
+        3. Mentioning businesses in a natural non-intrusive way
+        4. Maintaining appropriate platform tone (Reddit: casual, LinkedIn: professional, Twitter: concise)
+        
+        If the business mention feels forced, prioritize providing valuable information instead."""),
+        ("human", """Context:
+        Platform: {platform}
+        Post: {post_text}
+        
+        Business Info:
+        Name: {business_name}
+        Description: {business_description}
+        Website: {website_link}
+        
+        Generate a helpful response that prioritizes value while naturally mentioning the business smoothly and not like a promotional bot.
+        {format_instructions}""")
+    ])
+
+    # Create the chain
+    chain = (
+        prompt 
+        | llm 
+        | parser
+    )
+    
+    return chain
+
+def generate_social_reply(
+    platform: str,
+    post_text: str,
+    business_name: str,
+    business_description: str,
+    website_link: str
+) -> str:
+    """Generic social media response generator"""
+    
+    # Create the chain
+    chain = create_social_response_chain()
+    
+    # Generate response
+    response = chain.invoke({
+        "platform": platform,
+        "post_text": post_text,
+        "business_name": business_name,
+        "business_description": business_description,
+        "website_link": website_link,
+        "format_instructions": globals()['parser'].get_format_instructions()
+    })
+    
+    # Only include business mention if confidence is high enough
+    # if response.confidence_score < 0.7:
+    #     return response.response_text
+    
+    return response.response_text
+
+# Platform-specific functions now just call the generic function with different parameters
 def generate_reddit_reply(post, business_name, business_description, website_link):
-    description = post.selftext[:5000]
-    response = openai.ChatCompletion.create(
-            model="gpt-4o-mini",
-            messages=[
-                {
-                    "role": "system",
-                    "content": f"You are a thoughtful and insightful Reddit user who provides genuine and valuable responses to posts. Your goal is to assist users by offering advice, insights, or solutions. And naturally mention our business, {business_name}, in a way that adds value to the conversation. Include our link, {website_link}, if it fits naturally, explaining briefly how it might help with their issue. Avoid being overly promotional or spammy. Maintain a neutral and helpful tone throughout your response."
-                },
-                
-                {
-                    "role": "user",
-                    "content": f"""
-                        Please analyze the following Reddit post's title and description and craft a genuine and helpful reply that provides value to the user. 
-                        Find a way to naturally recommend our business and talk as if you've personally used it and how it helped you, if it is relevant and can be seamlessly integrated into your response. 
-                        If you can't mention the business naturally, focus solely on providing valuable advice. Focus on speaking in a neutral tone and avoid using exclaimation marks. 
-                        Please try to find a way to personally RECOMMEND {business_name}, in the reply naturally and preferably mention the, as well.
-                        when promiting the business ensure you have mentioned the name. if the website link is relevent then add that too.
-                        Everything after this point is information for you to use in your response. reply only with the generated comment and nothing else. 
-                        make the english simple and smooth and answer in under 500 characters
-                        Title: {post.title}
-                        Description: {description}
-                        Our Business Name: {business_name}
-                        Our Business Description: {business_description}
-                        Our Website Link: {website_link}
-                    """
-                }
-            ],
-            max_tokens=300,
-            temperature=0.7
-        )
-    return response.choices[0].message.content.strip()
+    return generate_social_reply(
+        "reddit",
+        f"{post.title}\n\n{post.selftext[:5000]}",
+        business_name,
+        business_description,
+        website_link
+    )
 
 def generate_twitter_reply(tweet, business_name, business_description, website_link):
-    tweet_text = tweet.get('text', '')
-    response = openai.ChatCompletion.create(
-        model="gpt-4o-mini",
-        messages=[
-            {
-                "role": "system",
-                "content": f"You are a thoughtful and insightful Twitter user who provides genuine and valuable responses to tweets. Your goal is to assist users by offering advice, insights, or solutions. And naturally mention our business, {business_name}, in a way that adds value to the conversation. Include our link, {website_link}, if it fits naturally, explaining briefly how it might help with their issue. Avoid being overly promotional or spammy. Maintain a neutral and helpful tone throughout your response."
-            },
-            {
-                "role": "user",
-                "content": f"""
-                    Please analyze the following tweet and craft a genuine and helpful reply that provides value to the user.
-                    Find a way to naturally recommend our business and talk as if you've personally used it and how it helped you, if it is relevant and can be seamlessly integrated into your response.
-                    If you can't mention the business naturally, focus solely on providing valuable advice. Focus on speaking in a neutral tone and avoid using exclamation marks.
-                    Please try to find a way to personally RECOMMEND {business_name}, in the reply naturally and preferably mention the, as well.
-                    when promoting the business ensure you have mentioned the name. if the website link is relevant then add that too.
-                    Everything after this point is information for you to use in your response. reply only with the generated comment and nothing else.
-                    make the english simple and smooth and answer in under 280 characters.
-                    Tweet: {tweet_text}
-                    Our Business Name: {business_name}
-                    Our Business Description: {business_description}
-                    Our Website Link: {website_link}
-                """
-            }
-        ],
-        max_tokens=100,
-        temperature=0.7
+    return generate_social_reply(
+        "twitter",
+        tweet.get('text', ''),
+        business_name,
+        business_description,
+        website_link
     )
-    return response.choices[0].message.content.strip()
 
 def generate_linkedin_reply(post, business_name, business_description, website_link):
-    post_text = post.get('text', '')
-    response = openai.ChatCompletion.create(
-        model="gpt-4o-mini",
-        messages=[
-            {
-                "role": "system",
-                "content": f"You are a thoughtful and insightful LinkedIn user who provides genuine and valuable responses to posts. Your goal is to assist users by offering advice, insights, or solutions. And naturally mention our business, {business_name}, in a way that adds value to the conversation. Include our link, {website_link}, if it fits naturally, explaining briefly how it might help with their issue. Avoid being overly promotional or spammy. Maintain a neutral and professional tone throughout your response."
-            },
-            {
-                "role": "user",
-                "content": f"""
-                    Please analyze the following LinkedIn post and craft a genuine and helpful reply that provides value to the user.
-                    Find a way to naturally recommend our business and talk as if you've personally used it and how it helped you, if it is relevant and can be seamlessly integrated into your response.
-                    If you can't mention the business naturally, focus solely on providing valuable advice. Focus on speaking in a neutral tone and avoid using exclamation marks.
-                    Please try to find a way to personally RECOMMEND {business_name}, in the reply naturally and preferably mention the, as well.
-                    when promoting the business ensure you have mentioned the name. if the website link is relevant then add that too.
-                    Everything after this point is information for you to use in your response. reply only with the generated comment and nothing else.
-                    make the english simple and smooth and answer in under 500 characters.
-                    Post: {post_text}
-                    Our Business Name: {business_name}
-                    Our Business Description: {business_description}
-                    Our Website Link: {website_link}
-                """
-            }
-        ],
-        max_tokens=200,
-        temperature=0.7
+    return generate_social_reply(
+        "linkedin",
+        post.get('text', ''),
+        business_name,
+        business_description,
+        website_link
     )
-    return response.choices[0].message.content.strip()
